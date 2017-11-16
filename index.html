@@ -329,8 +329,7 @@ CS4067 - Twine Game
 [[Start-&gt;Act One]]
 
 [[Credits]]
-
-[[Test Clock]]</tw-passagedata><tw-passagedata pid="2" name="Lounge" tags="" position="1001,199">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+</tw-passagedata><tw-passagedata pid="2" name="Lounge" tags="" position="1001,199">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
  &lt;div class=&quot;top-section&quot;&gt;
                 &lt;div id=&quot;room&quot;&gt;
 					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -448,19 +447,13 @@ TxtType.prototype.tick = function() {
 		}
 &lt;/script&gt;
 
-</tw-passagedata><tw-passagedata pid="4" name="Test Clock" tags="" position="201,398">&lt;h1 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h1&gt;
+</tw-passagedata><tw-passagedata pid="4" name="Act One" tags="" position="400,201">Introductions
 
-&lt;script&gt;
-	var clock = document.getElementById(&quot;clock&quot;)
-	setInterval(function(){
-		var time = story.state.functions.getClock()
-		clock.innerHTML = time
-	},1000)
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="5" name="Act One" tags="" position="400,201">Introductions
+[[Next-&gt;Character One]]</tw-passagedata><tw-passagedata pid="5" name="Character One" tags="" position="601,199">Hello I&#x27;m Charactor One
 
-[[Next-&gt;Character One]]</tw-passagedata><tw-passagedata pid="6" name="Character One" tags="" position="601,199">Hello I&#x27;m Charactor One
+[[Next-&gt;Act Two]]</tw-passagedata><tw-passagedata pid="6" name="Act Two" tags="" position="801,198">Investigate
 
-[[Next-&gt;Act Two]]</tw-passagedata><tw-passagedata pid="7" name="Act Two" tags="" position="801,198">Investigate
+You have until 7:30am to solve the mystery.
 
 [[Next-&gt;Lounge]]
 
@@ -470,7 +463,7 @@ var _functions = story.state.functions
   setInterval(function(){
 	  _functions.incrementClock(5)
   },5000)
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="8" name="Act Three" tags="" position="404,504">Time is up. Who did it?</tw-passagedata><tw-passagedata pid="9" name="Kitchen" tags="" position="1200,200">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="7" name="Act Three" tags="" position="404,504">Time is up. Who did it?</tw-passagedata><tw-passagedata pid="8" name="Kitchen" tags="" position="1200,200">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
  &lt;div class=&quot;top-section&quot;&gt;
                 &lt;div id=&quot;room&quot;&gt;
 					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
