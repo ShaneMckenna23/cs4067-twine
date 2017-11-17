@@ -114,7 +114,7 @@ img {
     padding: 20px;
 }
 
-#items {
+#item {
     box-sizing: border-box;
     float: left;
     width: 18%;
@@ -160,6 +160,124 @@ div.action-item:hover{
     color: black
 }
 
+#title {
+  display: none
+}
+
+
+/*-------------------------------------------------------------------*/
+input#flip {
+	padding: 0px;
+	background: transparent;
+	border: none;
+	font-family: 'Vollkorn', serif;
+	font-size: 2em;
+	cursor: pointer;
+	position: relative;
+	z-index: 99;
+}
+
+:focus {
+	outline: none;
+}
+
+.fp-tableCell {
+	vertical-align: top;
+	height: 100vh !important;
+}
+
+.row {
+	width: 100%;
+	text-align: center;
+}
+
+img.postcard {
+	width: 80%;
+	-webkit-animation: twitch 20s ease-in infinite alternate;
+	animation: twitch 20s ease-in infinite alternate;
+}
+
+p.delay {
+	-webkit-animation: fade 6s linear;
+	animation: fade 6s linear;
+}
+
+
+/*animations*/
+
+@-webkit-keyframes fade {
+	0% {
+		opacity: 0.0;
+	}
+	60% {
+		opacity: 0.1;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade {
+	0% {
+		opacity: 0.0;
+	}
+	60% {
+		opacity: 0.1;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+
+/*cards*/
+#card {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	transform-style: preserve-3d;
+	transition: transform 1.5s;
+}
+
+#card figure {
+	margin: 0;
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+}
+
+#card .front {}
+
+#card .back {
+	transform: rotateY( 180deg);
+}
+
+
+/*to prevent the back of the card flickering prematurely*/
+
+#card.flipped .back {
+	-webkit-transform: translateZ(-1px);
+	transform: translateZ(-1px);
+}
+
+#card.flipped {
+	transform: rotateY( 180deg);
+}
+
+
+/*stops a glitch where the back of the postcard wont show until double the transistion time*/
+
+#card.flipped figure {
+	backface-visibility: visible;
+}
+
+/*-------------------------------------------------------------------*/
+
+
+
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">// Create global "variables"
 story.state.variables = {};
 var _vars = story.state.variables;
@@ -194,11 +312,15 @@ _vars.locations = {
 	},
 	kitchen:{
 		people: ["butler"],
-		actions: [{name: "Make food", visable:true, function: makeFood}]
+		actions: [{name: "Make food", visable:true, function: makeFood},{name: "Pick up Knife", visable:true, function: pickUpKnife}]
 	},
 	library:{
 		people: ["politician"]
 	}
+}
+
+_vars.player = {
+	inventory: [{name: "Knife"}]
 }
 
 //Helper functions
@@ -243,6 +365,10 @@ function makeFood(){
 	_vars.locations.kitchen.actions[eatActionIndex].visable = false
 	
 	_functions.updateActions("kitchen")
+}
+
+function pickUpKnife(){
+	_functions.addItem("Knife")
 }
 
 
@@ -308,10 +434,36 @@ _functions.updateActions = function(room){
 	}
 }
 
+_functions.updateItems = function(){
+	var itemsObj = _vars.player.inventory
+	var itemList = document.getElementById("item-list")
+	itemList.innerHTML = ""
+	if (itemsObj != null){
+			var itemListToRender = [];
+		itemsObj.forEach(function(item){
+				var element = document.createElement('div')
+				element.className= "inventory-item"
+				element.innerHTML = item.name
+				itemListToRender.push(element)
+		})
+		itemListToRender.forEach(function(el){
+			itemList.appendChild(el)
+		})
+	}
+}
+
+_functions.addItem = function(item){
+	var itemsObj = _vars.player.inventory
+	itemsObj.push({name: item})
+	_functions.updateItems()
+}
+
+
 _functions.changeRoom = function(roomName){
 	var room = window.story.render(roomName);
 	$(".container").html(room);	
 	_functions.updateActions(roomName.toLowerCase())
+	_functions.updateItems()
 }
 
 _functions.changeCharacterLike = function(character, likeValue){
@@ -323,13 +475,20 @@ _functions.changeCharacterLike = function(character, likeValue){
 function startActThree(){
 	var actThree = window.story.render("Act Three");
 	$(".container").html(actThree);
-}</script><tw-passagedata pid="1" name="Menu" tags="" position="197,201">Welcome
+}
+
+
+
+</script><tw-passagedata pid="1" name="Menu" tags="" position="197,201">Welcome
 CS4067 - Twine Game
 
 [[Start-&gt;Act One]]
 
 [[Credits]]
-</tw-passagedata><tw-passagedata pid="2" name="Lounge" tags="" position="1001,199">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+
+[[Fade]]
+
+[[Intro Idea]]</tw-passagedata><tw-passagedata pid="2" name="Lounge" tags="" position="1001,199">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
  &lt;div class=&quot;top-section&quot;&gt;
                 &lt;div id=&quot;room&quot;&gt;
 					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -354,19 +513,11 @@ CS4067 - Twine Game
                 &lt;/div&gt;
 				&lt;div id=&quot;questions&quot;&gt;&lt;h2&gt;Questions&lt;/h2&gt;&lt;/div&gt;
 				&lt;div id=&quot;information&quot;&gt;
-					&lt;p&gt;
-                        &lt;h2&gt;Sister:&lt;/h2&gt;
-                        &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum lectus quis turpis tincidunt convallis. Sed pellentesque&quot;
-                    &lt;/p&gt;
-                    &lt;p&gt;
-                        &lt;h2&gt;Lounge:&lt;/h2&gt;
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum lectus quis turpis tincidunt convallis. Sed pellentesque 
-                        id orci sit amet maximus. Pellentesque nec consectetur nunc. Quisque vitae leo lectus. Praesent faucibus lorem sit amet leo gravida 
-                        pharetra.
-                    &lt;/p&gt;
+					
                 &lt;/div&gt;
-				&lt;div id=&quot;items&quot;&gt;
+				&lt;div id=&quot;item&quot;&gt;
                         &lt;h2&gt;Items&lt;/h2&gt;
+						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
 &lt;/div&gt;
@@ -384,6 +535,9 @@ CS4067 - Twine Game
 
 	//Update Actions
 	_functions.updateActions(&quot;lounge&quot;)
+	
+	//Update Items
+	_functions.updateItems()
 	
 	function changeRoom(roomName){
 		_functions.changeRoom(roomName)
@@ -463,7 +617,7 @@ var _functions = story.state.functions
   setInterval(function(){
 	  _functions.incrementClock(5)
   },5000)
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="7" name="Act Three" tags="" position="404,504">Time is up. Who did it?</tw-passagedata><tw-passagedata pid="8" name="Kitchen" tags="" position="1200,200">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="7" name="Act Three" tags="" position="500,500">Time is up. Who did it?</tw-passagedata><tw-passagedata pid="8" name="Kitchen" tags="" position="1200,200">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
  &lt;div class=&quot;top-section&quot;&gt;
                 &lt;div id=&quot;room&quot;&gt;
 					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -499,15 +653,15 @@ var _functions = story.state.functions
                         pharetra.
                     &lt;/p&gt;
                 &lt;/div&gt;
-				&lt;div id=&quot;items&quot;&gt;
+				&lt;div id=&quot;item&quot;&gt;
                         &lt;h2&gt;Items&lt;/h2&gt;
+						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
 	var _functions = story.state.functions
-	var _vars = story.state.variables
 	
 	//Update Clock
 	var clock = document.getElementById(&quot;clock&quot;)
@@ -515,14 +669,34 @@ var _functions = story.state.functions
 		var time = story.state.functions.getClock()
 		clock.innerHTML = time
 	},1000)
-
-	//Update Actions
-	_functions.updateActions(&quot;kitchen&quot;)
 	
 	function changeRoom(roomName){
 		_functions.changeRoom(roomName)
 	}
 	
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="Fade" tags="" position="201,401">&lt;div id=&quot;title&quot;&gt;Act One: Introduction&lt;/div&gt;
+
+&lt;script&gt;
+	$( &quot;#title&quot; ).fadeIn( &quot;slow&quot;, function() {
+    // Animation complete
+  });
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="Intro Idea" tags="" position="48,201">
+
+&lt;div class=&quot;section&quot;&gt;
+        &lt;div&gt;
+            &lt;input type=&quot;button&quot; value=&quot;FLIP OVER&quot; id=&quot;flip&quot;/&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;card&quot;&gt;
+            &lt;figure class=&quot;front&quot;&gt;&lt;img src=&quot;http://gomezisdan.com/images/postcard-web.png&quot; class=&quot;postcard front&quot; /&gt;&lt;/figure&gt;
+            &lt;figure class=&quot;back&quot;&gt;&lt;img src=&quot;http://gomezisdan.com/images/postcard-back-plain.png&quot; class=&quot;postcard back&quot; /&gt;&lt;/figure&gt;
+        &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;script&gt;
+    $(&quot;#flip&quot;).click(function() {
+      $(&quot;#card&quot;).toggleClass(&quot;flipped&quot;);
+    });
 &lt;/script&gt;</tw-passagedata></tw-storydata>
 
 <script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
