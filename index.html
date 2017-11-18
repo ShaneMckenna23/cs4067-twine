@@ -144,6 +144,7 @@ img {
 
 div.action-item:hover{
     background-color: #E3E3E3;
+  	cursor: pointer;
 }
 
 #kitchen {
@@ -276,9 +277,16 @@ p.delay {
 /*-------------------------------------------------------------------*/
 
 
+.hidden-info{
+	display: none
+}
 
 
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Create global "variables"
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Constants **************************
+var playerName = "PlayerName"
+
+
+//************** Global Variables **************************
 story.state.variables = {};
 var _vars = story.state.variables;
 
@@ -290,8 +298,11 @@ _vars.clock = {
 
 _vars.characters = {
 	sister: {
-		name: "NAME ME",
-		like: 5
+		name: "SISTERS NAME",
+		like: 5,
+		questions:[
+			{question: "What happened?", visible: true, function: whatHappend}
+		]
 	},
 	
 	politician: {
@@ -308,11 +319,19 @@ _vars.characters = {
 _vars.locations = {
 	lounge:{
 		people: ["sister"],
-		actions: [{name: "Sit Down", visable: true, function: sit},{name: "Stand Up", visable: false, function: stand}]
+		actions: [
+			{name: "Sit Down", visible: true, function: sit},
+			{name: "Stand Up", visible: false, function: stand}
+		],
+		desc: "This is the lounge room description"
 	},
 	kitchen:{
 		people: ["butler"],
-		actions: [{name: "Make food", visable:true, function: makeFood},{name: "Pick up Knife", visable:true, function: pickUpKnife}]
+		actions: [
+			{name: "Make food", visible:true, function: makeFood},
+			{name: "Pick up Knife", visible:true, function: pickUpKnife}
+		],
+		desc: "This is the kitchen room description"
 	},
 	library:{
 		people: ["politician"]
@@ -323,7 +342,13 @@ _vars.player = {
 	inventory: [{name: "Knife"}]
 }
 
-//Helper functions
+_vars.information = []
+
+//***************************************************
+
+
+//************** Helper Functions **************************
+
 function searchActions(actionArray, actionName){
     for (var i=0; i < actionArray.length; i++) {
         if (actionArray[i].name === actionName) {
@@ -332,49 +357,85 @@ function searchActions(actionArray, actionName){
     }
 }
 
-//Lounge Actions
+//***************************************************
+
+//************** Character Questions **************************
+
+function printPlayerInfo(info){
+	var header = playerName
+	_functions.addInfo(header,info)
+}
+
+//Siter
+function whatHappend(){
+	var question = "What happend here?"
+	printPlayerInfo(question)
+}
+
+
+//***************************************************
+
+//************** Room Actions **************************
+
+//Lounge
 function sit(){
-	alert("Player sits down")
+	printPlayerInfo("Player sits down")
 	var loungeActions = _vars.locations.lounge.actions
 	var sitActionIndex = searchActions(loungeActions, "Sit Down")
-	_vars.locations.lounge.actions[sitActionIndex].visable = false
+	_vars.locations.lounge.actions[sitActionIndex].visible = false
 	
 	var standActionIndex = searchActions(loungeActions, "Stand Up")
-	_vars.locations.lounge.actions[standActionIndex].visable = true
+	_vars.locations.lounge.actions[standActionIndex].visible = true
 	
 	_functions.updateActions("lounge")
 }
 
 function stand(){
-	alert("Player stands up")
+	printPlayerInfo("Player stands up")
 	var loungeActions = _vars.locations.lounge.actions
 	var sitActionIndex = searchActions(loungeActions, "Sit Down")
-	_vars.locations.lounge.actions[sitActionIndex].visable = true
+	_vars.locations.lounge.actions[sitActionIndex].visible = true
 	
 	var standActionIndex = searchActions(loungeActions, "Stand Up")
-	_vars.locations.lounge.actions[standActionIndex].visable = false
+	_vars.locations.lounge.actions[standActionIndex].visible = false
 	
 	_functions.updateActions("lounge")
 }
 
-//Kitchen Actions
+//Kitchen 
 function makeFood(){
-	alert("You made a sandwich, it was delicious!")
+	printPlayerInfo("You made a sandwich, it was delicious!")
 	var kitchenActions = _vars.locations.kitchen.actions
 	var eatActionIndex = searchActions(kitchenActions, "Make food")
-	_vars.locations.kitchen.actions[eatActionIndex].visable = false
+	_vars.locations.kitchen.actions[eatActionIndex].visible = false
 	
 	_functions.updateActions("kitchen")
 }
 
 function pickUpKnife(){
 	_functions.addItem("Knife")
+	printPlayerInfo("You take a knife from the drawer")
 }
 
+//***************************************************
 
-// Create global functions
+
+
+//************** Global Functions **************************
 story.state.functions = {};
 var _functions = story.state.functions;
+
+//************** Game Functions **************************
+_functions.changeRoom = function(roomName){
+	var room = window.story.render(roomName);
+	$(".container").html(room);
+	roomName = roomName.toLowerCase()
+	_functions.updateActions(roomName)
+	_functions.updateItems()
+	_functions.updateInfo()
+	_functions.updateQuestions(roomName)
+	_functions.drawRoomInfo(roomName)
+}
 
 _functions.getClock = function(){
 	var _vars = story.state.variables;
@@ -412,6 +473,14 @@ _functions.incrementClock = function(time){
 	}
 }
 
+function startActThree(){
+	var actThree = window.story.render("Act Three");
+	$(".container").html(actThree);
+}
+//***************************************************
+
+
+//************** UI Functions **************************
 _functions.updateActions = function(room){
 	var roomObj = _vars.locations[room]
 	var actions = roomObj.actions;
@@ -420,7 +489,7 @@ _functions.updateActions = function(room){
 	if (actions != null){
 			var actionListToRender = [];
 		actions.forEach(function(action){
-			if(action.visable == true){
+			if(action.visible == true){
 				var element = document.createElement('div')
 				element.className= "action-item"
 				element.innerHTML = action.name
@@ -452,34 +521,96 @@ _functions.updateItems = function(){
 	}
 }
 
+_functions.updateInfo = function(){
+	var infoStore = _vars.information
+	var infoBox = document.getElementById("information")
+	if (infoStore != null){
+		var infoToRender = [];
+		infoStore.forEach(function(info){
+				var element = document.createElement('p')
+				element.className= "info-item"
+				element.innerHTML = info
+				infoToRender.push(element)
+		})
+		infoToRender.forEach(function(el){
+			infoBox.appendChild(el)
+		})
+	}
+}
+
+_functions.updateQuestions = function(room){
+	var peopleInRoom = _vars.locations[room].people
+	if(peopleInRoom.length > 0){
+		var questions = _vars.characters[peopleInRoom[0]].questions
+		var questionList = document.getElementById("question-list")
+		if (questions != null){
+			var questionsToRender = [];
+			questions.forEach(function(q){
+					var element = document.createElement('div')
+					element.className= "question-item"
+					element.innerHTML = q.question
+					element.addEventListener('click', q.function)
+					questionsToRender.push(element)
+			})
+			questionsToRender.forEach(function(el){
+				questionList.appendChild(el)
+			})
+		}
+	}
+}
+
+_functions.drawInfo = function(info) {
+	var element = document.createElement('div')
+	element.className = "hidden-info"
+	element.innerHTML = info
+	$( "#information" ).prepend(element);
+	$( ".hidden-info" ).fadeIn( "slow", function() {
+		$(".hidden-info").removeClass("hidden-info");
+	  });
+}
+
+_functions.drawRoomInfo = function(room) {
+	var roomObj = _vars.locations[room];
+	var roomDesc = roomObj.desc;
+	var roomName = room.charAt(0).toUpperCase() + room.slice(1);
+	_functions.addInfo(roomName,roomDesc)
+}
+
+//***************************************************
+
+
+//************** Insert Functions **************************
+
 _functions.addItem = function(item){
 	var itemsObj = _vars.player.inventory
 	itemsObj.push({name: item})
 	_functions.updateItems()
 }
 
-
-_functions.changeRoom = function(roomName){
-	var room = window.story.render(roomName);
-	$(".container").html(room);	
-	_functions.updateActions(roomName.toLowerCase())
-	_functions.updateItems()
+_functions.addInfo = function(header, info){
+	var infoObj = _vars.information
+	if(infoObj.length > 15){
+		infoObj.shift();
+	}
+	var infoHeader = "<h2>"+header+"</h2>"
+	var formattedInfo = infoHeader+info
+	infoObj.push(formattedInfo)
+	_vars.information = infoObj
+	_functions.drawInfo(formattedInfo)
 }
 
-_functions.changeCharacterLike = function(character, likeValue){
+//***************************************************
+
+
+//************** Edit Functions **************************
+
+_functions.editCharacterLike = function(character, likeValue){
 	var _vars = story.state.variables;
 	var characterObj = _vars.characters[character]
 	character.like += likeValue
 }
 
-function startActThree(){
-	var actThree = window.story.render("Act Three");
-	$(".container").html(actThree);
-}
-
-
-
-</script><tw-passagedata pid="1" name="Menu" tags="" position="197,201">Welcome
+//****************************************************</script><tw-passagedata pid="1" name="Menu" tags="" position="197,201">Welcome
 CS4067 - Twine Game
 
 [[Start-&gt;Act One]]
@@ -511,7 +642,10 @@ CS4067 - Twine Game
                 &lt;div id=&quot;player&quot;&gt;
                     &lt;img id=&quot;player-img&quot; src=&quot;&quot;/&gt;
                 &lt;/div&gt;
-				&lt;div id=&quot;questions&quot;&gt;&lt;h2&gt;Questions&lt;/h2&gt;&lt;/div&gt;
+				&lt;div id=&quot;questions&quot;&gt;
+				&lt;h2&gt;Questions&lt;/h2&gt;
+				&lt;div id=&quot;question-list&quot;&gt;&lt;/div&gt;
+				&lt;/div&gt;
 				&lt;div id=&quot;information&quot;&gt;
 					
                 &lt;/div&gt;
@@ -539,11 +673,19 @@ CS4067 - Twine Game
 	//Update Items
 	_functions.updateItems()
 	
+	//Update Information
+	_functions.updateInfo()
+	_functions.drawRoomInfo(&quot;lounge&quot;)
+	
+	//Update Questions
+	_functions.updateQuestions(&quot;lounge&quot;)
+	
+	
 	function changeRoom(roomName){
 		_functions.changeRoom(roomName)
 	}
 	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="3" name="Credits" tags="" position="197,39">Made By: 
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="3" name="Credits" tags="" position="99,44">Made By: 
 
 &lt;a class=&quot;typewrite&quot; data-period=&quot;2000&quot; data-type=&#x27;[ &quot;Shane&quot;, &quot;Darren&quot;, &quot;Eoin&quot;, &quot;Rebecca&quot; ]&#x27;&gt;
  &lt;span class=&quot;wrap&quot;&gt;&lt;/span&gt;
@@ -617,7 +759,7 @@ var _functions = story.state.functions
   setInterval(function(){
 	  _functions.incrementClock(5)
   },5000)
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="7" name="Act Three" tags="" position="500,500">Time is up. Who did it?</tw-passagedata><tw-passagedata pid="8" name="Kitchen" tags="" position="1200,200">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="7" name="Act Three" tags="" position="501,401">Time is up. Who did it?</tw-passagedata><tw-passagedata pid="8" name="Kitchen" tags="" position="1200,200">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
  &lt;div class=&quot;top-section&quot;&gt;
                 &lt;div id=&quot;room&quot;&gt;
 					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -640,18 +782,12 @@ var _functions = story.state.functions
                 &lt;div id=&quot;player&quot;&gt;
                     &lt;img id=&quot;player-img&quot; src=&quot;&quot;/&gt;
                 &lt;/div&gt;
-				&lt;div id=&quot;questions&quot;&gt;&lt;h2&gt;Questions&lt;/h2&gt;&lt;/div&gt;
+				&lt;div id=&quot;questions&quot;&gt;
+				&lt;h2&gt;Questions&lt;/h2&gt;
+				&lt;div id=&quot;question-list&quot;&gt;&lt;/div&gt;
+				&lt;/div&gt;
 				&lt;div id=&quot;information&quot;&gt;
-					&lt;p&gt;
-                        &lt;h2&gt;Sister:&lt;/h2&gt;
-                        &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum lectus quis turpis tincidunt convallis. Sed pellentesque&quot;
-                    &lt;/p&gt;
-                    &lt;p&gt;
-                        &lt;h2&gt;Lounge:&lt;/h2&gt;
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum lectus quis turpis tincidunt convallis. Sed pellentesque 
-                        id orci sit amet maximus. Pellentesque nec consectetur nunc. Quisque vitae leo lectus. Praesent faucibus lorem sit amet leo gravida 
-                        pharetra.
-                    &lt;/p&gt;
+					
                 &lt;/div&gt;
 				&lt;div id=&quot;item&quot;&gt;
                         &lt;h2&gt;Items&lt;/h2&gt;
@@ -662,7 +798,7 @@ var _functions = story.state.functions
 
 &lt;script&gt;
 	var _functions = story.state.functions
-	
+
 	//Update Clock
 	var clock = document.getElementById(&quot;clock&quot;)
 	setInterval(function(){
@@ -674,13 +810,13 @@ var _functions = story.state.functions
 		_functions.changeRoom(roomName)
 	}
 	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="Fade" tags="" position="201,401">&lt;div id=&quot;title&quot;&gt;Act One: Introduction&lt;/div&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="Fade" tags="" position="70,354">&lt;div id=&quot;title&quot;&gt;Act One: Introduction&lt;/div&gt;
 
 &lt;script&gt;
 	$( &quot;#title&quot; ).fadeIn( &quot;slow&quot;, function() {
     // Animation complete
   });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="Intro Idea" tags="" position="48,201">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="Intro Idea" tags="" position="44,200">
 
 &lt;div class=&quot;section&quot;&gt;
         &lt;div&gt;
