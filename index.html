@@ -421,9 +421,10 @@ p.delay {
 /*-------------------------------------------------------------------*/
 
 
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Constants **************************
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Variables **************************
 var playerName = "PlayerName"
-
+var currentRoom = "lounge"
+var openedItem;
 
 //************** Global Variables **************************
 story.state.variables = {};
@@ -450,8 +451,11 @@ _vars.characters = {
 	},
 
 	butler: {
-			name: "NAME ME",
-			like: 5
+			name: "Butler Name",
+			like: 5,
+			itemRes:[
+				{name: "Bloody Knife", res: "THAT IS ALOT OF BLOOD!"}
+			]
 		}
 }
 
@@ -496,7 +500,10 @@ _vars.items = [
 	{
 		name: "Bloody Knife",
 		desc: "ITEM DESCRIPTION",
-		actions: [{name: "Show to", visible: true, function: showToPerson}]
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson},
+			{name: "Stab the Butler", visible: true, function: stabButler}
+		]
 	},
 	
 	{
@@ -575,8 +582,32 @@ function whatHappend(){
 
 //************** Item Actions **************************
 
+function getPersonInRoom(){
+	return _vars.locations[currentRoom].people[0]
+}
+
+function showToPersonText(){
+	var personName = _vars.characters[getPersonInRoom()].name
+	return "Show to " + personName
+}
+
 function showToPerson(){
-	alert("Test")
+	var item = openedItem
+	var person = getPersonInRoom()
+	var personName = _vars.characters[person].name
+	var charResObj = _vars.characters[person].itemRes
+	var response = _vars.characters[person].itemRes[searchObjArrayByName(charResObj,item)].res
+
+	closeItemWindow()
+	printPlayerInfo("Have you seen this "+item+"?")
+	setTimeout(()=>_functions.addInfo(personName,response), 1500)
+}
+
+function stabButler(){
+	closeItemWindow()
+	printPlayerInfo("You take the knife and stab the butler in the back")
+	setTimeout(()=>_functions.addInfo("ButlerName","WTF you just stabbed me"),2000)
+	
 }
 
 //***************************************************
@@ -626,6 +657,7 @@ _functions.changeRoom = function(roomName){
 	var room = window.story.render(roomName);
 	$(".container").html(room);
 	roomName = roomName.toLowerCase()
+	currentRoom = roomName
 	_functions.updateActions(roomName)
 	_functions.updateItems()
 	_functions.updateInfo()
@@ -671,6 +703,8 @@ _functions.incrementClock = function(time){
 
 function openItemWindow(event){
 	var itemName = event.target.innerHTML
+	openedItem = itemName;
+
 	var popup = document.getElementById('popupBox');
 	popup.style.display = "block";
 
@@ -694,7 +728,9 @@ function openItemWindow(event){
 
 function closeItemWindow(){
 	var popup = document.getElementById('popupBox');
-	popup.style.display = "none";
+	$("#popupBox").fadeOut("slow", function() {
+		//animation Complete
+	});
 }
 
 
@@ -794,14 +830,21 @@ _functions.updateItemWindow = function(itemName){
 
 	var actionHeader = "<h2>Item Actions: </h2>"
 	var popupAction = document.getElementById("popup-actions")
+	popupAction.innerHTML = actionHeader;
 	var itemActions = itemObj.actions
 
 	if (itemActions != null){
 		var itemActionsToRender = [];
 		itemActions.forEach(function(action){
+				var actionName;
+				if(typeof action.name == 'function'){
+					actionName = action.name()
+				}else{
+					actionName = action.name
+				}
 				var element = document.createElement('div')
 				element.className= "itemAction-item"
-				element.innerHTML = action.name
+				element.innerHTML = actionName
 				element.addEventListener('click', action.function)
 				itemActionsToRender.push(element)
 		})
