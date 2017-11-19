@@ -10,7 +10,7 @@ CS4067
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="CS4067" startnode="1" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+<tw-storydata name="CS4067" startnode="2" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
     font: 18px "Helvetica Neue",Helvetica,Arial,sans-serif;
   	background-image: url("http://eskipaper.com/images/victorian-wallpaper-2.jpg");
 }
@@ -30,8 +30,7 @@ img {
     max-width: 1680px;
     margin: 0 auto;
     box-sizing: border-box;
-  	margin-top: -20px
-	back
+  	margin-top: -20px;
 }
 
 .top-section{
@@ -74,7 +73,8 @@ img {
     height: 195px;
     margin-top: 1%;
     border:2px solid black;
-    padding: 20px
+    padding: 20px;
+	background-color: white;
 }
 
 #actions h2{
@@ -97,7 +97,7 @@ img {
     float: left;
     width: 31%;
     height: 100%;
-    background-color: purple;
+    background-color: white;
     border:2px solid black;
     margin-right: 1%;
 	padding: 20px;
@@ -108,7 +108,7 @@ img {
     float: left;
     width: 31%;
     height: 100%;
-    background-color: #00FF98;
+    background-color: white;
     border:2px solid black;
     margin-right: 1%;
   	overflow: auto;
@@ -121,7 +121,7 @@ img {
     float: left;
     width: 18%;
     height: 100%;
-    background-color: #F6FF00;
+    background-color: white;
     border:2px solid black;
   	padding: 20px;
 }
@@ -162,6 +162,21 @@ div.question-item:hover{
   	cursor: pointer;
 }
 
+.inventory-item {
+  padding: 5px;
+  padding-left: 15px;
+  margin-bottom: 5px;
+  border-radius: 25px;
+  border: 2px solid black;
+}
+
+div.inventory-item:hover{
+    background-color: #E3E3E3;
+  	cursor: pointer;
+}
+
+
+
 #kitchen {
     position: absolute;
     top: 40px;
@@ -191,6 +206,7 @@ input#flip {
 	cursor: pointer;
 	position: relative;
 	z-index: 99;
+  	color: white
 }
 
 :focus {
@@ -247,6 +263,15 @@ p.delay {
 
 
 /*cards*/
+.card-container {
+	width: 80%;
+	text-align: center;
+	height: 800px;
+	position: relative;
+	perspective: 800px;
+	margin: 40px auto 0px;
+}
+
 #card {
 	width: 100%;
 	height: 100%;
@@ -296,6 +321,105 @@ p.delay {
 	display: none
 }
 
+#menu {
+        position: absolute;
+        top:0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 500px;
+        height: 300px;
+        background-color: white;
+    }
+
+#begin a {
+    color: white;
+    font-size: 200%;
+    float: right;
+    margin-right: 250px;
+}
+
+
+/*-------------------------------------------------------------------*/
+/* mPopup box style */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+.popup-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    width: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+.popup-head {
+    padding: 2px 16px;
+    background-color: #ff0000;
+    color: white;
+}
+.popup-main {
+  padding: 2px 16px;
+  height: 500px;
+}
+
+
+.popup-foot {
+    padding: 2px 16px;
+    background-color: #ff0000;
+    color: #ffffff;
+}
+
+/* add animation effects */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* close button style */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#popup-desc{
+	float: left;
+}
+#popup-actions {
+  float: right;
+  margin-right: 300px;
+}
+
+/*-------------------------------------------------------------------*/
+
 
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Constants **************************
 var playerName = "PlayerName"
@@ -344,7 +468,7 @@ _vars.locations = {
 		people: ["butler"],
 		actions: [
 			{name: "Make food", visible:true, function: makeFood},
-			{name: "Pick up Knife", visible:true, function: pickUpKnife}
+			{name: "Pick up Bloody Knife", visible:true, function: pickUpBloodyKnife}
 		],
 		desc: "This is the kitchen room description"
 	},
@@ -353,8 +477,66 @@ _vars.locations = {
 	}
 }
 
+_vars.items = [
+	{
+		name: "Used Cup",
+		desc: "ITEM DESCRIPTION"
+	},
+
+	{
+		name: "Poison Bottle",
+		desc: "ITEM DESCRIPTION"
+	},	
+	
+	{
+		name: "Gun Case",
+		desc: "ITEM DESCRIPTION"
+	},
+	
+	{
+		name: "Bloody Knife",
+		desc: "ITEM DESCRIPTION",
+		actions: [{name: "Show to", visible: true, function: showToPerson}]
+	},
+	
+	{
+		name: "Magled Toaster",
+		desc: "ITEM DESCRIPTION"
+	},	
+	
+	{
+		name: "Pamphlet",
+		desc: "ITEM DESCRIPTION"
+	},	
+	
+	{
+		name: "Treatening Letter",
+		desc: "ITEM DESCRIPTION"
+	},	
+	
+	{
+		name: "Ledger",
+		desc: "ITEM DESCRIPTION"
+	},	
+	
+	{
+		name:"Rsvps",
+		desc: "ITEM DESCRIPTION"
+	},	
+	
+	{
+		name: "Diary",
+		desc: "ITEM DESCRIPTION"
+	},	
+	
+	{
+		name: "Letter Of Termination",
+		desc: "ITEM DESCRIPTION"
+	}
+]
+
 _vars.player = {
-	inventory: [{name: "Knife"}]
+	inventory: []
 }
 
 _vars.information = []
@@ -364,9 +546,9 @@ _vars.information = []
 
 //************** Helper Functions **************************
 
-function searchActions(actionArray, actionName){
-    for (var i=0; i < actionArray.length; i++) {
-        if (actionArray[i].name === actionName) {
+function searchObjArrayByName(array, name){
+    for (var i=0; i < array.length; i++) {
+        if (array[i].name === name) {
             return i;
         }
     }
@@ -381,7 +563,7 @@ function printPlayerInfo(info){
 	_functions.addInfo(header,info)
 }
 
-//Siter
+//Sister
 function whatHappend(){
 	var question = "What happend here?"
 	printPlayerInfo(question)
@@ -390,45 +572,44 @@ function whatHappend(){
 
 //***************************************************
 
+
+//************** Item Actions **************************
+
+function showToPerson(){
+	alert("Test")
+}
+
+//***************************************************
+
+
+
 //************** Room Actions **************************
 
 //Lounge
 function sit(){
 	printPlayerInfo("Player sits down")
-	var loungeActions = _vars.locations.lounge.actions
-	var sitActionIndex = searchActions(loungeActions, "Sit Down")
-	_vars.locations.lounge.actions[sitActionIndex].visible = false
-	
-	var standActionIndex = searchActions(loungeActions, "Stand Up")
-	_vars.locations.lounge.actions[standActionIndex].visible = true
-	
+	editLocAction("lounge","Sit Down",false)
+	editLocAction("lounge","Stand Up",true)
 	_functions.updateActions("lounge")
 }
 
 function stand(){
 	printPlayerInfo("Player stands up")
-	var loungeActions = _vars.locations.lounge.actions
-	var sitActionIndex = searchActions(loungeActions, "Sit Down")
-	_vars.locations.lounge.actions[sitActionIndex].visible = true
-	
-	var standActionIndex = searchActions(loungeActions, "Stand Up")
-	_vars.locations.lounge.actions[standActionIndex].visible = false
-	
+	editLocAction("lounge","Sit Down",true)
+	editLocAction("lounge","Stand Up",false)
 	_functions.updateActions("lounge")
 }
 
 //Kitchen 
 function makeFood(){
 	printPlayerInfo("You made a sandwich, it was delicious!")
-	var kitchenActions = _vars.locations.kitchen.actions
-	var eatActionIndex = searchActions(kitchenActions, "Make food")
-	_vars.locations.kitchen.actions[eatActionIndex].visible = false
-	
+	editLocAction("kitchen","Make food",false)
+
 	_functions.updateActions("kitchen")
 }
 
-function pickUpKnife(){
-	_functions.addItem("Knife")
+function pickUpBloodyKnife(){
+	_functions.addItem("Bloody Knife")
 	printPlayerInfo("You take a knife from the drawer")
 }
 
@@ -488,7 +669,37 @@ _functions.incrementClock = function(time){
 	}
 }
 
+function openItemWindow(event){
+	var itemName = event.target.innerHTML
+	var popup = document.getElementById('popupBox');
+	popup.style.display = "block";
+
+	 // get the close action element
+	 var close = document.getElementsByClassName("close")[0];
+	 
+	 // close the mPopup once close element is clicked
+	 close.onclick = function() {
+		 popup.style.display = "none";
+	 }
+	 
+	 // close the mPopup when user clicks outside of the box
+	 window.onclick = function(event) {
+		 if (event.target == popup) {
+			 popup.style.display = "none";
+		
+	 	}
+	  }
+	  _functions.updateItemWindow(itemName)
+}
+
+function closeItemWindow(){
+	var popup = document.getElementById('popupBox');
+	popup.style.display = "none";
+}
+
+
 function startActThree(){
+	closeItemWindow()
 	var actThree = window.story.render("Act Three");
 	$(".container").html(actThree);
 }
@@ -528,6 +739,7 @@ _functions.updateItems = function(){
 				var element = document.createElement('div')
 				element.className= "inventory-item"
 				element.innerHTML = item.name
+				element.addEventListener('click', openItemWindow)
 				itemListToRender.push(element)
 		})
 		itemListToRender.forEach(function(el){
@@ -539,6 +751,7 @@ _functions.updateItems = function(){
 _functions.updateInfo = function(){
 	var infoStore = _vars.information
 	var infoBox = document.getElementById("information")
+	infoBox.innerHTML = "";
 	if (infoStore != null){
 		var infoToRender = [];
 		infoStore.forEach(function(info){
@@ -547,9 +760,9 @@ _functions.updateInfo = function(){
 				element.innerHTML = info
 				infoToRender.push(element)
 		})
-		infoToRender.forEach(function(el){
-			infoBox.appendChild(el)
-		})
+		for(var i = infoToRender.length; i--;){
+			infoBox.appendChild(infoToRender[i])
+		  }
 	}
 }
 
@@ -571,6 +784,30 @@ _functions.updateQuestions = function(room){
 				questionList.appendChild(el)
 			})
 		}
+	}
+}
+
+_functions.updateItemWindow = function(itemName){
+	var itemObj = _vars.items[searchObjArrayByName(_vars.items, itemName)]
+	var popupContent = document.getElementById("popup-desc")
+	popupContent.innerHTML = "<h2>"+itemObj.name+"</h2>" + itemObj.desc
+
+	var actionHeader = "<h2>Item Actions: </h2>"
+	var popupAction = document.getElementById("popup-actions")
+	var itemActions = itemObj.actions
+
+	if (itemActions != null){
+		var itemActionsToRender = [];
+		itemActions.forEach(function(action){
+				var element = document.createElement('div')
+				element.className= "itemAction-item"
+				element.innerHTML = action.name
+				element.addEventListener('click', action.function)
+				itemActionsToRender.push(element)
+		})
+		itemActionsToRender.forEach(function(el){
+			popupAction.appendChild(el)
+		})
 	}
 }
 
@@ -625,82 +862,105 @@ _functions.editCharacterLike = function(character, likeValue){
 	character.like += likeValue
 }
 
-//****************************************************</script><tw-passagedata pid="1" name="Menu" tags="" position="197,201">Welcome
-CS4067 - Twine Game
+function editLocAction(loc,actionName,visible){
+	var actions = _vars.locations[loc].actions
+	var actionIndex = searchObjArrayByName(actions, actionName)
+	_vars.locations[loc].actions[actionIndex].visible = visible
+}
 
-[[Start-&gt;Act One]]
+//****************************************************
+</script><tw-passagedata pid="1" name="Menu" tags="" position="104,202"> &lt;div id=&quot;menu&quot;&gt;
+ 	Welcome
+	CS4067 - Twine Game
 
-[[Credits]]
+	[[Start-&gt;Intro Idea]]
 
-[[Fade]]
-
-[[Intro Idea]]</tw-passagedata><tw-passagedata pid="2" name="Lounge" tags="" position="1001,199">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
- &lt;div class=&quot;top-section&quot;&gt;
-                &lt;div id=&quot;room&quot;&gt;
-					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
-                    &lt;img id=&quot;room-img&quot; src=&quot;http://www.chicagopostcardmuseum.org/images/exhibit_halls/art_institute_of_chicago/ThornePhoto_Jeremiah_Lee_Mansion_Drawing_Room_MA_1768.jpg&quot;/&gt;
-                &lt;/div&gt;
-                &lt;div class=&quot;right&quot;&gt;
-                    &lt;div id=&quot;map&quot;&gt;
-				&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
-						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
-                        &lt;img id=&quot;map-img&quot; src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
-                    &lt;/div&gt;
-                    &lt;div id=&quot;actions&quot;&gt;
-					&lt;h2&gt;Actions:&lt;/h2&gt;
-					&lt;div id=&quot;action-list&quot;&gt;
-					&lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-			&lt;div class=&quot;bottom-section&quot;&gt;
-                &lt;div id=&quot;player&quot;&gt;
-                    &lt;img id=&quot;player-img&quot; src=&quot;&quot;/&gt;
-                &lt;/div&gt;
-				&lt;div id=&quot;questions&quot;&gt;
-				&lt;h2&gt;Questions&lt;/h2&gt;
-				&lt;div id=&quot;question-list&quot;&gt;&lt;/div&gt;
-				&lt;/div&gt;
-				&lt;div id=&quot;information&quot;&gt;
-					
-                &lt;/div&gt;
-				&lt;div id=&quot;item&quot;&gt;
-                        &lt;h2&gt;Items&lt;/h2&gt;
-						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;script&gt;
-	var _functions = story.state.functions
-	var _vars = story.state.variables
-	
-	//Update Clock
-	var clock = document.getElementById(&quot;clock&quot;)
-	setInterval(function(){
-		var time = story.state.functions.getClock()
-		clock.innerHTML = time
-	},1000)
-
-	//Update Actions
-	_functions.updateActions(&quot;lounge&quot;)
-	
-	//Update Items
-	_functions.updateItems()
-	
-	//Update Information
-	_functions.updateInfo()
-	_functions.drawRoomInfo(&quot;lounge&quot;)
-	
-	//Update Questions
-	_functions.updateQuestions(&quot;lounge&quot;)
-	
-	
-	function changeRoom(roomName){
-		_functions.changeRoom(roomName)
-	}
-	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="3" name="Credits" tags="" position="99,44">Made By: 
+	[[Credits]]
+ &lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="2" name="Lounge" tags="" position="1001,199">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+    &lt;div class=&quot;top-section&quot;&gt;
+                   &lt;div id=&quot;room&quot;&gt;
+                       &lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
+                       &lt;img id=&quot;room-img&quot; src=&quot;http://www.chicagopostcardmuseum.org/images/exhibit_halls/art_institute_of_chicago/ThornePhoto_Jeremiah_Lee_Mansion_Drawing_Room_MA_1768.jpg&quot;/&gt;
+                   &lt;/div&gt;
+                   &lt;div class=&quot;right&quot;&gt;
+                       &lt;div id=&quot;map&quot;&gt;
+                   &lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
+                           &lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+                           &lt;img id=&quot;map-img&quot; src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
+                       &lt;/div&gt;
+                       &lt;div id=&quot;actions&quot;&gt;
+                       &lt;h2&gt;Actions:&lt;/h2&gt;
+                       &lt;div id=&quot;action-list&quot;&gt;
+                       &lt;/div&gt;
+                       &lt;/div&gt;
+                   &lt;/div&gt;
+               &lt;/div&gt;
+               &lt;div class=&quot;bottom-section&quot;&gt;
+                   &lt;div id=&quot;player&quot;&gt;
+                       &lt;img id=&quot;player-img&quot; src=&quot;&quot;/&gt;
+                   &lt;/div&gt;
+                   &lt;div id=&quot;questions&quot;&gt;
+                   &lt;h2&gt;Questions&lt;/h2&gt;
+                   &lt;div id=&quot;question-list&quot;&gt;&lt;/div&gt;
+                   &lt;/div&gt;
+                   &lt;div id=&quot;information&quot;&gt;
+                       
+                   &lt;/div&gt;
+                   &lt;div id=&quot;item&quot;&gt;
+                           &lt;h2&gt;Items&lt;/h2&gt;
+                           &lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
+                   &lt;/div&gt;
+               &lt;/div&gt;
+   &lt;/div&gt;
+   
+   
+   &lt;div id=&quot;popupBox&quot; class=&quot;popup&quot;&gt;
+       &lt;!-- mPopup content --&gt;
+       &lt;div class=&quot;popup-content&quot;&gt;
+           &lt;div class=&quot;popup-head&quot;&gt;
+               &lt;span class=&quot;close&quot;&gt;×&lt;/span&gt;
+               &lt;h2&gt;Item Description&lt;/h2&gt;
+           &lt;/div&gt;
+			&lt;div class=&quot;popup-main&quot;&gt; 
+			&lt;div id=&quot;popup-desc&quot;&gt;&lt;/div&gt;
+			&lt;div id=&quot;popup-actions&quot;&gt;
+			&lt;h2&gt;Item Actions:&lt;/h2&gt;
+			&lt;/div&gt;
+           &lt;/div&gt;
+       &lt;/div&gt;
+   &lt;/div&gt;
+   
+   
+   &lt;script&gt;
+       var _functions = story.state.functions
+       var _vars = story.state.variables
+       
+       //Update Clock
+       var clock = document.getElementById(&quot;clock&quot;)
+       setInterval(function(){
+           var time = story.state.functions.getClock()
+           clock.innerHTML = time
+       },1000)
+   
+       //Update Actions
+       _functions.updateActions(&quot;lounge&quot;)
+       
+       //Update Items
+       _functions.updateItems()
+       
+       //Update Information
+       _functions.updateInfo()
+       _functions.drawRoomInfo(&quot;lounge&quot;)
+       
+       //Update Questions
+       _functions.updateQuestions(&quot;lounge&quot;)
+       
+       
+       function changeRoom(roomName){
+           _functions.changeRoom(roomName)
+       }
+   &lt;/script&gt;</tw-passagedata><tw-passagedata pid="3" name="Credits" tags="" position="99,44">Made By: 
 
 &lt;a class=&quot;typewrite&quot; data-period=&quot;2000&quot; data-type=&#x27;[ &quot;Shane&quot;, &quot;Darren&quot;, &quot;Eoin&quot;, &quot;Rebecca&quot; ]&#x27;&gt;
  &lt;span class=&quot;wrap&quot;&gt;&lt;/span&gt;
@@ -758,11 +1018,11 @@ TxtType.prototype.tick = function() {
 		}
 &lt;/script&gt;
 
-</tw-passagedata><tw-passagedata pid="4" name="Act One" tags="" position="400,201">Introductions
+</tw-passagedata><tw-passagedata pid="4" name="Act One" tags="" position="479,241">Introductions
 
-[[Next-&gt;Character One]]</tw-passagedata><tw-passagedata pid="5" name="Character One" tags="" position="601,199">Hello I&#x27;m Charactor One
+[[Next-&gt;Character One]]</tw-passagedata><tw-passagedata pid="5" name="Character One" tags="" position="628,243">Hello I&#x27;m Charactor One
 
-[[Next-&gt;Act Two]]</tw-passagedata><tw-passagedata pid="6" name="Act Two" tags="" position="801,198">Investigate
+[[Next-&gt;Act Two]]</tw-passagedata><tw-passagedata pid="6" name="Act Two" tags="" position="787,245">Investigate
 
 You have until 7:30am to solve the mystery.
 
@@ -825,15 +1085,10 @@ var _functions = story.state.functions
 		_functions.changeRoom(roomName)
 	}
 	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="Fade" tags="" position="70,354">&lt;div id=&quot;title&quot;&gt;Act One: Introduction&lt;/div&gt;
-
-&lt;script&gt;
-	$( &quot;#title&quot; ).fadeIn( &quot;slow&quot;, function() {
-    // Animation complete
-  });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="Intro Idea" tags="" position="44,200">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="Intro Idea" tags="" position="300,184">
 
 &lt;div class=&quot;section&quot;&gt;
+&lt;section class=&quot;card-container&quot;&gt;
         &lt;div&gt;
             &lt;input type=&quot;button&quot; value=&quot;FLIP OVER&quot; id=&quot;flip&quot;/&gt;
         &lt;/div&gt;
@@ -841,13 +1096,24 @@ var _functions = story.state.functions
             &lt;figure class=&quot;front&quot;&gt;&lt;img src=&quot;http://gomezisdan.com/images/postcard-web.png&quot; class=&quot;postcard front&quot; /&gt;&lt;/figure&gt;
             &lt;figure class=&quot;back&quot;&gt;&lt;img src=&quot;http://gomezisdan.com/images/postcard-back-plain.png&quot; class=&quot;postcard back&quot; /&gt;&lt;/figure&gt;
         &lt;/div&gt;
+	&lt;section&gt;
 &lt;/div&gt;
+&lt;div id=&quot;begin&quot; class=&quot;hidden-info&quot;&gt;
+	[[Begin-&gt;Lounge]]
+&lt;div&gt;
+
+
 
 
 &lt;script&gt;
     $(&quot;#flip&quot;).click(function() {
       $(&quot;#card&quot;).toggleClass(&quot;flipped&quot;);
-    });
+    	setTimeout(function(){
+		  $( &quot;.hidden-info&quot; ).fadeIn( &quot;slow&quot;, function() {
+			  $(&quot;.hidden-info&quot;).removeClass(&quot;hidden-info&quot;);
+			});
+		 }, 5000)
+	});
 &lt;/script&gt;</tw-passagedata></tw-storydata>
 
 <script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
