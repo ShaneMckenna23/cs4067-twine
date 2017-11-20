@@ -191,6 +191,34 @@ div.inventory-item:hover{
     color: black
 }
 
+#office {
+    position: absolute;
+    top: 40px;
+    right: 640px;
+    color: black
+}
+
+#library {
+    position: absolute;
+    top: 140px;
+    right: 440px;
+    color: black
+}
+
+#bedroom {
+    position: absolute;
+    top: 140px;
+    right: 540px;
+    color: black
+}
+
+#hallway {
+    position: absolute;
+    top: 140px;
+    right: 640px;
+    color: black
+}
+
 #title {
   display: none
 }
@@ -450,9 +478,34 @@ _vars.characters = {
 	},
 
 	butler: {
-			name: "NAME ME",
-			like: 5
-		}
+		name: "NAME ME",
+		like: 5,
+		questions:[
+			{question: "What was the last thing he told you?", visible: true, function: whatWasLastThingHeToldYou}
+		]
+	},
+	
+	rival: {
+		name: "McMahon",
+		like: 3,
+		questions:[
+			{question: "How was your business relationship?", visible: true, function: howWasYourRelationship}
+		]
+	},
+	policeman: {
+		name: "Officer",
+		like: 10,
+		questions:[
+			{question: "What happened?", visible: true, function: whatHappend}
+		]
+	},
+	deadman: {
+		name: "Mr. Callaway",
+		like: 10,
+		questions:[
+			{question: "Why did you invite me?", visible: true, function: whyAmIHere}
+		]
+	}
 }
 
 _vars.locations = {
@@ -474,6 +527,22 @@ _vars.locations = {
 	},
 	library:{
 		people: ["politician"]
+	},
+	office:{
+		people: ["rival"],
+		actions: [
+			{name: "Read Paper", visible:true, function: readPaper},
+			{name: "Pick up Letter", visible:true, function: pickUpLetterOfTermination}
+		],
+		desc: "This is the office room description"
+	},
+	bedroom:{
+		people: ["deadman"],
+		desc: "This is the bedroom with the dead body"
+	},
+	hallway:{
+		people: ["policeman"],
+		desc: "This is the hallway"
 	}
 }
 
@@ -530,8 +599,11 @@ _vars.items = [
 	},	
 	
 	{
-		name: "Letter Of Termination",
-		desc: "ITEM DESCRIPTION"
+		name: "Letter of Termination",
+		desc: "ITEM DESCRIPTION",
+		actions: [{name: "Show to", visible: true, function: showToPerson},
+				  {name: "Read Letter of Termination", visible:false, function: readLetterOfTermination}
+				  ]
 	}
 ]
 
@@ -563,9 +635,25 @@ function printPlayerInfo(info){
 	_functions.addInfo(header,info)
 }
 
-//Sister
+//General
 function whatHappend(){
 	var question = "What happend here?"
+	printPlayerInfo(question)
+}
+
+function whatWasLastThingHeToldYou(){
+	var question = "What was the last thing he told you?"
+	printPlayerInfo(question)
+}
+
+function howWasYourRelationship(){
+	var question = "How was your relationship?"
+	printPlayerInfo(question)
+}
+
+//Deadman
+function whyAmIHere(){
+	var question = "Why did you invite me?"
 	printPlayerInfo(question)
 }
 
@@ -613,6 +701,29 @@ function pickUpBloodyKnife(){
 	printPlayerInfo("You take a knife from the drawer")
 }
 
+//Office 
+function readPaper(){
+	printPlayerInfo("You read the paper, the world hasn't ended yet!")
+	editLocAction("office","Read Paper",false)
+
+	_functions.updateActions("office")
+}
+
+function pickUpLetterOfTermination(){
+	_functions.addItem("Letter of Termination")
+	printPlayerInfo("You picked up a Letter of Termination!")
+	editLocAction("office","Pick up Letter",false)
+
+	_functions.updateActions("office")
+}
+
+function readLetterOfTermination(){
+	printPlayerInfo("You read the letter, the Buttler was going to be fired!")
+	editLocAction("office","Read Letter of Termination",false)
+
+	_functions.updateActions("office")
+}
+
 //***************************************************
 
 
@@ -620,6 +731,7 @@ function pickUpBloodyKnife(){
 //************** Global Functions **************************
 story.state.functions = {};
 var _functions = story.state.functions;
+
 
 //************** Game Functions **************************
 _functions.changeRoom = function(roomName){
