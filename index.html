@@ -87,8 +87,6 @@ img {
     float: left;
     width: 17%;
     height: 100%;
-    background-color: orange;
-    border:2px solid black;
     margin-right: 1%;
 }
 
@@ -449,10 +447,11 @@ p.delay {
 /*-------------------------------------------------------------------*/
 
 
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Variables **************************
+
+
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Constants **************************
 var playerName = "PlayerName"
-var currentRoom = "lounge"
-var openedItem;
+
 
 //************** Global Variables **************************
 story.state.variables = {};
@@ -670,6 +669,10 @@ function whyAmIHere(){
 
 //************** Item Actions **************************
 
+function showToPerson(){
+	alert("Test")
+}
+
 function getPersonInRoom(){
 	return _vars.locations[currentRoom].people[0]
 }
@@ -769,7 +772,6 @@ _functions.changeRoom = function(roomName){
 	var room = window.story.render(roomName);
 	$(".container").html(room);
 	roomName = roomName.toLowerCase()
-	currentRoom = roomName
 	_functions.updateActions(roomName)
 	_functions.updateItems()
 	_functions.updateInfo()
@@ -815,8 +817,6 @@ _functions.incrementClock = function(time){
 
 function openItemWindow(event){
 	var itemName = event.target.innerHTML
-	openedItem = itemName;
-
 	var popup = document.getElementById('popupBox');
 	popup.style.display = "block";
 
@@ -840,9 +840,7 @@ function openItemWindow(event){
 
 function closeItemWindow(){
 	var popup = document.getElementById('popupBox');
-	$("#popupBox").fadeOut("slow", function() {
-		//animation Complete
-	});
+	popup.style.display = "none";
 }
 
 
@@ -942,21 +940,14 @@ _functions.updateItemWindow = function(itemName){
 
 	var actionHeader = "<h2>Item Actions: </h2>"
 	var popupAction = document.getElementById("popup-actions")
-	popupAction.innerHTML = actionHeader;
 	var itemActions = itemObj.actions
 
 	if (itemActions != null){
 		var itemActionsToRender = [];
 		itemActions.forEach(function(action){
-				var actionName;
-				if(typeof action.name == 'function'){
-					actionName = action.name()
-				}else{
-					actionName = action.name
-				}
 				var element = document.createElement('div')
 				element.className= "itemAction-item"
-				element.innerHTML = actionName
+				element.innerHTML = action.name
 				element.addEventListener('click', action.function)
 				itemActionsToRender.push(element)
 		})
@@ -1024,6 +1015,8 @@ function editLocAction(loc,actionName,visible){
 }
 
 //****************************************************
+
+
 </script><tw-passagedata pid="1" name="Menu" tags="" position="104,202"> &lt;div id=&quot;menu&quot;&gt;
  	Welcome
 	CS4067 - Twine Game
@@ -1032,7 +1025,7 @@ function editLocAction(loc,actionName,visible){
 
 	[[Credits]]
  &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="2" name="Lounge" tags="" position="1001,199">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+</tw-passagedata><tw-passagedata pid="2" name="Lounge" tags="" position="1000,200">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
     &lt;div class=&quot;top-section&quot;&gt;
                    &lt;div id=&quot;room&quot;&gt;
                        &lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -1042,6 +1035,10 @@ function editLocAction(loc,actionName,visible){
                        &lt;div id=&quot;map&quot;&gt;
                    &lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
                            &lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						   &lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
+						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
+						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
                            &lt;img id=&quot;map-img&quot; src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                        &lt;/div&gt;
                        &lt;div id=&quot;actions&quot;&gt;
@@ -1053,7 +1050,7 @@ function editLocAction(loc,actionName,visible){
                &lt;/div&gt;
                &lt;div class=&quot;bottom-section&quot;&gt;
                    &lt;div id=&quot;player&quot;&gt;
-                       &lt;img id=&quot;player-img&quot; src=&quot;&quot;/&gt;
+                       &lt;img id=&quot;player-img&quot; src=&quot;https://github.com/DarrenFarrell/test/blob/master/Character-Portraits/Portrait4.png?raw=true&quot;/&gt;
                    &lt;/div&gt;
                    &lt;div id=&quot;questions&quot;&gt;
                    &lt;h2&gt;Questions&lt;/h2&gt;
@@ -1199,6 +1196,10 @@ var _functions = story.state.functions
                     &lt;div id=&quot;map&quot;&gt;
 						&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
 						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
+						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
+						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
@@ -1269,6 +1270,226 @@ var _functions = story.state.functions
 			});
 		 }, 5000)
 	});
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="Office" tags="" position="1200,325">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+ &lt;div class=&quot;top-section&quot;&gt;
+                &lt;div id=&quot;room&quot;&gt;
+					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
+                    &lt;img id=&quot;room-img&quot; src=&quot;https://i.imgur.com/odsVTO5.jpg&quot;/&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;right&quot;&gt;
+                    &lt;div id=&quot;map&quot;&gt;
+						&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
+						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
+						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
+						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+                        &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
+                    &lt;/div&gt;
+                    &lt;div id=&quot;actions&quot;&gt;
+					&lt;h2&gt;Actions:&lt;/h2&gt;
+					&lt;div id=&quot;action-list&quot;&gt;
+					&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+			&lt;div class=&quot;bottom-section&quot;&gt;
+                &lt;div id=&quot;player&quot;&gt;
+                    &lt;img id=&quot;player-img&quot; src=&quot;https://github.com/DarrenFarrell/test/blob/master/Character-Portraits/Portrait2.png?raw=true&quot;/&gt;
+                &lt;/div&gt;
+				&lt;div id=&quot;questions&quot;&gt;
+				&lt;h2&gt;Questions&lt;/h2&gt;
+				&lt;div id=&quot;question-list&quot;&gt;&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div id=&quot;information&quot;&gt;
+					
+                &lt;/div&gt;
+				&lt;div id=&quot;item&quot;&gt;
+                        &lt;h2&gt;Items&lt;/h2&gt;
+						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var _functions = story.state.functions
+
+	//Update Clock
+	var clock = document.getElementById(&quot;clock&quot;)
+	setInterval(function(){
+		var time = story.state.functions.getClock()
+		clock.innerHTML = time
+	},1000)
+	
+	function changeRoom(roomName){
+		_functions.changeRoom(roomName)
+	}
+	
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="11" name="Library" tags="" position="1000,325">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+ &lt;div class=&quot;top-section&quot;&gt;
+                &lt;div id=&quot;room&quot;&gt;
+					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
+                    &lt;img id=&quot;room-img&quot; src=&quot;http://lowres-picturecabinet.com.s3-eu-west-1.amazonaws.com/115/main/1/343983.jpg&quot;/&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;right&quot;&gt;
+                    &lt;div id=&quot;map&quot;&gt;
+						&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
+						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
+						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
+						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+                        &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
+                    &lt;/div&gt;
+                    &lt;div id=&quot;actions&quot;&gt;
+					&lt;h2&gt;Actions:&lt;/h2&gt;
+					&lt;div id=&quot;action-list&quot;&gt;
+					&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+			&lt;div class=&quot;bottom-section&quot;&gt;
+                &lt;div id=&quot;player&quot;&gt;
+                    &lt;img id=&quot;player-img&quot; src=&quot;https://github.com/DarrenFarrell/test/blob/master/Character-Portraits/Portrait3.png?raw=true&quot;/&gt;
+                &lt;/div&gt;
+				&lt;div id=&quot;questions&quot;&gt;
+				&lt;h2&gt;Questions&lt;/h2&gt;
+				&lt;div id=&quot;question-list&quot;&gt;&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div id=&quot;information&quot;&gt;
+					
+                &lt;/div&gt;
+				&lt;div id=&quot;item&quot;&gt;
+                        &lt;h2&gt;Items&lt;/h2&gt;
+						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var _functions = story.state.functions
+
+	//Update Clock
+	var clock = document.getElementById(&quot;clock&quot;)
+	setInterval(function(){
+		var time = story.state.functions.getClock()
+		clock.innerHTML = time
+	},1000)
+	
+	function changeRoom(roomName){
+		_functions.changeRoom(roomName)
+	}
+	
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="12" name="Bedroom" tags="" position="1000,450">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+ &lt;div class=&quot;top-section&quot;&gt;
+                &lt;div id=&quot;room&quot;&gt;
+					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
+                    &lt;img id=&quot;room-img&quot; src=&quot;http://www.amazadesign.com/wp-content/uploads/Glamorous-Calm-King-Bedroom-Sets-With-Bed-Mattress-For-Aparment-Design-Ideas-With-Modern-Traditional-Furniture-Sets-Ideas-And-Beautiful-Rug-Design-Also-Laminate-Dark-Wood-Flooring-Ideas.jpg&quot;/&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;right&quot;&gt;
+                    &lt;div id=&quot;map&quot;&gt;
+						&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
+						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
+						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
+						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+                        &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
+                    &lt;/div&gt;
+                    &lt;div id=&quot;actions&quot;&gt;
+					&lt;h2&gt;Actions:&lt;/h2&gt;
+					&lt;div id=&quot;action-list&quot;&gt;
+					&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+			&lt;div class=&quot;bottom-section&quot;&gt;
+                &lt;div id=&quot;player&quot;&gt;
+                    &lt;img id=&quot;player-img&quot; src=&quot;https://github.com/DarrenFarrell/test/blob/master/Character-Portraits/Portrait1.png?raw=true&quot;/&gt;
+                &lt;/div&gt;
+				&lt;div id=&quot;questions&quot;&gt;
+				&lt;h2&gt;Questions&lt;/h2&gt;
+				&lt;div id=&quot;question-list&quot;&gt;&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div id=&quot;information&quot;&gt;
+					
+                &lt;/div&gt;
+				&lt;div id=&quot;item&quot;&gt;
+                        &lt;h2&gt;Items&lt;/h2&gt;
+						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var _functions = story.state.functions
+
+	//Update Clock
+	var clock = document.getElementById(&quot;clock&quot;)
+	setInterval(function(){
+		var time = story.state.functions.getClock()
+		clock.innerHTML = time
+	},1000)
+	
+	function changeRoom(roomName){
+		_functions.changeRoom(roomName)
+	}
+	
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="13" name="Hallway" tags="" position="1200,450">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+ &lt;div class=&quot;top-section&quot;&gt;
+                &lt;div id=&quot;room&quot;&gt;
+					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
+                    &lt;img id=&quot;room-img&quot; src=&quot;http://www.driehausmuseum.org/img/blog/Main_Hall_big.jpg&quot;/&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;right&quot;&gt;
+                    &lt;div id=&quot;map&quot;&gt;
+						&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
+						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
+						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
+						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+                        &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
+                    &lt;/div&gt;
+                    &lt;div id=&quot;actions&quot;&gt;
+					&lt;h2&gt;Actions:&lt;/h2&gt;
+					&lt;div id=&quot;action-list&quot;&gt;
+					&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+			&lt;div class=&quot;bottom-section&quot;&gt;
+                &lt;div id=&quot;player&quot;&gt;
+                    &lt;img id=&quot;player-img&quot; src=&quot;&quot;/&gt;
+                &lt;/div&gt;
+				&lt;div id=&quot;questions&quot;&gt;
+				&lt;h2&gt;Questions&lt;/h2&gt;
+				&lt;div id=&quot;question-list&quot;&gt;&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div id=&quot;information&quot;&gt;
+					
+                &lt;/div&gt;
+				&lt;div id=&quot;item&quot;&gt;
+                        &lt;h2&gt;Items&lt;/h2&gt;
+						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	var _functions = story.state.functions
+
+	//Update Clock
+	var clock = document.getElementById(&quot;clock&quot;)
+	setInterval(function(){
+		var time = story.state.functions.getClock()
+		clock.innerHTML = time
+	},1000)
+	
+	function changeRoom(roomName){
+		_functions.changeRoom(roomName)
+	}
+	
 &lt;/script&gt;</tw-passagedata></tw-storydata>
 
 <script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
