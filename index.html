@@ -532,10 +532,7 @@ p.delay {
 
 
 
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">var audio = new Audio('./static/music/rain.mp3');
-audio.play();
-
-//************** Variables **************************
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Variables **************************
 var playerName = "PlayerName"
 var currentRoom = "lounge"
 var openedItem;
@@ -1171,6 +1168,9 @@ function editQVisible(character, question,visible){
    
    
    &lt;script&gt;
+	   var audio = new Audio(&#x27;./static/music/rain.mp3&#x27;);
+	   audio.play();
+
        var _functions = story.state.functions
        var _vars = story.state.variables
        
@@ -1268,6 +1268,9 @@ var _functions = story.state.functions
   setInterval(function(){
 	  _functions.incrementClock(5)
   },5000)
+  
+  var audio = new Audio(&#x27;./static/music/scream.mp3&#x27;);
+  audio.play();
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="5" name="Act Three" tags="" position="430,532">You and the Constable draw all of the 
 
 [[The Rival Accusation]]
