@@ -740,7 +740,6 @@ function bWhereWereYou(){
  _functions.editCharacterTrust("butler", -1)
 
  editQVisible("butler", "Where were you at the time of the murder?",false)
- alert(_vars.characters.butler.questions[0].visible)
  _functions.updateQuestions(currentRoom)
 }
 
@@ -1122,7 +1121,7 @@ function editQVisible(character, question,visible){
 						   &lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                            &lt;img id=&quot;map-img&quot; src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                        &lt;/div&gt;
                        &lt;div id=&quot;actions&quot;&gt;
@@ -1287,7 +1286,7 @@ var _functions = story.state.functions
 						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
@@ -1371,7 +1370,7 @@ var _functions = story.state.functions
 						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
@@ -1426,7 +1425,7 @@ var _functions = story.state.functions
 						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
@@ -1481,7 +1480,7 @@ var _functions = story.state.functions
 						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
@@ -1536,7 +1535,7 @@ var _functions = story.state.functions
 						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
