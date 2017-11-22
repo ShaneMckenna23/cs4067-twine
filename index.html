@@ -10,7 +10,7 @@ CS4067
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="CS4067" startnode="17" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+<tw-storydata name="CS4067" startnode="1" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
     font: 18px "Helvetica Neue",Helvetica,Arial,sans-serif;
   	background-image: url("http://eskipaper.com/images/victorian-wallpaper-2.jpg");
   background-repeat:no-repeat;
@@ -538,9 +538,11 @@ p.delay {
 
 
 
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Constants **************************
 var playerName = "PlayerName"
-
+var currentRoom = "lounge"
+var openedItem;
 
 //************** Global Variables **************************
 story.state.variables = {};
@@ -555,7 +557,7 @@ _vars.clock = {
 _vars.characters = {
 	sister: {
 		name: "SISTERS NAME",
-		like: 5,
+		trust: 5,
 		questions:[
 			{question: "What happened?", visible: true, function: whatHappend}
 		]
@@ -563,12 +565,12 @@ _vars.characters = {
 	
 	politician: {
 		name: "NAME ME",
-		like: 2
+		trust: 2
 	},
 
 	butler: {
 		name: "NAME ME",
-		like: 5,
+		trust: 5,
 		questions:[
 			{question: "What was the last thing he told you?", visible: true, function: whatWasLastThingHeToldYou}
 		],
@@ -579,21 +581,21 @@ _vars.characters = {
 	
 	rival: {
 		name: "McMahon",
-		like: 3,
+		trust: 3,
 		questions:[
 			{question: "How was your business relationship?", visible: true, function: howWasYourRelationship}
 		]
 	},
 	policeman: {
 		name: "Officer",
-		like: 10,
+		trust: 10,
 		questions:[
 			{question: "What happened?", visible: true, function: whatHappend}
 		]
 	},
 	deadman: {
 		name: "Mr. Callaway",
-		like: 10,
+		trust: 10,
 		questions:[
 			{question: "Why did you invite me?", visible: true, function: whyAmIHere}
 		]
@@ -1006,14 +1008,17 @@ _functions.updateQuestions = function(room){
 	if(peopleInRoom.length > 0){
 		var questions = _vars.characters[peopleInRoom[0]].questions
 		var questionList = document.getElementById("question-list")
+		questionList.innerHTML = "";
 		if (questions != null){
 			var questionsToRender = [];
 			questions.forEach(function(q){
+				if(q.visible == true){
 					var element = document.createElement('div')
 					element.className= "question-item"
 					element.innerHTML = q.question
 					element.addEventListener('click', q.function)
 					questionsToRender.push(element)
+				}
 			})
 			questionsToRender.forEach(function(el){
 				questionList.appendChild(el)
@@ -1091,10 +1096,9 @@ _functions.addInfo = function(header, info){
 
 //************** Edit Functions **************************
 
-_functions.editCharacterLike = function(character, likeValue){
-	var _vars = story.state.variables;
+_functions.editCharacterTrust = function(character, trustValue){
 	var characterObj = _vars.characters[character]
-	character.like += likeValue
+	characterObj.trust += trustValue
 }
 
 function editLocAction(loc,actionName,visible){
@@ -1103,7 +1107,14 @@ function editLocAction(loc,actionName,visible){
 	_vars.locations[loc].actions[actionIndex].visible = visible
 }
 
+function editQVisible(character, question,visible){
+	var questionObj = _vars.characters[character].questions
+	var quesitonIndex = searchObjArrayByQ(questionObj, question)
+	_vars.characters[character].questions[quesitonIndex].visible = visible
+}
+
 //****************************************************
+
 
 
 
@@ -2019,7 +2030,7 @@ But I guess the next question to be asked is why?
 
 [[No One Reaction]]
 
-[[The Sister/Politician Reaction]]</tw-passagedata><tw-passagedata pid="24" name="The Rival Reaction" tags="" position="790,955">[[Afterwards]]</tw-passagedata><tw-passagedata pid="25" name="The Politician Reaction" tags="" position="787,804">[[Afterwards]]</tw-passagedata><tw-passagedata pid="26" name="The Sister Reaction" tags="" position="841,681">[[Afterwards]]</tw-passagedata><tw-passagedata pid="27" name="The Butler Reaction" tags="" position="1004,628">[[Afterwards]]</tw-passagedata><tw-passagedata pid="28" name="Good Ending" tags="" position="1118,1546.7999267578125">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="29" name="Worst Ending" tags="" position="1377.7999877929688,1554">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="30" name="Bad Ending" tags="" position="1244,1554">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="31" name="Rival Agrees with Host" tags="" position="352,523">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="32" name="Afterwards" tags="" position="1202,756">[[Butler Free]]
+[[The Sister/Politician Reaction]]</tw-passagedata><tw-passagedata pid="24" name="The Rival Reaction" tags="" position="790,955">[[Afterwards]]</tw-passagedata><tw-passagedata pid="25" name="The Politician Reaction" tags="" position="787,804">[[Afterwards]]</tw-passagedata><tw-passagedata pid="26" name="The Sister Reaction" tags="" position="841,681">[[Afterwards]]</tw-passagedata><tw-passagedata pid="27" name="The Butler Reaction" tags="" position="1004,628">[[Afterwards]]</tw-passagedata><tw-passagedata pid="28" name="Good Ending" tags="" position="1118,1546">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="29" name="Worst Ending" tags="" position="1377,1554">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="30" name="Bad Ending" tags="" position="1244,1554">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="31" name="Rival Agrees with Host" tags="" position="352,523">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="32" name="Afterwards" tags="" position="1202,756">[[Butler Free]]
 
 [[Butler Inprison]]</tw-passagedata><tw-passagedata pid="33" name="Butler Free" tags="" position="1133,902">[[Rival Free]]
 
