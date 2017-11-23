@@ -10,7 +10,7 @@ CS4067
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="CS4067" startnode="1" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+<tw-storydata name="CS4067" startnode="4" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
     font: 18px "Helvetica Neue",Helvetica,Arial,sans-serif;
   	background-image: url("http://eskipaper.com/images/victorian-wallpaper-2.jpg");
   background-repeat:no-repeat;
@@ -124,6 +124,7 @@ img {
     background-color: white;
     border:2px solid black;
   	padding: 20px;
+  	background-image: url("https://github.com/ShaneMckenna23/cs4067-twine/raw/master/static/images/ui/notepad.png")
 }
 
 .clock {
@@ -570,7 +571,7 @@ _vars.clock = {
 
 _vars.characters = {
 	sister: {
-		name: "SISTERS NAME",
+		name: "SisterName",
 		trust: 5,
 		questions:[
 			{question: "What happened?", visible: true, function: whatHappend}
@@ -578,12 +579,12 @@ _vars.characters = {
 	},
 	
 	politician: {
-		name: "NAME ME",
+		name: "PoliticianName",
 		trust: 2
 	},
 
 	butler: {
-		name: "NAME ME",
+		name: "ButlerName",
 		trust: 5,
 		questions:[
 			{question: "What was the last thing he told you?", visible: true, function: whatWasLastThingHeToldYou}
@@ -712,8 +713,9 @@ _vars.items = [
 	{
 		name: "Letter of Termination",
 		desc: "ITEM DESCRIPTION",
-		actions: [{name: "Show to", visible: true, function: showToPerson},
-				  {name: "Read Letter of Termination", visible:false, function: readLetterOfTermination}
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson},
+			{name: "Read Letter of Termination", visible:false, function: readLetterOfTermination}
 				  ]
 	}
 ]
@@ -732,6 +734,14 @@ _vars.information = []
 function searchObjArrayByName(array, name){
     for (var i=0; i < array.length; i++) {
         if (array[i].name === name) {
+            return i;
+        }
+    }
+}
+
+function searchObjArrayByQuestion(array, question){
+    for (var i=0; i < array.length; i++) {
+        if (array[i].question === question) {
             return i;
         }
     }
@@ -773,11 +783,6 @@ function whyAmIHere(){
 
 
 //************** Item Actions **************************
-
-function showToPerson(){
-	alert("Test")
-}
-
 function getPersonInRoom(){
 	return _vars.locations[currentRoom].people[0]
 }
@@ -877,6 +882,7 @@ _functions.changeRoom = function(roomName){
 	var room = window.story.render(roomName);
 	$(".container").html(room);
 	roomName = roomName.toLowerCase()
+	currentRoom = roomName
 	_functions.updateActions(roomName)
 	_functions.updateItems()
 	_functions.updateInfo()
@@ -922,6 +928,7 @@ _functions.incrementClock = function(time){
 
 function openItemWindow(event){
 	var itemName = event.target.innerHTML
+	openedItem = itemName
 	var popup = document.getElementById('popupBox');
 	popup.style.display = "block";
 
@@ -944,8 +951,9 @@ function openItemWindow(event){
 }
 
 function closeItemWindow(){
-	var popup = document.getElementById('popupBox');
-	popup.style.display = "none";
+	$("#popupBox").fadeOut("slow", function() {
+			//animation Complete
+	});
 }
 
 
@@ -1049,15 +1057,21 @@ _functions.updateItemWindow = function(itemName){
 	var actionHeader = "<h2>Item Actions: </h2>"
 	var popupAction = document.getElementById("popup-actions")
 	var itemActions = itemObj.actions
-
+	popupAction.innerHTML = actionHeader
 	if (itemActions != null){
 		var itemActionsToRender = [];
 		itemActions.forEach(function(action){
-				var element = document.createElement('div')
-				element.className= "itemAction-item"
-				element.innerHTML = action.name
-				element.addEventListener('click', action.function)
-				itemActionsToRender.push(element)
+			var actionName;
+			if(typeof action.name == 'function'){
+				actionName = action.name()
+			}else{
+				actionName = action.name
+			}
+			var element = document.createElement('div')
+			element.className= "itemAction-item"
+			element.innerHTML = actionName
+			element.addEventListener('click', action.function)
+			itemActionsToRender.push(element)
 		})
 		itemActionsToRender.forEach(function(el){
 			popupAction.appendChild(el)
@@ -1291,7 +1305,7 @@ TxtType.prototype.tick = function() {
 		}
 &lt;/script&gt;
 
-</tw-passagedata><tw-passagedata pid="4" name="Act Two" tags="" position="606,299">Investigate
+</tw-passagedata><tw-passagedata pid="4" name="Act Two" tags="" position="598.3333333333334,309">Investigate
 
 You have until 7:30am to solve the mystery.
 
@@ -2019,7 +2033,7 @@ Albert attacks
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="The Murder" tags="" position="348,399">[[Act Two]]</tw-passagedata><tw-passagedata pid="23" name="The Accusation" tags="" position="549,653">So I have gathered you all here, because I have put together the last piece of the puzzle in who 
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="The Murder" tags="" position="348,399">[[Act Two]]</tw-passagedata><tw-passagedata pid="23" name="The Accusation" tags="" position="552,612">So I have gathered you all here, because I have put together the last piece of the puzzle in who 
 
 It was [Accused].
 
@@ -2045,7 +2059,7 @@ But I guess the next question to be asked is why?
 
 [[No One Reaction]]
 
-[[The Sister/Politician Reaction]]</tw-passagedata><tw-passagedata pid="24" name="The Rival Reaction" tags="" position="790,955">[[Afterwards]]</tw-passagedata><tw-passagedata pid="25" name="The Politician Reaction" tags="" position="787,804">[[Afterwards]]</tw-passagedata><tw-passagedata pid="26" name="The Sister Reaction" tags="" position="841,681">[[Afterwards]]</tw-passagedata><tw-passagedata pid="27" name="The Butler Reaction" tags="" position="1004,628">[[Afterwards]]</tw-passagedata><tw-passagedata pid="28" name="Good Ending" tags="" position="1118,1546">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="29" name="Worst Ending" tags="" position="1377,1554">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="30" name="Bad Ending" tags="" position="1244,1554">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="31" name="Rival Agrees with Host" tags="" position="352,523">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="32" name="Afterwards" tags="" position="1202,756">[[Butler Free]]
+[[The Sister/Politician Reaction]]</tw-passagedata><tw-passagedata pid="24" name="The Rival Reaction" tags="" position="790,955">[[Afterwards]]</tw-passagedata><tw-passagedata pid="25" name="The Politician Reaction" tags="" position="787,804">[[Afterwards]]</tw-passagedata><tw-passagedata pid="26" name="The Sister Reaction" tags="" position="841,681">[[Afterwards]]</tw-passagedata><tw-passagedata pid="27" name="The Butler Reaction" tags="" position="1000,625">[[Afterwards]]</tw-passagedata><tw-passagedata pid="28" name="Good Ending" tags="" position="1118,1546">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="29" name="Worst Ending" tags="" position="1377,1554">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="30" name="Bad Ending" tags="" position="1244,1554">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="31" name="Rival Agrees with Host" tags="" position="352,523">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="32" name="Afterwards" tags="" position="1202,756">[[Butler Free]]
 
 [[Butler Inprison]]</tw-passagedata><tw-passagedata pid="33" name="Butler Free" tags="" position="1133,902">[[Rival Free]]
 
@@ -2071,7 +2085,7 @@ But I guess the next question to be asked is why?
 
 [[Bad Ending]]
 
-[[Worst Ending]]</tw-passagedata><tw-passagedata pid="41" name="Best Ending" tags="" position="986,1554">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="The Sister/Politician Reaction" tags="" position="1247,593">[[Afterwards]]</tw-passagedata><tw-passagedata pid="43" name="No One Reaction" tags="" position="745,1117">[[Afterwards]]</tw-passagedata><tw-passagedata pid="44" name="Act One" tags="" position="426,153">&lt;div class=&quot;act-intro&quot;&gt;
+[[Worst Ending]]</tw-passagedata><tw-passagedata pid="41" name="Best Ending" tags="" position="990,1540">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="The Sister/Politician Reaction" tags="" position="1200,584">[[Afterwards]]</tw-passagedata><tw-passagedata pid="43" name="No One Reaction" tags="" position="745,1117">[[Afterwards]]</tw-passagedata><tw-passagedata pid="44" name="Act One" tags="" position="426,153">&lt;div class=&quot;act-intro&quot;&gt;
 	Act One: The Dinner
 &lt;/div&gt;
 &lt;script&gt;
