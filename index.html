@@ -10,7 +10,7 @@ CS4067
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="CS4067" startnode="4" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+<tw-storydata name="CS4067" startnode="1" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
     font: 18px "Helvetica Neue",Helvetica,Arial,sans-serif;
   	background-image: url("http://eskipaper.com/images/victorian-wallpaper-2.jpg");
   background-repeat:no-repeat;
@@ -556,7 +556,7 @@ p.delay {
 
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Constants **************************
 var playerName = "PlayerName"
-var currentRoom = "lounge"
+var currentRoom = "dining"
 var openedItem;
 
 //************** Global Variables **************************
@@ -569,18 +569,30 @@ _vars.clock = {
 	post: "PM"
 }
 
+
 _vars.characters = {
 	sister: {
 		name: "SisterName",
 		trust: 5,
 		questions:[
-			{question: "What happened?", visible: true, function: whatHappend}
-		]
+			{question: "What happened?", visible: true, function: whatHappend},
+        ],
+        itemRes:[
+            {name: "Pamphlet", res: "I knew about that and he can do what he wants"},
+            {name: "Gun Case", res: "He usually has a gun there"},
+            {name: "RSVPS", res: "Yes, I did write that"},
+            {name: "Poison Bottle", res:"Maybe ask the butler"}
+        ]
 	},
 	
 	politician: {
 		name: "PoliticianName",
-		trust: 2
+        trust: 2,
+        itemRes:[
+            {name: "Pamphlet", res: "That proves it was the sister"},
+            {name: "Threatening Letter", res: "Claim to have never seen it"},
+            {name: "RSVPS", res: "Yes, I did write that"}
+        ]			
 	},
 
 	butler: {
@@ -590,24 +602,40 @@ _vars.characters = {
 			{question: "What was the last thing he told you?", visible: true, function: whatWasLastThingHeToldYou}
 		],
 		itemRes:[
-			{name: "Bloody Knife", res: "THAT IS ALOT OF BLOOD!"}
+            {name: "Bloody Knife", res: "Shows recent knife injury"},
+            {name: "Used Cup", res: "Yes it is Albert's cup"},
+            {name: "Posion Bottle", res: "Rat Problem"},
+            {name: "Ledger", res: "We are no longer partners"},
+            {name: "Mangled Toaster", res: "Now I have to buy a new toaster. I just bought that"}
 		]
 	},
 	
 	rival: {
-		name: "McMahon",
+		name: "Victor",
 		trust: 3,
 		questions:[
 			{question: "How was your business relationship?", visible: true, function: howWasYourRelationship}
+        ],
+        itemRes:[
+            {name: "Mangled Toaster", res: "Broke it because I don’t like him"},
+            {name: "Ledger", res: "We are no longer partners"},
+            {name: "RSVPS", res: "Yes, I did write that"}
 		]
-	},
+    },
+    
 	policeman: {
 		name: "Officer",
 		trust: 10,
 		questions:[
 			{question: "What happened?", visible: true, function: whatHappend}
-		]
-	},
+        ],
+        itemRes:[
+            {name:"Poison Bottle", res: "That could be a murder weapon, but it does have legit uses"},
+            {name: "Threatening Letter", res: "That’s an obvious piece of evidence"},
+            {name: "Bloody Knife", res: "That could be a murder weapon, but it does have legit uses"}
+        ]
+    },
+    
 	deadman: {
 		name: "Mr. Callaway",
 		trust: 10,
@@ -618,39 +646,58 @@ _vars.characters = {
 }
 
 _vars.locations = {
-	lounge:{
+    
+    dining:{
 		people: ["sister"],
 		actions: [
-			{name: "Sit Down", visible: true, function: sit},
-			{name: "Stand Up", visible: false, function: stand}
+            {name: "Investigate Table", visible:true, function: investigateTable},
+            {name: "Investigate Cabinet", visible:true, function: investigateCabinet},
+            {name: "Investigate Decorations", visible:true, function: investigateDecorations},
+            {name: "Place Gun in Holder", visible:false, function: placeGunInHolder}
 		],
-		desc: "This is the lounge room description"
+		desc: "This is the dining room description"
 	},
-	kitchen:{
+    
+    kitchen:{
 		people: ["butler"],
 		actions: [
-			{name: "Make food", visible:true, function: makeFood},
-			{name: "Pick up Bloody Knife", visible:true, function: pickUpBloodyKnife}
+            {name: "Investigate Sink", visible:true, function: investigateSink},
+            {name: "Investigate Counter", visible:true, function: investigateCounter}
 		],
 		desc: "This is the kitchen room description"
 	},
-	library:{
-		people: ["politician"]
+    
+    library:{
+        people: ["politician"],
+        actions: [
+            {name: "Investigate Reading Table", visible:true, function: investigateReadingTable},
+            {name: "Investigate Bookshelf", visible:true, function: investigateBookshelf},
+            {name: "Investigate Broken Drawer", visible:true, function: investigateBrokenDrawer}
+        ],
+        desc: "This is the Library room description"
 	},
-	office:{
+    
+    office:{
 		people: ["rival"],
 		actions: [
-			{name: "Read Paper", visible:true, function: readPaper},
-			{name: "Pick up Letter", visible:true, function: pickUpLetterOfTermination}
+            {name: "Investigate Desk", visible:true, function: investigateDesk},
+            {name: "Investigate Mantlepiece", visible:true, function: investigateMantlepiece}
 		],
 		desc: "This is the office room description"
 	},
-	bedroom:{
-		people: ["deadman"],
+    
+    bedroom:{
+        people: ["deadman"],
+        actions: [],
 		desc: "This is the bedroom with the dead body"
 	},
-	hallway:{
-		people: ["policeman"],
+    
+    hallway:{
+        people: ["policeman"],
+        actions: [
+            {name: "Show evidence to police", visible:true, function: showEvidenceToPolice},
+            {name: "I know who committed the murder", visible:true, function: iKnowTheMurderer}
+        ],
 		desc: "This is the hallway"
 	}
 }
@@ -658,65 +705,90 @@ _vars.locations = {
 _vars.items = [
 	{
 		name: "Used Cup",
-		desc: "ITEM DESCRIPTION"
+		desc: "ITEM DESCRIPTION",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
 	},
 
 	{
 		name: "Poison Bottle",
-		desc: "ITEM DESCRIPTION"
+		desc: "ITEM DESCRIPTION",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
 	},	
 	
 	{
 		name: "Gun Case",
-		desc: "ITEM DESCRIPTION"
+		desc: "ITEM DESCRIPTION",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
 	},
 	
 	{
 		name: "Bloody Knife",
 		desc: "ITEM DESCRIPTION",
 		actions: [
-			{name: showToPersonText, visible: true, function: showToPerson},
-			{name: "Stab the Butler", visible: true, function: stabButler}
+			{name: showToPersonText, visible: true, function: showToPerson}
 		]
 	},
 	
 	{
 		name: "Magled Toaster",
-		desc: "ITEM DESCRIPTION"
+		desc: "ITEM DESCRIPTION",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
 	},	
 	
 	{
 		name: "Pamphlet",
-		desc: "ITEM DESCRIPTION"
+		desc: "ITEM DESCRIPTION",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
 	},	
 	
 	{
 		name: "Treatening Letter",
-		desc: "ITEM DESCRIPTION"
+		desc: "ITEM DESCRIPTION",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
 	},	
 	
 	{
 		name: "Ledger",
-		desc: "ITEM DESCRIPTION"
+		desc: "ITEM DESCRIPTION",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
 	},	
 	
 	{
-		name:"Rsvps",
-		desc: "ITEM DESCRIPTION"
+		name:"RSVPS",
+		desc: "ITEM DESCRIPTION",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
 	},	
 	
 	{
 		name: "Diary",
-		desc: "ITEM DESCRIPTION"
+		desc: "ITEM DESCRIPTION",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
 	},	
 	
 	{
 		name: "Letter of Termination",
 		desc: "ITEM DESCRIPTION",
 		actions: [
-			{name: showToPersonText, visible: true, function: showToPerson},
-			{name: "Read Letter of Termination", visible:false, function: readLetterOfTermination}
-				  ]
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
 	}
 ]
 
@@ -797,11 +869,17 @@ function showToPerson(){
 	var person = getPersonInRoom()
 	var personName = _vars.characters[person].name
 	var charResObj = _vars.characters[person].itemRes
-	var response = _vars.characters[person].itemRes[searchObjArrayByName(charResObj,item)].res
-
-	closeItemWindow()
-	printPlayerInfo("Have you seen this "+item+"?")
-	setTimeout(()=>_functions.addInfo(personName,response), 1500)
+	try{
+		var response = _vars.characters[person].itemRes[searchObjArrayByName(charResObj,item)].res
+		closeItemWindow()
+		printPlayerInfo("Have you seen this "+item+"?")
+		setTimeout(()=>_functions.addInfo(personName,response), 1500)
+	}catch(e){
+		var genericRes = "why are you showing this to me?"
+		closeItemWindow()
+		printPlayerInfo("Have you seen this "+item+"?")
+		setTimeout(()=>_functions.addInfo(personName,genericRes), 1500)
+	}
 }
 
 function stabButler(){
@@ -817,55 +895,116 @@ function stabButler(){
 
 //************** Room Actions **************************
 
-//Lounge
-function sit(){
-	printPlayerInfo("Player sits down")
-	editLocAction("lounge","Sit Down",false)
-	editLocAction("lounge","Stand Up",true)
-	_functions.updateActions("lounge")
+//dining
+function investigateTable(){
+	printPlayerInfo("You find a used cup. It is at the same seat where Albert was sitting during dinner");
+	
+	_functions.addItem("Used Cup")
+	_functions.updateItems()	
+
+	editLocAction("dining","Investigate Table",false)
+	_functions.updateActions("dining")
+}
+function investigateCabinet(){
+	printPlayerInfo("You find a bottle of poison")
+	_functions.addItem("Poison Bottle")
+	_functions.updateItems()
+
+	
+	editLocAction("dining","Investigate Cabinet",false)
+	_functions.updateActions("dining")
 }
 
-function stand(){
-	printPlayerInfo("Player stands up")
-	editLocAction("lounge","Sit Down",true)
-	editLocAction("lounge","Stand Up",false)
-	_functions.updateActions("lounge")
+function investigateDecorations(){
+	printPlayerInfo("You notice a gun case on the wall, but it is empty. On a closer inspection you notice a dust outline")
+
+	
+	editLocAction("dining","Investigate Decorations",false)
+	_functions.updateActions("dining")
 }
 
-//Kitchen 
-function makeFood(){
-	printPlayerInfo("You made a sandwich, it was delicious!")
-	editLocAction("kitchen","Make food",false)
+function placeGunInHolder(){
+	printPlayerInfo("You place the gun in the holster.")
+	setTimeout(()=> printPlayerInfo("You notice a bloodstain on the butt of the gun"),1500)
+	//ToDO - Evidence is added	
 
+	
+	editLocAction("dining","Place Gun in Holder",false)
+	_functions.updateActions("dining")
+}
+
+//kitchen
+function investigateSink(){
+	printPlayerInfo("You look into the sink. To your disgust you find a bloody knife. Could this be to do with the murder?")
+	_functions.addItem("Bloody Knife");
+	_functions.updateItems()
+
+	editLocAction("kitchen","Investigate Sink",false)
 	_functions.updateActions("kitchen")
 }
 
-function pickUpBloodyKnife(){
-	_functions.addItem("Bloody Knife")
-	printPlayerInfo("You take a knife from the drawer")
+function investigateCounter(){
+	printPlayerInfo("You find a mangled device of some sort, on closer inspection it turns out to be one of those new toaster devices.")
+	_functions.addItem("Mangled Toaster");
+	_functions.updateItems()
+
+	editLocAction("kitchen","Investigate Counter",false)
+	_functions.updateActions("kitchen")
 }
 
-//Office 
-function readPaper(){
-	printPlayerInfo("You read the paper, the world hasn't ended yet!")
-	editLocAction("office","Read Paper",false)
+//library
+function investigateReadingTable(){
+	printPlayerInfo("You find a pamphlet entitled “The case against Womens Suffrage”. You decide to take it with you.")
+	_functions.addItem("Pamphlet");
+	_functions.updateItems()
 
+	editLocAction("library","Investigate Reading Table",false)
+	_functions.updateActions("library")
+}
+
+function investigateBookshelf(){
+	printPlayerInfo("You look at the bookshelf, there are four books that catch your attention.") 
+	//Todo: add book actions Oliver Twist, Wuthering Heights, The Time Machine and the Odessey ”
+	
+	editLocAction("library","Investigate Bookshelf",false)
+	_functions.updateActions("library")
+}
+
+function investigateBrokenDrawer(){
+	printPlayerInfo("You notice a gun case on the wall, but it is empty. On a closer inspection you notice a dust outline")
+
+	editLocAction("library","Investigate Broken Drawer",false)
+	_functions.updateActions("library")
+}
+
+//office
+
+function investigateDesk(){
+	printPlayerInfo("You find a ledger in the desk” (TODO: Add more info)")
+	_functions.addItem("Ledger");
+	_functions.updateItems()	
+
+	editLocAction("office","Investigate Desk",false)
 	_functions.updateActions("office")
 }
 
-function pickUpLetterOfTermination(){
-	_functions.addItem("Letter of Termination")
-	printPlayerInfo("You picked up a Letter of Termination!")
-	editLocAction("office","Pick up Letter",false)
+function investigateMantlepiece(){
+	printPlayerInfo("You find a stack of RSVPS")
+	_functions.addItem("RSVPS");
+	_functions.updateItems()
 
+	editLocAction("office","Investigate Mantlepiece",false)
 	_functions.updateActions("office")
 }
 
-function readLetterOfTermination(){
-	printPlayerInfo("You read the letter, the Buttler was going to be fired!")
-	editLocAction("office","Read Letter of Termination",false)
+//hallway
 
-	_functions.updateActions("office")
+function showEvidenceToPolice(){
+	alert("TODO")
+}
+
+function iKnowTheMurderer(){
+	alert("Todo: Are you sure you want to move to the next stage, y/n")
 }
 
 //***************************************************
@@ -1054,7 +1193,7 @@ _functions.updateItemWindow = function(itemName){
 	var popupContent = document.getElementById("popup-desc")
 	popupContent.innerHTML = "<h2>"+itemObj.name+"</h2>" + itemObj.desc
 
-	var actionHeader = "<h2>Item Actions: </h2>"
+	var actionHeader = "<h2>Actions: </h2>"
 	var popupAction = document.getElementById("popup-actions")
 	var itemActions = itemObj.actions
 	popupAction.innerHTML = actionHeader
@@ -1141,18 +1280,7 @@ function editQVisible(character, question,visible){
 	_vars.characters[character].questions[quesitonIndex].visible = visible
 }
 
-//****************************************************
-
-
-
-
-
-
-
-
-
-
-</script><tw-passagedata pid="1" name="Menu" tags="" position="103,148"> &lt;div id=&quot;menu&quot;&gt;
+//****************************************************</script><tw-passagedata pid="1" name="Menu" tags="" position="103,148"> &lt;div id=&quot;menu&quot;&gt;
  	Welcome
 	CS4067 - Twine Game
 
@@ -1160,7 +1288,7 @@ function editQVisible(character, question,visible){
 
 	[[Credits]]
  &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="2" name="Lounge" tags="" position="1000,200">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+</tw-passagedata><tw-passagedata pid="2" name="Dining" tags="" position="1000,200">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
     &lt;div class=&quot;top-section&quot;&gt;
                    &lt;div id=&quot;room&quot;&gt;
                        &lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -1169,11 +1297,11 @@ function editQVisible(character, question,visible){
                    &lt;div class=&quot;right&quot;&gt;
                        &lt;div id=&quot;map&quot;&gt;
                    &lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
-                           &lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+                           &lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Dining&quot;)&#x27;&gt;Dining Room&lt;/a&gt;
 						   &lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                            &lt;img id=&quot;map-img&quot; src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                        &lt;/div&gt;
                        &lt;div id=&quot;actions&quot;&gt;
@@ -1195,7 +1323,7 @@ function editQVisible(character, question,visible){
                        
                    &lt;/div&gt;
                    &lt;div id=&quot;item&quot;&gt;
-                           &lt;h2&gt;Items&lt;/h2&gt;
+                           &lt;h2&gt;Evidence&lt;/h2&gt;
                            &lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
                    &lt;/div&gt;
                &lt;/div&gt;
@@ -1207,12 +1335,12 @@ function editQVisible(character, question,visible){
        &lt;div class=&quot;popup-content&quot;&gt;
            &lt;div class=&quot;popup-head&quot;&gt;
                &lt;span class=&quot;close&quot;&gt;×&lt;/span&gt;
-               &lt;h2&gt;Item Description&lt;/h2&gt;
+               &lt;h2&gt;Description:&lt;/h2&gt;
            &lt;/div&gt;
 			&lt;div class=&quot;popup-main&quot;&gt; 
 			&lt;div id=&quot;popup-desc&quot;&gt;&lt;/div&gt;
 			&lt;div id=&quot;popup-actions&quot;&gt;
-			&lt;h2&gt;Item Actions:&lt;/h2&gt;
+			&lt;h2&gt;Actions:&lt;/h2&gt;
 			&lt;/div&gt;
            &lt;/div&gt;
        &lt;/div&gt;
@@ -1231,17 +1359,17 @@ function editQVisible(character, question,visible){
        },1000)
    
        //Update Actions
-       _functions.updateActions(&quot;lounge&quot;)
+       _functions.updateActions(&quot;dining&quot;)
        
        //Update Items
        _functions.updateItems()
        
        //Update Information
        _functions.updateInfo()
-       _functions.drawRoomInfo(&quot;lounge&quot;)
+       _functions.drawRoomInfo(&quot;dining&quot;)
        
        //Update Questions
-       _functions.updateQuestions(&quot;lounge&quot;)
+       _functions.updateQuestions(&quot;dining&quot;)
        
        
        function changeRoom(roomName){
@@ -1309,7 +1437,7 @@ TxtType.prototype.tick = function() {
 
 You have until 7:30am to solve the mystery.
 
-[[Next-&gt;Lounge]]
+[[Next-&gt;Dining]]
 
 &lt;script&gt;
 var _functions = story.state.functions
@@ -1337,11 +1465,11 @@ You think to yourself, it is now or never...
                 &lt;div class=&quot;right&quot;&gt;
                     &lt;div id=&quot;map&quot;&gt;
 						&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
-						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Dining&quot;)&#x27;&gt;Dining Room&lt;/a&gt;
 						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
@@ -1363,7 +1491,7 @@ You think to yourself, it is now or never...
 					
                 &lt;/div&gt;
 				&lt;div id=&quot;item&quot;&gt;
-                        &lt;h2&gt;Items&lt;/h2&gt;
+                        &lt;h2&gt;Evidence&lt;/h2&gt;
 						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -1421,11 +1549,11 @@ You think to yourself, it is now or never...
                 &lt;div class=&quot;right&quot;&gt;
                     &lt;div id=&quot;map&quot;&gt;
 						&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
-						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Dining&quot;)&#x27;&gt;Dining Room&lt;/a&gt;
 						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
@@ -1447,7 +1575,7 @@ You think to yourself, it is now or never...
 					
                 &lt;/div&gt;
 				&lt;div id=&quot;item&quot;&gt;
-                        &lt;h2&gt;Items&lt;/h2&gt;
+                        &lt;h2&gt;Evidence&lt;/h2&gt;
 						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -1476,11 +1604,11 @@ You think to yourself, it is now or never...
                 &lt;div class=&quot;right&quot;&gt;
                     &lt;div id=&quot;map&quot;&gt;
 						&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
-						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Dining&quot;)&#x27;&gt;Dining Room&lt;/a&gt;
 						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
@@ -1502,7 +1630,7 @@ You think to yourself, it is now or never...
 					
                 &lt;/div&gt;
 				&lt;div id=&quot;item&quot;&gt;
-                        &lt;h2&gt;Items&lt;/h2&gt;
+                        &lt;h2&gt;Evidence&lt;/h2&gt;
 						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -1531,11 +1659,11 @@ You think to yourself, it is now or never...
                 &lt;div class=&quot;right&quot;&gt;
                     &lt;div id=&quot;map&quot;&gt;
 						&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
-						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Dining&quot;)&#x27;&gt;Dining Room&lt;/a&gt;
 						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
@@ -1557,7 +1685,7 @@ You think to yourself, it is now or never...
 					
                 &lt;/div&gt;
 				&lt;div id=&quot;item&quot;&gt;
-                        &lt;h2&gt;Items&lt;/h2&gt;
+                        &lt;h2&gt;Evidence&lt;/h2&gt;
 						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -1586,11 +1714,11 @@ You think to yourself, it is now or never...
                 &lt;div class=&quot;right&quot;&gt;
                     &lt;div id=&quot;map&quot;&gt;
 						&lt;a id=&quot;kitchen&quot; onclick=&#x27;changeRoom(&quot;Kitchen&quot;)&#x27;&gt;Kitchen&lt;/a&gt;
-						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Lounge&quot;)&#x27;&gt;Lounge&lt;/a&gt;
+						&lt;a id=&quot;lounge&quot; onclick=&#x27;changeRoom(&quot;Dining&quot;)&#x27;&gt;Dining Room&lt;/a&gt;
 						&lt;a id=&quot;office&quot; onclick=&#x27;changeRoom(&quot;Office&quot;)&#x27;&gt;Office&lt;/a&gt;
 						&lt;a id=&quot;hallway&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Hallway&lt;/a&gt;
 						&lt;a id=&quot;bedroom&quot; onclick=&#x27;changeRoom(&quot;Bedroom&quot;)&#x27;&gt;Bedroom&lt;/a&gt;
-						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Hallway&quot;)&#x27;&gt;Library&lt;/a&gt;
+						&lt;a id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;Library&lt;/a&gt;
                         &lt;img id=&quot;map-img&quot; 		src=&quot;https://i.pinimg.com/originals/36/78/9d/36789d0de4c8e463d4846b641ca70992.png&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div id=&quot;actions&quot;&gt;
@@ -1612,7 +1740,7 @@ You think to yourself, it is now or never...
 					
                 &lt;/div&gt;
 				&lt;div id=&quot;item&quot;&gt;
-                        &lt;h2&gt;Items&lt;/h2&gt;
+                        &lt;h2&gt;Evidence&lt;/h2&gt;
 						&lt;div id=&quot;item-list&quot;&gt;&lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
