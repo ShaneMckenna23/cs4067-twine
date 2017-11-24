@@ -10,7 +10,7 @@ CS4067
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="CS4067" startnode="1" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+<tw-storydata name="CS4067" startnode="4" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
     font: 18px "Helvetica Neue",Helvetica,Arial,sans-serif;
   	background-image: url("http://eskipaper.com/images/victorian-wallpaper-2.jpg");
   background-repeat:no-repeat;
@@ -622,7 +622,7 @@ _vars.characters = {
 		itemRes:[
             {name: "Bloody Knife", res: "Shows recent knife injury"},
             {name: "Used Cup", res: "Yes it is Albert's cup"},
-            {name: "Posion Bottle", res: "Rat Problem"},
+            {name: "Poison Bottle", res: "Rat Problem"},
             {name: "Ledger", res: "We are no longer partners"},
             {name: "Mangled Toaster", res: "Now I have to buy a new toaster. I just bought that"}
 		]
@@ -705,7 +705,9 @@ _vars.locations = {
     
     bedroom:{
         people: ["deadman"],
-        actions: [],
+        actions: [
+			{name: "Investigate Bedside Table", visible:true, function: investigateBedsideTable}
+		],
 		desc: "This is the bedroom with the dead body"
 	},
     
@@ -1048,7 +1050,7 @@ function investigateBrokenDrawer(){
 //office
 
 function investigateDesk(){
-	printPlayerInfo("You find a ledger in the desk” (TODO: Add more info)")
+	printPlayerInfo("You find a ledger in the desk")
 	_functions.addItem("Ledger");
 	_functions.updateItems()	
 
@@ -1073,6 +1075,16 @@ function showEvidenceToPolice(){
 
 function iKnowTheMurderer(){
 	alert("Todo: Are you sure you want to move to the next stage, y/n")
+}
+
+//bedroom
+function investigateBedsideTable(){
+	printPlayerInfo("You find a Diary")
+	_functions.addItem("Diary");
+	_functions.updateItems()
+
+	editLocAction("bedroom","Investigate Bedside Table", false)
+	_functions.updateActions("bedroom")
 }
 
 //***************************************************
@@ -1300,6 +1312,9 @@ _functions.drawRoomInfo = function(room) {
 	var roomObj = _vars.locations[room];
 	var roomDesc = roomObj.desc;
 	var roomName = room.charAt(0).toUpperCase() + room.slice(1);
+	if(roomName == "Dining"){
+		roomName = roomName + " Room"
+	}
 	_functions.addInfo(roomName,roomDesc)
 }
 
