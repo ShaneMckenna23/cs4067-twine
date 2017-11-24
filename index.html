@@ -10,7 +10,7 @@ CS4067
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="CS4067" startnode="12" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+<tw-storydata name="CS4067" startnode="4" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
     font: 18px "Helvetica Neue",Helvetica,Arial,sans-serif;
   	background-image: url("http://eskipaper.com/images/victorian-wallpaper-2.jpg");
   background-repeat:no-repeat;
@@ -558,6 +558,7 @@ p.delay {
 
 
 
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Constants **************************
 var playerName = "PlayerName"
 var currentRoom = "dining"
@@ -576,54 +577,70 @@ _vars.clock = {
 
 _vars.characters = {
 	sister: {
-		name: "SisterName",
+		name: "Ada Baynes",
 		trust: 5,
 		questions:[
-			{question: "What happened?", visible: true, function: whatHappend},
+            {question: "Where were you at the time of the murder?", visible: true, function: whereWasSister},
+            {question: "Do you have any clues who the murder may be?", visible: true, function: anyCluesSister},
+            {question: "IAnd what do you make of the death?", visible: true, function: tragicSister}
         ],
         itemRes:[
-            {name: "Pamphlet", res: "I knew about that and he can do what he wants"},
-            {name: "Gun Case", res: "He usually has a gun there"},
-            {name: "RSVPS", res: "Yes, I did write that"},
-            {name: "Poison Bottle", res:"Maybe ask the butler"}
+            {name: "Pamphlet", res: "I knew about that and he can do what he wants."},
+            {name: "Gun Case", res: "He usually has a gun there."},
+            {name: "RSVPS", res: "Yes, I did write that."},
+            {name: "Poison Bottle", res:"Maybe you should ask the butler."}
         ]
 	},
 	
 	politician: {
-		name: "PoliticianName",
+		name: "Francis Tappington",
         trust: 2,
+        questions: [
+            {question: "Where were you at the time of the murder?", visible: true, function: whereWasPol},
+            {question: "That’s not what Victor said. He said the two of you where having a drink.", visible: false, function: wereYouDrinkingPol}, //TODO
+            {question: "What were you drinking?", visible: false, function: whatDrinkingPol}, //TODO after above
+            {question: "Do you have any clues who the murderer may be?", visible: true, function: anyCluePolitiction}, 
+            {question: "And what do you make of the death?", visible: true, function: makeOfDeathPol}
+        ],
         itemRes:[
-            {name: "Pamphlet", res: "That proves it was the sister"},
-            {name: "Threatening Letter", res: "Claim to have never seen it"},
-            {name: "RSVPS", res: "Yes, I did write that"}
+            {name: "Pamphlet", res: "That proves it was Ada who did it."},
+            {name: "Threatening Letter", res: "CI have never seen that before."},
+            {name: "RSVPS", res: "Yes, I did write that."}
         ]			
 	},
 
 	butler: {
-		name: "ButlerName",
+		name: "Cecil Smith",
 		trust: 5,
 		questions:[
-			{question: "What was the last thing he told you?", visible: true, function: whatWasLastThingHeToldYou}
+            {question: "Where were you at the time of the murder?", visible: true, function: whereWasButler},
+            {question: "Do you have any clues as to who the murderer may be?", visible: true, function: anyCluesButler},
+            {question: "How do you feel about his death?", visible: true, function: feelAboutDeathButler},
+            {question: "Are there any problems with the house?", visible: true, function: problemsWithHouse}
+            
 		],
 		itemRes:[
-            {name: "Bloody Knife", res: "Shows recent knife injury"},
-            {name: "Used Cup", res: "Yes it is Albert's cup"},
-            {name: "Posion Bottle", res: "Rat Problem"},
-            {name: "Ledger", res: "We are no longer partners"},
-            {name: "Mangled Toaster", res: "Now I have to buy a new toaster. I just bought that"}
+            {name: "Bloody Knife", res: "That was from when I cut my hand making dinner."},
+            {name: "Used Cup", res: "Yes, it is Albert's cup."},
+            {name: "Poison Bottle", res: "That is to deal with our rat problem."},
+            {name: "Mangled Toaster", res: "Now I have to buy a new toaster. I just bought that."}
 		]
 	},
 	
 	rival: {
-		name: "Victor",
+		name: "Victor Whatrton",
 		trust: 3,
 		questions:[
-			{question: "How was your business relationship?", visible: true, function: howWasYourRelationship}
+            {question: "Where were you at the time of the murder?", visible: true, function: whereWasRival},
+            {question: "Your story does not fully add up Francis didn’t mention this at all?", visible: false, function: storyDoesntMatchRival}, //TODO
+            {question: "And what drink do the two of you enjoy?", visible: false, function: whatDrinkRival},
+            {question: "Do you have any clues who the murder may be?", visible: true, function: anyClueRival},
+            {question: "How do you feel about it all?", visible: true, function: feelAboutDeathRival},
         ],
         itemRes:[
-            {name: "Mangled Toaster", res: "Broke it because I don’t like him"},
-            {name: "Ledger", res: "We are no longer partners"},
-            {name: "RSVPS", res: "Yes, I did write that"}
+            {name: "Mangled Toaster", res: "I broke it because I don’t like these newfangled electric devices."},
+            {name: "Ledger", res: "We are no longer partners."},
+            {name: "RSVPS", res: "Yes, I did write that."}
 		]
     },
     
@@ -631,21 +648,16 @@ _vars.characters = {
 		name: "Officer",
 		trust: 10,
 		questions:[
-			{question: "What happened?", visible: true, function: whatHappend}
         ],
         itemRes:[
-            {name:"Poison Bottle", res: "That could be a murder weapon, but it does have legit uses"},
-            {name: "Threatening Letter", res: "That’s an obvious piece of evidence"},
-            {name: "Bloody Knife", res: "That could be a murder weapon, but it does have legit uses"}
+            {name:"Poison Bottle", res: "That could be a murder weapon, but it does have legitimate uses."},
+            {name: "Threatening Letter", res: "That’s an obvious piece of evidence."},
+            {name: "Bloody Knife", res: "That could be a murder weapon, but it does have legitimate uses."}
         ]
     },
     
 	deadman: {
-		name: "Mr. Callaway",
-		trust: 10,
-		questions:[
-			{question: "Why did you invite me?", visible: true, function: whyAmIHere}
-		]
+		name: "Albert Baynes II"
 	}
 }
 
@@ -692,7 +704,9 @@ _vars.locations = {
     
     bedroom:{
         people: ["deadman"],
-        actions: [],
+        actions: [
+			{name: "Investigate Bedside Table", visible:true, function: investigateBedsideTable}
+		],
 		desc: "This is the bedroom with the dead body"
 	},
     
@@ -832,26 +846,77 @@ function printPlayerInfo(info){
 	_functions.addInfo(header,info)
 }
 
-//General
-function whatHappend(){
-	var question = "What happend here?"
-	printPlayerInfo(question)
+//Sister
+function whereWasSister(){
+	
 }
 
-function whatWasLastThingHeToldYou(){
-	var question = "What was the last thing he told you?"
-	printPlayerInfo(question)
+function anyCluesSister(){
+
+}
+function tragicSister(){
+
 }
 
-function howWasYourRelationship(){
-	var question = "How was your relationship?"
-	printPlayerInfo(question)
+
+//Politician
+function whereWasPol(){
+
 }
 
-//Deadman
-function whyAmIHere(){
-	var question = "Why did you invite me?"
-	printPlayerInfo(question)
+function wereYouDrinkingPol(){
+
+}
+
+function whatDrinkingPol(){
+
+} 
+
+function anyCluePolitiction(){
+
+}
+
+function makeOfDeathPol(){
+
+}
+
+
+//Butler
+function whereWasButler(){
+
+}
+
+function anyCluesButler(){
+
+}
+
+function feelAboutDeathButler(){
+
+}
+
+function problemsWithHouse(){
+
+}
+
+//Rival
+function whereWasRival(){
+
+}
+
+function storyDoesntMatchRival(){
+
+}
+
+function whatDrinkRival(){
+
+}
+
+function anyClueRival(){
+
+}
+
+function feelAboutDeathRival(){
+
 }
 
 
@@ -984,7 +1049,7 @@ function investigateBrokenDrawer(){
 //office
 
 function investigateDesk(){
-	printPlayerInfo("You find a ledger in the desk” (TODO: Add more info)")
+	printPlayerInfo("You find a ledger in the desk")
 	_functions.addItem("Ledger");
 	_functions.updateItems()	
 
@@ -1009,6 +1074,16 @@ function showEvidenceToPolice(){
 
 function iKnowTheMurderer(){
 	alert("Todo: Are you sure you want to move to the next stage, y/n")
+}
+
+//bedroom
+function investigateBedsideTable(){
+	printPlayerInfo("You find a Diary")
+	_functions.addItem("Diary");
+	_functions.updateItems()
+
+	editLocAction("bedroom","Investigate Bedside Table", false)
+	_functions.updateActions("bedroom")
 }
 
 //***************************************************
@@ -1236,6 +1311,9 @@ _functions.drawRoomInfo = function(room) {
 	var roomObj = _vars.locations[room];
 	var roomDesc = roomObj.desc;
 	var roomName = room.charAt(0).toUpperCase() + room.slice(1);
+	if(roomName == "Dining"){
+		roomName = roomName + " Room"
+	}
 	_functions.addInfo(roomName,roomDesc)
 }
 
@@ -1284,9 +1362,7 @@ function editQVisible(character, question,visible){
 	_vars.characters[character].questions[quesitonIndex].visible = visible
 }
 
-//****************************************************
-
-</script><tw-passagedata pid="1" name="Menu" tags="" position="103,148"> &lt;div id=&quot;menu&quot;&gt;
+//****************************************************</script><tw-passagedata pid="1" name="Menu" tags="" position="103,148"> &lt;div id=&quot;menu&quot;&gt;
  	Welcome
 	CS4067 - Twine Game
 
@@ -1973,18 +2049,20 @@ You decide that the conversation has gotten heated up enough and decide to inter
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://eskipaper.com/images/victorian-wallpaper-2.jpg&quot;)&#x27;);
 });
-
+	
+	var _functions = story.state.functions
+	
 	$(&quot;#Option1&quot;).click(function(){
-		_functions.editCharacterTrust(politician, 2)
-		_functions.editCharacterTrust(rival, -2)
+		_functions.editCharacterTrust(&quot;politician&quot;, 2)
+		_functions.editCharacterTrust(&quot;rival&quot;, -2)
 	})
 	$(&quot;#Option2&quot;).click(function(){
-		_functions.editCharacterTrust(politician, -1)
-		_functions.editCharacterTrust(rival, -1)
+		_functions.editCharacterTrust(&quot;politician&quot;, -1)
+		_functions.editCharacterTrust(&quot;rival&quot;, -1)
 	})
 	$(&quot;#Option3&quot;).click(function(){
-		_functions.editCharacterTrust(rival, 2)
-		_functions.editCharacterTrust(politician, -2)		
+		_functions.editCharacterTrust(&quot;rival&quot;, 2)
+		_functions.editCharacterTrust(&quot;politician&quot;, -2)		
 	})
 &lt;/script&gt;
 
@@ -2021,12 +2099,14 @@ James: The Royal Navy, sir.
 &lt;/div&gt;
 
 &lt;script&gt;
+var _functions = story.state.functions
+
 $(&quot;#Option1&quot;).click(function(){
-		_functions.editCharacterTrust(butler, 2)
-		_functions.editCharacterTrust(rival, -2)
+		_functions.editCharacterTrust(&quot;butler&quot;, 2)
+		_functions.editCharacterTrust(&quot;rival&quot;, -2)
 	})
 	$(&quot;#Option2&quot;).click(function(){
-		_functions.editCharacterTrust(butler, -1)
+		_functions.editCharacterTrust(&quot;butler&quot;, -1)
 	})
 
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="19" name="Conversation 3" tags="" position="223,643">&lt;div class=&quot;ConversationBackground&quot;&gt;
@@ -2104,20 +2184,22 @@ Albert :My good Paul you have been rather quiet, what does the church have to sa
 &lt;/div&gt;
 
 &lt;script&gt;
+var _functions = story.state.functions
+
 $(&quot;#Option1&quot;).click(function(){
-		_functions.editCharacterTrust(sister, 3)
-		_functions.editCharacterTrust(rival, -1)
-		_functions.editCharacterTrust(politician, -1)
+		_functions.editCharacterTrust(&quot;sister&quot;, 3)
+		_functions.editCharacterTrust(&quot;rival&quot;, -1)
+		_functions.editCharacterTrust(&quot;politician&quot;, -1)
 	})
 	$(&quot;#Option2&quot;).click(function(){
-		_functions.editCharacterTrust(sister, -1)
-		_functions.editCharacterTrust(rival, -1)
-		_functions.editCharacterTrust(politician, -1)
+		_functions.editCharacterTrust(&quot;sister&quot;, -1)
+		_functions.editCharacterTrust(&quot;rival&quot;, -1)
+		_functions.editCharacterTrust(&quot;politician&quot;, -1)
 	})
 	$(&quot;#Option2&quot;).click(function(){
-		_functions.editCharacterTrust(sister, -3)
-		_functions.editCharacterTrust(rival, 2)
-		_functions.editCharacterTrust(politician, 2)
+		_functions.editCharacterTrust(&quot;sister&quot;, -3)
+		_functions.editCharacterTrust(&quot;rival&quot;, 2)
+		_functions.editCharacterTrust(&quot;politician&quot;, 2)
 	})
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="20" name=" Conversation 4" tags="" position="222,520">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
@@ -2180,15 +2262,17 @@ Albert attacks
 &lt;/div&gt;
 
 &lt;script&gt;
+var _functions = story.state.functions
+
 $(&quot;#Option1&quot;).click(function(){
-		_functions.editCharacterTrust(sister, 3)
-		_functions.editCharacterTrust(rival, -1)
-		_functions.editCharacterTrust(politician, -1)
+		_functions.editCharacterTrust(&quot;sister&quot;, 3)
+		_functions.editCharacterTrust(&quot;rival&quot;, -1)
+		_functions.editCharacterTrust(&quot;politician&quot;, -1)
 	})
 	$(&quot;#Option2&quot;).click(function(){
-		_functions.editCharacterTrust(sister, -1)
-		_functions.editCharacterTrust(rival, -1)
-		_functions.editCharacterTrust(politician, -1)
+		_functions.editCharacterTrust(&quot;sister&quot;, -1)
+		_functions.editCharacterTrust(&quot;rival&quot;, -1)
+		_functions.editCharacterTrust(&quot;politician&quot;, -1)
 	})
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="22" name="The Murder" tags="" position="589,295">As you wait for Albert to join you in 
 
@@ -2494,13 +2578,15 @@ Victor:
 &lt;/div&gt;
 
 &lt;script&gt;
+var _functions = story.state.functions
+
 $(&quot;#Option1&quot;).click(function(){
-		_functions.editCharacterTrust(rival, 2)
-		_functions.editCharacterTrust(politician, -2)
+		_functions.editCharacterTrust(&quot;rival&quot;, 2)
+		_functions.editCharacterTrust(&quot;politician&quot;, -2)
 	})
 	$(&quot;#Option2&quot;).click(function(){
-		_functions.editCharacterTrust(rival, -2)
-		_functions.editCharacterTrust(politician, 2)
+		_functions.editCharacterTrust(&quot;rival&quot;, -2)
+		_functions.editCharacterTrust(&quot;politician&quot;, 2)
 	})
 
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="45" name="Heading To Bed" tags="" position="406,350">As you all start to make your way up to bed, Albert draws you aside.
