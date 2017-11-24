@@ -1,0 +1,34 @@
+
+		name: "Used Cup",
+		desc: "ITEM DESCRIPTION",
+	
+		name: "Poison Bottle",
+		desc: "ITEM DESCRIPTION",
+	
+		name: "Gun Case",
+		desc: "ITEM DESCRIPTION",
+
+		name: "Bloody Knife",
+		desc: "ITEM DESCRIPTION",
+	
+		name: "Magled Toaster",
+		desc: "ITEM DESCRIPTION",
+	
+		name: "Pamphlet",
+		desc: "ITEM DESCRIPTION",
+	
+		name: "Treatening Letter",
+		desc: "ITEM DESCRIPTION",
+	
+		name: "Ledger",
+		desc: "ITEM DESCRIPTION",
+	
+		name:"Rsvps",
+		desc: "ITEM DESCRIPTION",
+	
+		name: "Diary",
+		desc: "ITEM DESCRIPTION",
+	
+		name: "Letter of Termination",
+		desc: "ITEM DESCRIPTION",
+	
