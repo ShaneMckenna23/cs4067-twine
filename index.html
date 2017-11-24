@@ -560,7 +560,7 @@ p.delay {
 
 
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Constants **************************
-var playerName = "PlayerName"
+var playerName = "Paul Witherfield"
 var currentRoom = "dining"
 var openedItem;
 
@@ -582,7 +582,7 @@ _vars.characters = {
 		questions:[
             {question: "Where were you at the time of the murder?", visible: true, function: whereWasSister},
             {question: "Do you have any clues who the murder may be?", visible: true, function: anyCluesSister},
-            {question: "IAnd what do you make of the death?", visible: true, function: tragicSister}
+            {question: "And what do you make of the death?", visible: true, function: tragicSister}
         ],
         itemRes:[
             {name: "Pamphlet", res: "I knew about that and he can do what he wants."},
@@ -723,7 +723,7 @@ _vars.locations = {
 _vars.items = [
 	{
 		name: "Used Cup",
-		desc: "ITEM DESCRIPTION",
+		desc: "A cup that was at the same seat where Albert was sitting during dinner. There is some mysterious residue around the rim.",
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
@@ -731,7 +731,7 @@ _vars.items = [
 
 	{
 		name: "Poison Bottle",
-		desc: "ITEM DESCRIPTION",
+		desc: "A half empty poison bottle.",
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
@@ -739,7 +739,7 @@ _vars.items = [
 	
 	{
 		name: "Gun Case",
-		desc: "ITEM DESCRIPTION",
+		desc: "An unlocked, empty gun case with a dust outline.",
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
@@ -747,7 +747,7 @@ _vars.items = [
 	
 	{
 		name: "Bloody Knife",
-		desc: "ITEM DESCRIPTION",
+		desc: "A bloody knife, found in the kitchen sink.",
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
@@ -755,7 +755,7 @@ _vars.items = [
 	
 	{
 		name: "Magled Toaster",
-		desc: "ITEM DESCRIPTION",
+		desc: "A ruined toaster, found in the kitchen.",
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
@@ -763,7 +763,7 @@ _vars.items = [
 	
 	{
 		name: "Pamphlet",
-		desc: "ITEM DESCRIPTION",
+		desc: "A pamphlet entitled The case against Women's Suffrage”.",
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
@@ -779,15 +779,15 @@ _vars.items = [
 	
 	{
 		name: "Ledger",
-		desc: "ITEM DESCRIPTION",
+		desc: "A business ledger with Albert's debt to Victor.",
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
 	},	
 	
 	{
-		name:"RSVPS",
-		desc: "ITEM DESCRIPTION",
+		name:"RSVPs",
+		desc: "A stack of RSVPs to the dinner party.",
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
@@ -795,7 +795,7 @@ _vars.items = [
 	
 	{
 		name: "Diary",
-		desc: "ITEM DESCRIPTION",
+		desc: "Albert's diary with his worries about his safety.",
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
@@ -803,11 +803,28 @@ _vars.items = [
 	
 	{
 		name: "Letter of Termination",
-		desc: "ITEM DESCRIPTION",
+		desc: "A letter addressed to the butler, Cecil. He is going to be fired.",
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
-	}
+	},
+    
+    {
+		name: "Blood on Gun",
+		desc: "There is blood and hair on the butt of the gun.",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
+    },
+    
+    {
+		name: "Gun",
+		desc: "An old gun that has not been fired recently.",
+		actions: [
+			{name: showToPersonText, visible: true, function: showToPerson}
+		]
+	},
+
 ]
 
 _vars.player = {
@@ -847,78 +864,100 @@ function printPlayerInfo(info){
 }
 
 //Sister
-function whereWasSister(){
-	
+function whereWasSister(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “I was with the Butler drinking tea, and I do not like that accusatory tone you are taking with me, sir.”
+	//trust--
 }
 
-function anyCluesSister(){
-
+function anyCluesSister(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “Well, I have it on good information from Mrs. Tappington that Francis was always worrying about Albert. She never found out why.”
+	//EVIDENCE: Francis wife gossip
 }
-function tragicSister(){
-
+function tragicSister(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “I mean I could barely be in the same room as the brute without us arguing, but I grew up with him and I will even miss his archaic views.”
 }
 
 
 //Politician
-function whereWasPol(){
-
+function whereWasPol(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res "I was asleep in the guest quarters.”
+	//trust--
 }
 
-function wereYouDrinkingPol(){
-
+function wereYouDrinkingPol(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “That’s not what Victor said. He said the two of you where having a drink.”
 }
 
-function whatDrinkingPol(){
-
+function whatDrinkingPol(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “Well brandy is the gentleman's drink of choice.”
 } 
 
-function anyCluePolitiction(){
-
+function anyCluePolitiction(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “Well you simply need to look at who has the most to gain. It seems very clear to me that Ada as the inheritor of his fortune would do very well from this.”
 }
 
-function makeOfDeathPol(){
-
+function makeOfDeathPol(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “It is always sad to see a fellow country man die, particularly in such a tragic fashion.”
 }
 
 
 //Butler
-function whereWasButler(){
-
+function whereWasButler(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “I was the making tea for Miss Ada.”
 }
 
-function anyCluesButler(){
-
+function anyCluesButler(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “I guess it could have been Victor; things have been tense since the falling out.”
 }
 
-function feelAboutDeathButler(){
-
+function feelAboutDeathButler(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “Well he was nothing compared to his father, but he was a good master all the same.”
 }
 
-function problemsWithHouse(){
-
+function problemsWithHouse(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “Oh well with an old house like this there will always be some issues. We have had a rat infestation recently.”
 }
 
 //Rival
-function whereWasRival(){
-
+function whereWasRival(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res I was with the Francis having a nightcap.”
+	//trust -- 
 }
 
-function storyDoesntMatchRival(){
-
+function storyDoesntMatchRival(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “Well that is the truth and all I have to say on the matter.”
+	//EVIDENCE untrustworthy alibi
 }
 
-function whatDrinkRival(){
-
+function whatDrinkRival(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “The finest scotch we could find at hand.”
+	//Evidence inconsistent story
 }
 
-function anyClueRival(){
-
+function anyClueRival(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “You religious types think you are outside the law. Stop bothering me.”
 }
 
-function feelAboutDeathRival(){
-
+function feelAboutDeathRival(e){
+	printPlayerInfo(e.target.innerHTML)
+	//res “He was a decent man, even if we did not see eye to eye on all matters.”
 }
-
 
 //***************************************************
 
@@ -966,7 +1005,7 @@ function stabButler(){
 
 //dining
 function investigateTable(){
-	printPlayerInfo("You find a used cup. It is at the same seat where Albert was sitting during dinner");
+	printPlayerInfo("You find a used cup. It is at the same seat where Albert was sitting during dinner. There is some mysterious residue around the rim.");
 	
 	_functions.addItem("Used Cup")
 	_functions.updateItems()	
@@ -975,7 +1014,7 @@ function investigateTable(){
 	_functions.updateActions("dining")
 }
 function investigateCabinet(){
-	printPlayerInfo("You find a bottle of poison")
+	printPlayerInfo("You find a bottle of poison. It is half empty.")
 	_functions.addItem("Poison Bottle")
 	_functions.updateItems()
 
@@ -985,7 +1024,7 @@ function investigateCabinet(){
 }
 
 function investigateDecorations(){
-	printPlayerInfo("You notice a gun case on the wall, but it is empty. On a closer inspection you notice a dust outline")
+	printPlayerInfo("You notice a gun case on the wall, but it is empty. The lock has been opened. On closer inspection, you notice a dust outline.")
 
 	
 	editLocAction("dining","Investigate Decorations",false)
@@ -993,8 +1032,8 @@ function investigateDecorations(){
 }
 
 function placeGunInHolder(){
-	printPlayerInfo("You place the gun in the holster.")
-	setTimeout(()=> printPlayerInfo("You notice a bloodstain on the butt of the gun"),1500)
+	printPlayerInfo("You place the gun back in its case.")
+	setTimeout(()=> printPlayerInfo("You notice a bloodstain and stray hairs on the butt of the gun."),1500)
 	//ToDO - Evidence is added	
 
 	
@@ -1004,7 +1043,7 @@ function placeGunInHolder(){
 
 //kitchen
 function investigateSink(){
-	printPlayerInfo("You look into the sink. To your disgust you find a bloody knife. Could this be to do with the murder?")
+	printPlayerInfo("You look into the sink. To your disgust you find a bloody knife. Could this be related to the murder?")
 	_functions.addItem("Bloody Knife");
 	_functions.updateItems()
 
@@ -1023,7 +1062,7 @@ function investigateCounter(){
 
 //library
 function investigateReadingTable(){
-	printPlayerInfo("You find a pamphlet entitled “The case against Womens Suffrage”. You decide to take it with you.")
+	printPlayerInfo("You find a pamphlet entitled “The case against Women's Suffrage”. You decide to take it with you.")
 	_functions.addItem("Pamphlet");
 	_functions.updateItems()
 
@@ -1040,8 +1079,9 @@ function investigateBookshelf(){
 }
 
 function investigateBrokenDrawer(){
-	printPlayerInfo("You notice a gun case on the wall, but it is empty. On a closer inspection you notice a dust outline")
+	printPlayerInfo("You find a gun in the drawer. It is old, and has not been fired recently.")
 
+	_functions.addItem("gun")
 	editLocAction("library","Investigate Broken Drawer",false)
 	_functions.updateActions("library")
 }
@@ -1049,7 +1089,7 @@ function investigateBrokenDrawer(){
 //office
 
 function investigateDesk(){
-	printPlayerInfo("You find a ledger in the desk")
+	printPlayerInfo("You find a ledger in the desk. It shows a debt that Albert owes Victor.")
 	_functions.addItem("Ledger");
 	_functions.updateItems()	
 
@@ -1058,7 +1098,7 @@ function investigateDesk(){
 }
 
 function investigateMantlepiece(){
-	printPlayerInfo("You find a stack of RSVPS")
+	printPlayerInfo("You find a stack of RSVPs to the dinner party.")
 	_functions.addItem("RSVPS");
 	_functions.updateItems()
 
@@ -1078,11 +1118,20 @@ function iKnowTheMurderer(){
 
 //bedroom
 function investigateBedsideTable(){
-	printPlayerInfo("You find a Diary")
+	printPlayerInfo("You find a Diary. In it, Albert has written that he is worried for his safety.")
 	_functions.addItem("Diary");
 	_functions.updateItems()
 
 	editLocAction("bedroom","Investigate Bedside Table", false)
+	_functions.updateActions("bedroom")
+}
+
+function investigateBedDesk(){
+	printPlayerInfo("You find a letter addressed to the butler, Cecil. He is going to be fired.")
+	_functions.addItem("Letter of Termination");
+	_functions.updateItems()
+
+	editLocAction("bedroom","Investigate Desk",false)
 	_functions.updateActions("bedroom")
 }
 
