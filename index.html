@@ -10,7 +10,7 @@ CS4067
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="CS4067" startnode="4" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+<tw-storydata name="CS4067" startnode="1" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
     font: 18px "Helvetica Neue",Helvetica,Arial,sans-serif;
   	background-image: url("http://eskipaper.com/images/victorian-wallpaper-2.jpg");
   background-repeat:no-repeat;
@@ -77,6 +77,8 @@ img {
     border:2px solid black;
     padding: 20px;
 	background:url("https://image.freepik.com/free-photo/grunge-vintage-old-paper-background_1373-431.jpg");
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 #actions h2{
@@ -588,6 +590,7 @@ p.delay {
 
 
 
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">//************** Constants **************************
 var playerName = "Paul Witherfield"
 var currentRoom = "dining"
@@ -717,7 +720,12 @@ _vars.locations = {
         actions: [
             {name: "Investigate Reading Table", visible:true, function: investigateReadingTable},
             {name: "Investigate Bookshelf", visible:true, function: investigateBookshelf},
-            {name: "Investigate Broken Drawer", visible:true, function: investigateBrokenDrawer}
+			{name: "Investigate Broken Drawer", visible:true, function: investigateBrokenDrawer},
+			
+			{name: "Investigate A Tale of Two Cities", visible:false, function: investigateTwoCities},
+			{name: "Investigate Wuthering Heights", visible:false, function: investigateWutheringHeights},
+			{name: "Investigate The Time Machine", visible:false, function: investigateTheTimeMachine},
+			{name: "Investigate The Odessey", visible:false, function: investigateTheOdessey}
         ],
         desc: "This is the Library room description"
 	},
@@ -852,7 +860,7 @@ _vars.items = [
 		actions: [
 			{name: showToPersonText, visible: true, function: showToPerson}
 		]
-	},
+	}
 
 ]
 
@@ -875,7 +883,7 @@ function searchObjArrayByName(array, name){
     }
 }
 
-function searchObjArrayByQuestion(array, question){
+function searchObjArrayByQ(array, question){
     for (var i=0; i < array.length; i++) {
         if (array[i].question === question) {
             return i;
@@ -895,97 +903,165 @@ function printPlayerInfo(info){
 //Sister
 function whereWasSister(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “I was with the Butler drinking tea, and I do not like that accusatory tone you are taking with me, sir.”
+	var res = "I was with the Butler drinking tea, and I do not like that accusatory tone you are taking with me, sir."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("sister", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 	//trust--
 }
 
 function anyCluesSister(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “Well, I have it on good information from Mrs. Tappington that Francis was always worrying about Albert. She never found out why.”
+	var res = "Well, I have it on good information from Mrs. Tappington that Francis was always worrying about Albert. She never found out why."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("sister", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 	//EVIDENCE: Francis wife gossip
 }
 function tragicSister(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “I mean I could barely be in the same room as the brute without us arguing, but I grew up with him and I will even miss his archaic views.”
+	var res =  "I mean I could barely be in the same room as the brute without us arguing, but I grew up with him and I will even miss his archaic views."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("sister", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 }
 
 
 //Politician
 function whereWasPol(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res "I was asleep in the guest quarters.”
+	var res = "I was asleep in the guest quarters."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("politician", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 	//trust--
 }
 
 function wereYouDrinkingPol(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “That’s not what Victor said. He said the two of you where having a drink.”
+	var res = "That’s not what Victor said. He said the two of you where having a drink."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("politician", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 }
 
 function whatDrinkingPol(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “Well brandy is the gentleman's drink of choice.”
+	var res =  "Well brandy is the gentleman's drink of choice."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("politician", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 } 
 
 function anyCluePolitiction(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “Well you simply need to look at who has the most to gain. It seems very clear to me that Ada as the inheritor of his fortune would do very well from this.”
+	var res = "Well I can't think of anyone here who would dare do such a thing."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("politician", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 }
 
 function makeOfDeathPol(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “It is always sad to see a fellow country man die, particularly in such a tragic fashion.”
+	var res = "It is always sad to see a fellow country man die, particularly in such a tragic fashion."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("politician", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 }
 
 
 //Butler
 function whereWasButler(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “I was the making tea for Miss Ada.”
+	var res = "I was the making tea for Miss Ada."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("butler", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 }
 
 function anyCluesButler(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “I guess it could have been Victor; things have been tense since the falling out.”
+	var res = "I guess it could have been Victor; things have been tense since the falling out."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("butler", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 }
 
 function feelAboutDeathButler(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “Well he was nothing compared to his father, but he was a good master all the same.”
+	var res = "Well he was nothing compared to his father, but he was a good master all the same."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("butler", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 }
 
 function problemsWithHouse(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “Oh well with an old house like this there will always be some issues. We have had a rat infestation recently.”
+	var res = "Oh well with an old house like this there will always be some issues. We have had a rat infestation recently."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("butler", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 }
 
 //Rival
 function whereWasRival(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res I was with the Francis having a nightcap.”
+	var res =  "I was with the Francis having a nightcap."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("rival", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 	//trust -- 
 }
 
 function storyDoesntMatchRival(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “Well that is the truth and all I have to say on the matter.”
+	var res = "Well that is the truth and all I have to say on the matter."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("rival", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 	//EVIDENCE untrustworthy alibi
 }
 
 function whatDrinkRival(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “The finest scotch we could find at hand.”
+	var res = "The finest scotch we could find at hand."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("rival", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 	//Evidence inconsistent story
 }
 
 function anyClueRival(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “You religious types think you are outside the law. Stop bothering me.”
+	var res = "You religious types think you are outside the law. Stop bothering me."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("rival", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 }
 
 function feelAboutDeathRival(e){
 	printPlayerInfo(e.target.innerHTML)
-	//res “He was a decent man, even if we did not see eye to eye on all matters.”
+	var res = "He was a decent man, even if we did not see eye to eye on all matters."
+	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	editQVisible("rival", e.target.innerHTML, false)
+	_functions.updateQuestions(currentRoom)
 }
 
 //***************************************************
@@ -994,6 +1070,11 @@ function feelAboutDeathRival(e){
 //************** Item Actions **************************
 function getPersonInRoom(){
 	return _vars.locations[currentRoom].people[0]
+}
+
+function getPersonInRoomName(){
+	var person = getPersonInRoom()
+	return _vars.characters[person].name
 }
 
 function showToPersonText(){
@@ -1102,6 +1183,10 @@ function investigateReadingTable(){
 function investigateBookshelf(){
 	printPlayerInfo("You look at the bookshelf, there are four books that catch your attention.") 
 	//Todo: add book actions Oliver Twist, Wuthering Heights, The Time Machine and the Odessey ”
+	editLocAction("library","Investigate A Tale of Two Cities",true)
+	editLocAction("library","Investigate Wuthering Heights",true)
+	editLocAction("library","Investigate The Time Machine",true)
+	editLocAction("library","Investigate The Odessey",true)
 	
 	editLocAction("library","Investigate Bookshelf",false)
 	_functions.updateActions("library")
@@ -1112,6 +1197,37 @@ function investigateBrokenDrawer(){
 
 	_functions.addItem("gun")
 	editLocAction("library","Investigate Broken Drawer",false)
+	_functions.updateActions("library")
+}
+
+function investigateTwoCities(e){
+	printPlayerInfo("You take a look within the book, it is a classic no doubt, but you do not have time to read it.")
+	
+	editLocAction("library",e.target.innerHTML,false)
+	_functions.updateActions("library")
+}
+
+function investigateWutheringHeights(e){
+	printPlayerInfo("You take a look within the book, it is a classic no doubt, but you do not have time to read it.")
+
+	editLocAction("library",e.target.innerHTML,false)
+	_functions.updateActions("library")
+}
+
+function investigateTheTimeMachine(e){
+	printPlayerInfo("You take a look within the book, inside you find a note")
+
+	_functions.addItem("Treatening Letter")
+	_functions.updateItems()
+
+	editLocAction("library",e.target.innerHTML,false)
+	_functions.updateActions("library")
+}
+
+function investigateTheOdessey(e){
+	printPlayerInfo("You take a look within the book, it is a classic no doubt, but you do not have time to read it.")
+
+	editLocAction("library",e.target.innerHTML,false)
 	_functions.updateActions("library")
 }
 
@@ -1440,8 +1556,7 @@ function editQVisible(character, question,visible){
 	_vars.characters[character].questions[quesitonIndex].visible = visible
 }
 
-//****************************************************
-</script><tw-passagedata pid="1" name="Menu" tags="" position="103,148"> &lt;div id=&quot;menu&quot;&gt;
+//****************************************************</script><tw-passagedata pid="1" name="Menu" tags="" position="103,148"> &lt;div id=&quot;menu&quot;&gt;
  	Welcome
 	CS4067 - Twine Game
 
