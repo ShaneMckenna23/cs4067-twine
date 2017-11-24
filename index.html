@@ -474,7 +474,6 @@ p.delay {
     box-sizing: border-box;
   	margin-top: -20px
   background-color:brown;
-  background-image:url("https://image.ibb.co/cYxThm/Party.jpg"); 
   background-repeat:no-repeat;
   background-size:100% 100%;
   width:100%;
@@ -489,11 +488,22 @@ p.delay {
   background-repeat:no-repeat;
   background-size:100%;
   padding:10%;
+  overflow: auto;
+  overflow-x: hidden;
+  height:800px;
 }
 
 .Comment{
   margin:24px;
   font-family:"IM Fell Great Primer";
+}
+
+.Paragraph a{
+ 	color:white; 
+}
+
+.Comment a{
+ 	color:white; 
 }
 
 .Option a{
@@ -521,9 +531,27 @@ p.delay {
   background-size:100% 100%;
   background-color:black;
   height:800px;
-  
 }
+
+.OutroText{
+  float:left;
+  width:50%;
+  margin:10% 25%;
+   background-image:url("https://media.overstockart.com/optimized/cache/data/frames/FR-6996G24X36-1000x1000.png");
+    background-repeat:no-repeat;
+  background-size:100% 100%;
+  background-color:black;
+  height:800px;
+}
+
 .IntroImage{
+  width:25%;
+  margin:5% 5%;
+  height: 800px;
+  float:left;
+}
+
+.DoubleImage{
   width:25%;
   margin:5% 5%;
   height: 800px;
@@ -547,6 +575,7 @@ p.delay {
     color: white;
     font-weight: 300;
 }
+
 
 
 
@@ -1411,7 +1440,8 @@ function editQVisible(character, question,visible){
 	_vars.characters[character].questions[quesitonIndex].visible = visible
 }
 
-//****************************************************</script><tw-passagedata pid="1" name="Menu" tags="" position="103,148"> &lt;div id=&quot;menu&quot;&gt;
+//****************************************************
+</script><tw-passagedata pid="1" name="Menu" tags="" position="103,148"> &lt;div id=&quot;menu&quot;&gt;
  	Welcome
 	CS4067 - Twine Game
 
@@ -1906,7 +1936,7 @@ You walk up to the old manor, noticing that the walkway needs to be repaved. A q
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
-“Thank you, Mr. Phillips. A pleasure to make your acquaintance.”
+“Thank you, Mr. Smith. A pleasure to make your acquaintance.”
 &lt;/div&gt;
 
 
@@ -1968,7 +1998,7 @@ Your response is cut off by a knock at the door.
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
-Mr. Phillips, the butler, leads a slender and clean-cut older gentleman into the parlor. The man introduces himself as Victor Wharton of Wharton and Co., putting a strange emphasis on the company’s name.
+Mr. Smith, the butler, leads a slender and clean-cut older gentleman into the parlor. The man introduces himself as Victor Wharton of Wharton and Co., putting a strange emphasis on the company’s name.
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
@@ -2016,9 +2046,7 @@ After a few minutes of light conversation, you were once again interrupted by th
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="Sister Introduction" tags="" position="100,893">
-
-&lt;div = class = &quot;IntroImage&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="Sister Introduction" tags="" position="100,893">&lt;div = class = &quot;IntroImage&quot;&gt;
 &lt;img src=&quot;https://image.ibb.co/hTtyYR/sister.jpg&quot;&gt;
 &lt;/div&gt;
 
@@ -2050,44 +2078,47 @@ It was at this point that James lead you and the other guests into the dining ro
 &lt;/div&gt;
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="Conversation 1" tags="" position="223,893">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
+
 &lt;div class = &quot;Comment&quot;&gt;
-Albert: I hear that the HMS Dreadnought will be ready to launch in a months time. It looks to be the largest ship of its type ever built.
+Albert: &quot;I hear that the HMS Dreadnought will be ready to launch in a months time. It looks to be the largest ship of its type ever built.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-Victor: Hopefully that will be enough to keep those upstart Prussians at bay. If it is not, we might have to take some time to show the Kaiser a thing or two. 
+Victor: &quot;Hopefully that will be enough to keep those upstart Prussians at bay. If it is not, we might have to take some time to show the Kaiser a thing or two.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-Francis: I would not have thought of you as such a Jingoist, my boy. 
+Francis: &quot;I would not have thought of you as such a Jingoist, my boy.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-Victor: Is it wrong to look to defend such His Majesty&#x27;s great empire from foreign barabarity.
+Victor: &quot;Is it wrong to look to defend such His Majesty&#x27;s great empire from foreign barabarity.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
 
-Francis: We both know that is not what the issue is here. The issue here is a member of parliament does not trust he has a seat in westminister to return to next Autumn. 
+Francis: &quot;We both know that is not what the issue is here. The issue here is a member of parliament does not trust he has a seat in westminister to return to next Autumn.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-Victor: I would not have pegged you for a yellow belly. I guess that what so many years of mercentalism will do to someone. Turn them soft to thier core!
+&lt;img&gt;
+Victor: &quot;I would not have pegged you for a yellow belly. I guess that what so many years of mercentalism will do to someone. Turn them soft to thier core!&quot;
 &lt;/div&gt;
  
 &lt;div class = &quot;Comment&quot;&gt;
 You decide that the conversation has gotten heated up enough and decide to intervene.
+&lt;img&gt;
 &lt;/div&gt;
 
-&lt;div class = &quot;Paragraph&quot; id = &quot;Option1&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option1&quot;&gt;
 [[&quot;As the lord has said to us &#x27;Blessed are the peacemakers, for they will be called children of God.&#x27;&quot; |Conversation 2]]
 &lt;/div&gt;
 
-&lt;div class = &quot;Paragraph&quot; id = &quot;Option2&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option2&quot;&gt;
 [[&quot;Ok Gentlemen, I think this has all gone on long enough, let us all just drop it.&quot; |Conversation 2]]
 &lt;/div&gt;
 
-&lt;div class = &quot;Paragraph&quot; id = &quot;Option3&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option3&quot;&gt;
 [[&quot;I think Victor is right, this is not a country built on weak stomachs!&quot; |Conversation 2]]
 &lt;/div&gt;
 
@@ -2098,9 +2129,7 @@ You decide that the conversation has gotten heated up enough and decide to inter
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://eskipaper.com/images/victorian-wallpaper-2.jpg&quot;)&#x27;);
 });
-	
-	var _functions = story.state.functions
-	
+
 	$(&quot;#Option1&quot;).click(function(){
 		_functions.editCharacterTrust(&quot;politician&quot;, 2)
 		_functions.editCharacterTrust(&quot;rival&quot;, -2)
@@ -2118,7 +2147,9 @@ You decide that the conversation has gotten heated up enough and decide to inter
 </tw-passagedata><tw-passagedata pid="18" name="Conversation 2" tags="" position="224,769">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
 It was at this point that the James enters the room and begins serving the guest. 
+&lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
 Francis: It seems that dinner is served. But who is this rough gent who is serving us? We might have to call the constable over this evening?
@@ -2136,28 +2167,28 @@ Francis: And in which branch would that be in?
 James: The Royal Navy, sir. 
 &lt;/div&gt;
 
-&lt;div class = &quot;Option&quot; id = &quot;Option1&quot;&gt;
-[[&quot;Gentlemen, I hardly think it hardly right to comment on another mans appearance at the dinner table&quot; |Conversation 3]]
+&lt;div class = &quot;Comment&quot; id = &quot;Option1&quot;&gt;
+[[&quot;Gentlemen, I hardly think it is right to comment on another mans appearance at the dinner table&quot; |Conversation 3]]
 &lt;/div&gt;
 
-&lt;div class = &quot;Option&quot; id = &quot;Option2&quot;&gt;
-[[Let the Converasation Continue|Conversation 2.5]] 
+&lt;div class = &quot;Comment&quot; id = &quot;Option2&quot;&gt;
+[[Let the converasation continue|Conversation 2.5]] 
 &lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
-var _functions = story.state.functions
-
 $(&quot;#Option1&quot;).click(function(){
-		_functions.editCharacterTrust(&quot;butler&quot;, 2)
-		_functions.editCharacterTrust(&quot;rival&quot;, -2)
+		_functions.editCharacterTrust(&quot;sister&quot;, 3)
+		_functions.editCharacterTrust(&quot;rival&quot;, -1)
+		_functions.editCharacterTrust(&quot;politician&quot;, -1)
 	})
 	$(&quot;#Option2&quot;).click(function(){
-		_functions.editCharacterTrust(&quot;butler&quot;, -1)
+		_functions.editCharacterTrust(&quot;sister&quot;, -1)
+		_functions.editCharacterTrust(&quot;rival&quot;, -1)
+		_functions.editCharacterTrust(&quot;politician&quot;, -1)
 	})
-
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="19" name="Conversation 3" tags="" position="223,643">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
@@ -2217,15 +2248,15 @@ Ada: That counts double for brutes like you!
 Albert :My good Paul you have been rather quiet, what does the church have to say about the issue?
 &lt;/div&gt;
 
-&lt;div class = &quot;Option&quot; id = &quot;Option1&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option1&quot;&gt;
 [[&quot;I think Women should be given the vote the same as any man&quot; | Conversation 4]]
 &lt;/div&gt;
 
-&lt;div class = &quot;Option&quot; id = &quot;Option2&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option2&quot;&gt;
 [[&quot;I do not think it right for a man of the cloth like myself to  &quot; | Conversation 4]]
 &lt;/div&gt;
 
-&lt;div class = &quot;Option&quot; id = &quot;Option3&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option3&quot;&gt;
 [[&quot;Was it not Eve, the first of all women, who lead Adam astray in the Garden of Eden.&quot; | Conversation 4]]
 &lt;/div&gt;
 
@@ -2233,8 +2264,6 @@ Albert :My good Paul you have been rather quiet, what does the church have to sa
 &lt;/div&gt;
 
 &lt;script&gt;
-var _functions = story.state.functions
-
 $(&quot;#Option1&quot;).click(function(){
 		_functions.editCharacterTrust(&quot;sister&quot;, 3)
 		_functions.editCharacterTrust(&quot;rival&quot;, -1)
@@ -2250,90 +2279,137 @@ $(&quot;#Option1&quot;).click(function(){
 		_functions.editCharacterTrust(&quot;rival&quot;, 2)
 		_functions.editCharacterTrust(&quot;politician&quot;, 2)
 	})
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="20" name=" Conversation 4" tags="" position="222,520">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="20" name=" Conversation 4" tags="" position="221,520">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
 As the guests begin to finish there meals, you lose concentration. When you return to your sense the rest of the party have moved on to the topic of literature. 
-
-&lt;div class = &quot;Comment&quot;&gt;
-Ada: Unsuprisingly, I think the Bronte Sisters show a far superior wit to anything you &quot;Men&quot; have thrown out...
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-Victor: Unsuprisingly indeed! I think it hard to overlook the great Dickens. A Tale of Two Cities is an epic for our generation!
+Ada:&quot; Unsuprisingly, I think the Bronte Sisters show a far superior wit to anything you &quot;Men&quot; have thrown out.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-Albert: I personally would vouch for the classics, it loses a certain something in translation to English, but Homer&#x27;s Oddyssey is a classic that has lasted the ages.
+Victor: &quot;Unsuprisingly indeed! I think it hard to overlook the great Dickens. A Tale of Two Cities is an epic for our generation!&quot;
 &lt;/div&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
+Francis: &quot;I personally would vouch for the classics, it loses a certain something in translation to English, but Homer&#x27;s Oddyssey is a classic that has lasted the ages.&quot;
+&lt;/div&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
+Albert:&quot;I myself would be partial to the works of HG Wells, the time machine being a personal favourite.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Comment&quot;&gt;
 You decide that now would be a good time to chime in. 
+&lt;/div&gt;
 
-&lt;div id = &quot;Option&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option1&quot;&gt;
 [[&quot;I would be partial to a tale of two Cities&quot;|Conversation 5]]
 &lt;/div&gt;
 
-&lt;div id = &quot;Option&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option2&quot;&gt;
 [[&quot;There is certain appeal to Wuthering Heights&quot;|Conversation 5]]
 &lt;/div&gt;
 
-&lt;div id = &quot;Option&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option3&quot;&gt;
 [[&quot;I agree with Albert, none of these catch my imagination in the same fashion as a good HG Wells novel&quot; |Conversation 5]]
 &lt;/div&gt;
 
-&lt;div id = &quot;Option&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option4&quot;&gt;
 [[&quot;The Odyssey certainly is a classic&quot;|Conversation 5]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="21" name="Conversation 5" tags="" position="223,399">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+	$(&quot;#Option1&quot;).click(function(){
+		_functions.editCharacterTrust(&quot;politician&quot;, 2)
+		_functions.editCharacterTrust(&quot;rival&quot;, -2)
+	})
+	$(&quot;#Option2&quot;).click(function(){
+		_functions.editCharacterTrust(&quot;politician&quot;, -1)
+		_functions.editCharacterTrust(&quot;rival&quot;, -1)
+	})
+	$(&quot;#Option3&quot;).click(function(){
+		_functions.editCharacterTrust(&quot;politician&quot;, -1)
+		_functions.editCharacterTrust(&quot;rival&quot;, -1)
+	})
+	$(&quot;#Option4&quot;).click(function(){
+		_functions.editCharacterTrust(&quot;rival&quot;, 2)
+		_functions.editCharacterTrust(&quot;politician&quot;, -2)		
+	})
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="21" name="Conversation 5" tags="" position="223,399">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
-As the meal drew to a close, the guests quited
+&lt;div class= &quot;Comment&quot;&gt;
+Conversation became sparser as the meal drew to a close. Cecil enters the room and begins to clean away the dishes. 
+&lt;/div&gt;
 
-It had slowly become obvious that Victor has had quite too much wine.
+&lt;div class = &quot;Comment&quot;&gt;
+Victor:&quot;Ah look, if it isnt our dearest friend the Butler. Come regale us with a story from your time in the military&quot;.
+&lt;/div&gt;
 
-Politician drank too much. Going on about importance of rights. 
+&lt;div class= &quot;Comment&quot;&gt;
+Albert:Victor I think it is becoming increasingly obvious that you have drank altogether too much red wine.
+&lt;/div&gt;
 
-Albert attacks 
+&lt;div class = &quot;Comment&quot;&gt;
 
+&lt;/div&gt;
 
+&lt;div class= &quot;Comment&quot;&gt;
+Cecil:&quot;I would very much like to keep at the task at hand.&quot; 
+&lt;/div&gt;
 
-
-
-&lt;div class = &quot;Options&quot; id = &quot;Option1&quot;&gt;
+&lt;div class = &quot;Comment&quot; id = &quot;Option1&quot;&gt;
 [[&quot;My good chap, I think you have had altogether enough to drink and need to leave that poor butler alone&quot;|Heading To Bed]]
 &lt;/div&gt;
 
-&lt;div class = &quot;Options&quot; id = &quot;Option2&quot;&gt;
-[[&quot;My good chap, I think you have had altogether enough to drink and need to leave that poor butler alone&quot;|Heading To Bed]]
+&lt;div class = &quot;Comment&quot; id = &quot;Option2&quot;&gt;
+[[Ignore the situation again|Heading To Bed]]
 &lt;/div&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
-var _functions = story.state.functions
-
 $(&quot;#Option1&quot;).click(function(){
-		_functions.editCharacterTrust(&quot;sister&quot;, 3)
+		_functions.editCharacterTrust(&quot;butler&quot;, 3)
 		_functions.editCharacterTrust(&quot;rival&quot;, -1)
-		_functions.editCharacterTrust(&quot;politician&quot;, -1)
 	})
 	$(&quot;#Option2&quot;).click(function(){
-		_functions.editCharacterTrust(&quot;sister&quot;, -1)
-		_functions.editCharacterTrust(&quot;rival&quot;, -1)
-		_functions.editCharacterTrust(&quot;politician&quot;, -1)
+		_functions.editCharacterTrust(&quot;bulter&quot;, -1)
 	})
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="22" name="The Murder" tags="" position="589,295">As you wait for Albert to join you in 
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="22" name="The Murder" tags="" position="589,295">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;div class=&quot;Conversation&quot;&gt;
 
-You begin to worry about the time, not taking Albert for a tardy gentleman. 
+&lt;div class = &quot;Comment&quot;&gt;
+In the morning, you reluctantly get up out of bed. Preparing for your hunting trip with the owner of the house. You wait for him quietly in hallway. 
+&lt;/div&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
+After some time you begin to worry about the time, you had not taken Albert for a tardy gentleman. 
+&lt;/div&gt;
+
+&lt;div class = &quot;Comment&quot;&gt;
 You knock upon his door. When there is no responce a few minutes later you knock again. Instead of knocking a third time, you find Cecil and inquire about Albert&#x27;s whereabouts. He says he too is surprised about Albert not being up yet. He is an avid hunter. 
+&lt;/div&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
 Cecil decides to look for Albert in his room. A few moments later he calls you in. 
+&lt;/div&gt;
 
-When you enter the room you 
+&lt;div class = &quot;Comment&quot;&gt;
+When you enter the room you notice Albert lying motionless in his bed. After a few seconds you begin to realise what has happened. 
+&lt;/div&gt;
 
-[[Act Two]]</tw-passagedata><tw-passagedata pid="23" name="The Accusation" tags="" position="552,612">&lt;div class = &quot;comment&quot;&gt;
+&lt;div class = &quot;Comment&quot;&gt;
+[[Act Two]]
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="The Accusation" tags="" position="552,612">&lt;div class = &quot;comment&quot;&gt;
 It is time to choose who you think committed the murder.
 &lt;/div&gt;
 
@@ -2363,45 +2439,123 @@ It is time to choose who you think committed the murder.
 
 &lt;script&gt;
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="24" name="The Rival Reaction" tags="" position="790,955">&quot;But the dissolution of their partnership was fraught with anger and resentment. Victor was owed money from Albert, but he refused to acknowledge the debt. Victor must have wanted to reduce the competition.&quot;
-
-[[Afterwards]]</tw-passagedata><tw-passagedata pid="25" name="The Politician Reaction" tags="" position="787,804">&lt;div class = &quot;comment&quot;&gt;
-But there was a reason to want Albert dead. Albert knew that Francis took bribes from prominent aristocrats and was threatening to reveal this information, which would have ruined Francis’ career. 
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="24" name="The Rival Reaction" tags="" position="790,955">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
 &lt;/div&gt;
 
-&lt;div class = &quot;comment&quot;&gt;
-Furthermore, the scrawl on the death threat matches the handwriting on Francis’ RSVP.
-&lt;/div&gt;
-
-[[Afterwards]]</tw-passagedata><tw-passagedata pid="26" name="The Sister Reaction" tags="" position="841,681">&lt;div class = &quot;Comment&quot;&gt;
-Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes the second. 
-&lt;/div&gt;
-
-&lt;div class = &quot;Comment&quot;&gt;
-The murderer was none other than his sister Ada. 
-&lt;/div&gt;
-
-&lt;div class = &quot;Comment&quot;&gt;
-Francis: &quot;I think you had better take a step back and look at what you are doing father, she has just lost her closest relative, this is no time for unfounded personal attacks.&quot;
-&lt;/div&gt;
-
-&lt;div class = &quot;Comment&quot;&gt;
-&quot;They were family, but only by blood. Ada knew that when Albert died unwed, she would inherit the large family fortune. To damn her further, the key to the gun case was in her purse.&quot;
-&lt;/div&gt;
-
-&lt;div class = &quot;Comment&quot;&gt;
-
-&lt;/div&gt;
-
-When the room finally came to its senses. 
-
-[[Afterwards]]</tw-passagedata><tw-passagedata pid="27" name="The Butler Reaction" tags="" position="1000,625">&lt;div class = &quot;IntroText&quot;&gt;
+&lt;div class = &quot;IntroText&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
-Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes the second. 
+Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes II.
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
-It was Cecil all along.
+&quot;It was none other than Francis.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;But the dissolution of their partnership was fraught with anger and resentment. Victor was owed money from Albert, but he refused to acknowledge the debt. Victor must have wanted to reduce the competition.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+Victor:&quot;This is utterly ridiculous, there is no way you all believe what he is saying.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+
+&lt;/div&gt;
+
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+[[Continue|Afterwards]]
+&lt;/div&gt;
+
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="The Politician Reaction" tags="" position="787,804">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class = &quot;IntroText&quot;&gt;
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
+&quot;Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes the second.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;You see it was Victor all along.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+Victor:&quot;That is a very bold claim to be making, especially about a man of my stature.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;But there was a reason to want Albert dead. Albert knew that Francis took bribes from prominent aristocrats and was threatening to reveal this information, which would have ruined Francis’ career.&quot; 
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;Furthermore, the scrawl on the death threat matches the handwriting on Francis’ RSVP.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+Victor: &quot;I think these claims are quite ridiculous altogether, can you not all see that this man doesnt know what he is saying&quot;.
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+As Victor began to look around the room, no one else attempted to make eye contact with him. He was then taken away by Deputy Connolly.
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+[[Continue|Afterwards]]
+&lt;/div&gt;
+
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="The Sister Reaction" tags="" position="841,681">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class = &quot;IntroText&quot;&gt;
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
+&quot;Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes the second.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;You see it was Victor all along.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+Victor:&quot;That is a very bold claim to be making, especially about a man of my stature.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;But there was a reason to want Albert dead. Albert knew that Francis took bribes from prominent aristocrats and was threatening to reveal this information, which would have ruined Francis’ career.&quot; 
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;Furthermore, the scrawl on the death threat matches the handwriting on Francis’ RSVP.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+Victor: &quot;I think these claims are quite ridiculous altogether, can you not all see that this man doesnt know what he is saying&quot;.
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+As Victor began to look around the room, no one else attempted to make eye contact with him. He was then taken away by Deputy Connolly.
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+[[Continue|Afterwards]]
+&lt;/div&gt;
+
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="27" name="The Butler Reaction" tags="" position="1000,625">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class = &quot;IntroText&quot;&gt;
+&lt;div class = &quot;TopParagraph&quot;&gt;
+Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes II.
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;It was our dear Cecil all along.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
@@ -2409,93 +2563,158 @@ Ada: &quot;He has been a loyal member of this household many years&quot;.
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
-That he has, but that all changed when Albert I died and Albert II took over. If you see this letter here, this was on Albert’s bedside table, and is a letter of termination. Cecil must have seen this, and decided to exact his vengeance for Albert I.
+&quot;That he has, but that all changed when Albert I died and Albert II took over. If you see this letter here, this was on Albert’s bedside table, and is a letter of termination. Cecil must have seen this, and decided to exact his vengeance for Albert I.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
-Only Cecil and Ada would know where the key to the gun case is, and the evidence points to Cecil.
+&quot;Furthermore, only Cecil and Ada would know where the key to the gun case is, and the evidence points to Cecil.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
-A look of shock runs across Cecil&#x27;s face for a moment until he returns to his collective self. 
+A look of shock runs across Cecil&#x27;s face for a moment until he returns to his calm and collected self. He was then taken away by Deputy Connolly.
 &lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
+[[Continue|Afterwards]]
+&lt;/div&gt;
 
-[[Continue|Afterwards]]</tw-passagedata><tw-passagedata pid="28" name="Good Ending" tags="" position="1118,1546">You continue your work as a minister in the parish. 
+&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="28" name="Good Ending" tags="" position="1118,1546">&lt;div class = &quot;OutroText&quot;&gt;
 
-Some nights 
+&lt;div class = &quot;TopParagraph&quot;&gt;
+You continue your work as a minister in the parish. You came to love the parish you lived in 
+&lt;/div&gt;
 
-Later in life, you start to question whether you really know the entire story and who was involved.</tw-passagedata><tw-passagedata pid="29" name="Worst Ending" tags="" position="1377,1554">&lt;div class = &quot;comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
+Some nights, you start to question whether you really know the entire story and who was involved.
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+$(function(){
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+});
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="29" name="Worst Ending" tags="" position="1377,1554">&lt;div class = &quot;OutroText&quot;&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
 You where found to be the main suspect in the case. 
 &lt;/div&gt;
 
-&lt;div class = &quot;comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 Francis had put lots of money behind the case of Alberts murder, and it was dealt with in records time. While once a great of believer in Great Britians justice, you find that system fickle and corruptable.
 &lt;/div&gt;
 
-&lt;div class = &quot;comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 You lived the rest of your life bitter that the murders had gotten away with their crime, and that you where punished in thier stead. 
 &lt;/div&gt;
 
-&lt;scirpt&gt;
-image change
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="30" name="Bad Ending" tags="" position="1244,1554">You returned to your parish and tried to get on with living your life again. 
-
-&lt;div class = &quot;comment&quot;&gt;
-Often you thought back on that night, reliving every detail again and again, never able to escape the sinking feeling that you had come to the wrong conclusion and your evidence just hadnt really added up. 
 &lt;/div&gt;
 
-Slowly 
-Eventually </tw-passagedata><tw-passagedata pid="31" name="Afterwards" tags="" position="1202,756">[[Butler Free]]
+&lt;script&gt;
+$(function(){
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+});
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="30" name="Bad Ending" tags="" position="1244,1554">&lt;div class = &quot;OutroText&quot;&gt;
 
-[[Butler Inprison]]</tw-passagedata><tw-passagedata pid="32" name="Butler Free" tags="" position="1133,902">&lt;div class = &quot;Charactrer&quot;&gt;
-The butler goes to work for another wealthy businessman. He gets married after retiring and enjoys a quiet life in the country.
+&lt;div class = &quot;TopParagraph&quot;&gt;
+You returned to your parish and tried to get on with living your life again.
 &lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
+Often you thought back on that night, reliving every detail again and again, never able to escape the sinking feeling that you had come to the wrong conclusion and your evidence just hadnt really added up. To 
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+You began to increasingly drink  Eventually you were fired in disgrace 
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+$(function(){
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+});
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="31" name="Afterwards" tags="" position="1202,756">[[Butler Free]]
+
+[[Butler Inprison]]</tw-passagedata><tw-passagedata pid="32" name="Butler Free" tags="" position="1133,902">&lt;div class = &quot;OutroText&quot;&gt;
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
+Cecil Smith goes to work for another wealthy businessman in Cornwall. 
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+After retiring he finally had time to find himself a wife. They had a small intimate wedding. Together they enjoyed a quiet life in the country.
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Rival Free]]
+&lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Rival In prison]]
+&lt;div&gt;
+
+&lt;/div&gt;
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
 });
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="33" name="Butler Inprison" tags="" position="1283,902">&lt;div class = &quot;OutroImage&gt;
-&lt;img&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="33" name="Butler Inprison" tags="" position="1283,902">&lt;div class = &quot;OutroText&quot;&gt;
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
+Victor Wharton’s company expands to become a global leader in coal manufacturing.
 &lt;/div&gt;
 
-&lt;div class = &quot;OutroText&quot;&gt;
-Cecil Smith, is given a life sentence for murder. He lives the remainder of his life in a cold, dark cell.
+&lt;div class = &quot;Paragraph&quot;&gt;
+[[Sister Free]]
 &lt;/div&gt;
 
-[[Rival Free]]
+&lt;div class = &quot;Paragraph&quot;&gt;
+[[Sister In prison]]
+&lt;/div&gt;
 
-[[Rival In prison]]
+&lt;div class = &quot;Paragraph&quot;&gt;
+[[Sister In prison for Murder]]
+&lt;/div&gt;
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
 });
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="34" name="Sister Free" tags="" position="1120,1223">&lt;div class = &quot;OutroText&quot;&gt;
-Ada Baynes continues her fight for women’s rights, becoming a household name with her death ten years later.
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
+Ada Baynes continued her fight for women’s rights, becoming a household name with her death ten years later.
 &lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Politician Free]]
+&lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Politician In prison]]
+&lt;/div&gt;
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
 });
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="35" name="Sister In prison" tags="" position="1290,1221">&lt;div class = &quot;OutroText&quot;&gt;
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
 Ada Baynes gets a 20-year sentence for accessory to murder. She dies five years later of pneumonia, never seeing women get the right to vote.
 &lt;/div&gt;
 
+&lt;div class = &quot;TopParagraph&quot;&gt;
 [[Politician Free]]
+&lt;/div&gt;
 
+&lt;div class = &quot;TopParagraph&quot;&gt;
 [[Politician In prison]]
+&lt;/div&gt;
 
 &lt;script&gt; 
 $(function(){
@@ -2516,86 +2735,153 @@ $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
 });
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="37" name="Rival In prison" tags="" position="1291,1073">&lt;div class = &quot;OutroText&quot;&gt;
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
 Victor Wharton gets a life sentence for murder. He commits suicide shortly after being sentenced. His son is unable to keep the family business alive.
 &lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Sister Free]]
+&lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Sister In prison]]
+&lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Sister In prison for Murder]]
+&lt;/div&gt;
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
 });
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="38" name="Politician Free" tags="" position="1126,1366">&lt;div class = &quot;OutroText&quot;&gt;
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
 Ada Baynes gets a life sentence for murder. She dies five years later of pneumonia, never seeing women get the right to vote.
 &lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Best Ending]]
+&lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Good Ending]]
+&lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Bad Ending]]
+&lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Worst Ending]]
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
 });
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="39" name="Politician In prison" tags="" position="1303,1366">&lt;div class = &quot;OutroText&quot;&gt;
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
 Francis Tappington gets life in prison. His wife divorces him and his political career ended before it started.
 &lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Best Ending]]
+&lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Good Ending]]
+&lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Bad Ending]]
+&lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Worst Ending]]
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;script&gt;
+$(function(){
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+});
+&lt;/script&gt;
+</tw-passagedata><tw-passagedata pid="40" name="Best Ending" tags="" position="990,1540">&lt;div class = &quot;OutroText&quot;&gt;
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
+You spend the rest of your life working as a minister in the parish. 
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+Years from now you still look back fondly on the murder you solved at the beginning of your career, very proud you put the killers behind bars.
+&lt;/div&gt;
+
+&lt;/div&gt;
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
 });
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="40" name="Best Ending" tags="" position="990,1540">You continue your work as a minister in the parish. You always look back fondly on the murder you solved at the beginning of your career.
-</tw-passagedata><tw-passagedata pid="41" name="The Sister/Politician Reaction" tags="" position="1200,584">&lt;div class = &quot;Comment&quot;&gt;
-Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes the second. 
+</tw-passagedata><tw-passagedata pid="41" name="The Sister/Politician Reaction" tags="" position="1200,584">&lt;div class = &quot;IntroText&quot;&gt;
+&lt;div class = &quot;TopParagraph&quot;&gt;
+&quot;Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes II.&quot;
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
-It was not one murderer, but rather a pair. 
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;It was not one murderer, but rather a pair.&quot;
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
-Francis and Ada despite their apparent distaste for one another, colluded to eliminate a mutual enemy. After all, the enemy of my enemy is my friend. 
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;Francis and Ada despite their apparent distaste for one another, colluded to eliminate a mutual enemy. After all, the enemy of my enemy is my friend.&quot;
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 Francis: &quot;Well my boy, that seems to be a very bold claim indeed, I do hope you have what you need to back it all up.&quot;
 &lt;/div&gt;
 
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;And that I do, here I present the proof. Albert knew that Francis took bribes from prominent aristocrats and was threatening to reveal this information, which would have ruined Francis’ career, and the scrawl on the &#x27;death threat matches the handwriting on Francis’ RSVP. The key to the gun case was in Ada’s purse, and she stood to gain the family fortune with Albert’s death.&quot; 
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+&quot;To prove their collusion, I present this article showing Francis’ quick change of heart in supporting women’s voting rights, as well as the butler’s statement that he saw them talking last night.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+[[Afterwards]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="No One Reaction" tags="" position="745,1117">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;div class=&quot;Conversation&quot;&gt;
+
 &lt;div class = &quot;Comment&quot;&gt;
-And that I do, here I present the proof. Albert knew that Francis took bribes from prominent aristocrats and was threatening to reveal this information, which would have ruined Francis’ career, and the scrawl on the &#x27;death threat matches the handwriting on Francis’ RSVP. The key to the gun case was in Ada’s purse, and she stood to gain the family fortune with Albert’s death. 
+Deputy Connolly gathers you all in the drawing room. 
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-To prove their collusion, I present this article showing Francis’ quick change of heart in supporting women’s voting rights, as well as the butler’s statement that he saw them talking last night.
-&lt;/div&gt;
-
-[[Afterwards]]</tw-passagedata><tw-passagedata pid="42" name="No One Reaction" tags="" position="745,1117">The Constable gathers you all in the drawing room. 
-
 Politician: &quot;I think it rather convient that our newfound priest arrived just on the verge of the or dear Albert death&quot;.
+&lt;/div&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
 You try to speak up to defend yourself of this ridiculous claim, there is no evidence linking you to the crime at all. You almost pass out from the horror of the scene transpiring infront of you. 
+&lt;/div&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
 Moments later you are dragged out in handcuffs.
+&lt;/div&gt;
 
-[[Continue|Afterwards]]</tw-passagedata><tw-passagedata pid="43" name="Act One" tags="" position="426,153">&lt;div class=&quot;act-intro&quot;&gt;
+&lt;div class = &quot;Comment&quot;&gt;
+[[Continue|Afterwards]]
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="43" name="Act One" tags="" position="426,153">&lt;div class=&quot;act-intro&quot;&gt;
 	Act One: The Dinner
 &lt;/div&gt;
 &lt;script&gt;
@@ -2606,12 +2892,15 @@ Moments later you are dragged out in handcuffs.
 		})
 		,1200)
 })
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="44" name="Conversation 2.5" tags="" position="364,710">&lt;div class = &quot;Comment&quot;&gt;
-Victor: No need for the Sir, our dear Francis here is no lord. Indeed he is merely the brother of one. 
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="44" name="Conversation 2.5" tags="" position="364,710">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;div class=&quot;Conversation&quot;&gt;
+
+&lt;div class = &quot;Comment&quot;&gt;
+Victor: &quot;No need for the Sir, our dear Francis here is no lord. Indeed he is merely the brother of one.&quot; 
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-Francis: I am off noble blood and a member of parliament!!!
+Francis: &quot;I am off noble blood and a member of parliament!!!&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -2626,9 +2915,10 @@ Victor:
 [[&quot;&quot;|Conversation 3]]
 &lt;/div&gt;
 
-&lt;script&gt;
-var _functions = story.state.functions
+&lt;/div&gt;
+&lt;/div&gt;
 
+&lt;script&gt;
 $(&quot;#Option1&quot;).click(function(){
 		_functions.editCharacterTrust(&quot;rival&quot;, 2)
 		_functions.editCharacterTrust(&quot;politician&quot;, -2)
@@ -2638,16 +2928,42 @@ $(&quot;#Option1&quot;).click(function(){
 		_functions.editCharacterTrust(&quot;politician&quot;, 2)
 	})
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="45" name="Heading To Bed" tags="" position="406,350">As you all start to make your way up to bed, Albert draws you aside.
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="45" name="Heading To Bed" tags="" position="406,350">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;div class=&quot;Conversation&quot;&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
+As you all start to make your way up to bed, Albert draws you aside.
+&lt;/div&gt;
+
+&lt;div class = &quot;Comment&quot;&gt;
 Albert: My good priest. How are you at hunting?
+&lt;/div&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
 Embarrassed to admit that you are not a good hunter, you agree to join him in the morning.
+&lt;/div&gt;
 
-[[Continue|The Murder]]</tw-passagedata><tw-passagedata pid="46" name="Sister In prison for Murder" tags="" position="1440,1220">[[Politician Free]]
+&lt;div class = &quot;Comment&quot;&gt;
+You continue on to bed, dreading tomorrow morning.
+&lt;/div&gt;
 
+&lt;div class = &quot;Comment&quot;&gt;
+[[Continue|The Murder]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="Sister In prison for Murder" tags="" position="1440,1220">&lt;div class = &quot;OutroText&quot;&gt;
+
+&lt;div class = &quot;TopParagraph&quot;&gt;
+
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+[[Politician Free]]
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Politician In prison]]
+&lt;/div&gt;
 
+&lt;/div&gt;
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
