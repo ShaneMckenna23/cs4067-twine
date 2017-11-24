@@ -577,59 +577,58 @@ _vars.clock = {
 
 _vars.characters = {
 	sister: {
-		name: "SisterName",
+		name: "Ada Baynes",
 		trust: 5,
 		questions:[
             {question: "Where were you at the time of the murder?", visible: true, function: whereWasSister},
             {question: "Do you have any clues who the murder may be?", visible: true, function: anyCluesSister},
-            {question: "It is so tragic?", visible: true, function: tragicSister}
+            {question: "IAnd what do you make of the death?", visible: true, function: tragicSister}
         ],
         itemRes:[
-            {name: "Pamphlet", res: "I knew about that and he can do what he wants"},
-            {name: "Gun Case", res: "He usually has a gun there"},
-            {name: "RSVPS", res: "Yes, I did write that"},
-            {name: "Poison Bottle", res:"Maybe ask the butler"}
+            {name: "Pamphlet", res: "I knew about that and he can do what he wants."},
+            {name: "Gun Case", res: "He usually has a gun there."},
+            {name: "RSVPS", res: "Yes, I did write that."},
+            {name: "Poison Bottle", res:"Maybe you should ask the butler."}
         ]
 	},
 	
 	politician: {
-		name: "PoliticianName",
+		name: "Francis Tappington",
         trust: 2,
         questions: [
             {question: "Where were you at the time of the murder?", visible: true, function: whereWasPol},
-            {question: "That’s not what Victor said, he said the two of you where having a drink", visible: false, function: wereYouDrinkingPol}, //TODO
+            {question: "That’s not what Victor said. He said the two of you where having a drink.", visible: false, function: wereYouDrinkingPol}, //TODO
             {question: "What were you drinking?", visible: false, function: whatDrinkingPol}, //TODO after above
             {question: "Do you have any clues who the murderer may be?", visible: true, function: anyCluePolitiction}, 
-            {question: "And what do you make of the death ?", visible: true, function: makeOfDeathPol}
+            {question: "And what do you make of the death?", visible: true, function: makeOfDeathPol}
         ],
         itemRes:[
-            {name: "Pamphlet", res: "That proves it was the sister"},
-            {name: "Threatening Letter", res: "Claim to have never seen it"},
-            {name: "RSVPS", res: "Yes, I did write that"}
+            {name: "Pamphlet", res: "That proves it was Ada who did it."},
+            {name: "Threatening Letter", res: "CI have never seen that before."},
+            {name: "RSVPS", res: "Yes, I did write that."}
         ]			
 	},
 
 	butler: {
-		name: "ButlerName",
+		name: "Cecil Smith",
 		trust: 5,
 		questions:[
             {question: "Where were you at the time of the murder?", visible: true, function: whereWasButler},
-            {question: "Do you have any clues who the murderer may be?", visible: true, function: anyCluesButler},
+            {question: "Do you have any clues as to who the murderer may be?", visible: true, function: anyCluesButler},
             {question: "How do you feel about his death?", visible: true, function: feelAboutDeathButler},
             {question: "Are there any problems with the house?", visible: true, function: problemsWithHouse}
             
 		],
 		itemRes:[
-            {name: "Bloody Knife", res: "Shows recent knife injury"},
-            {name: "Used Cup", res: "Yes it is Albert's cup"},
-            {name: "Poison Bottle", res: "Rat Problem"},
-            {name: "Ledger", res: "We are no longer partners"},
-            {name: "Mangled Toaster", res: "Now I have to buy a new toaster. I just bought that"}
+            {name: "Bloody Knife", res: "That was from when I cut my hand making dinner."},
+            {name: "Used Cup", res: "Yes, it is Albert's cup."},
+            {name: "Poison Bottle", res: "That is to deal with our rat problem."},
+            {name: "Mangled Toaster", res: "Now I have to buy a new toaster. I just bought that."}
 		]
 	},
 	
 	rival: {
-		name: "Victor",
+		name: "Victor Whatrton",
 		trust: 3,
 		questions:[
             {question: "Where were you at the time of the murder?", visible: true, function: whereWasRival},
@@ -639,9 +638,9 @@ _vars.characters = {
             {question: "How do you feel about it all?", visible: true, function: feelAboutDeathRival},
         ],
         itemRes:[
-            {name: "Mangled Toaster", res: "Broke it because I don’t like him"},
-            {name: "Ledger", res: "We are no longer partners"},
-            {name: "RSVPS", res: "Yes, I did write that"}
+            {name: "Mangled Toaster", res: "I broke it because I don’t like these newfangled electric devices."},
+            {name: "Ledger", res: "We are no longer partners."},
+            {name: "RSVPS", res: "Yes, I did write that."}
 		]
     },
     
@@ -651,14 +650,14 @@ _vars.characters = {
 		questions:[
         ],
         itemRes:[
-            {name:"Poison Bottle", res: "That could be a murder weapon, but it does have legit uses"},
-            {name: "Threatening Letter", res: "That’s an obvious piece of evidence"},
-            {name: "Bloody Knife", res: "That could be a murder weapon, but it does have legit uses"}
+            {name:"Poison Bottle", res: "That could be a murder weapon, but it does have legitimate uses."},
+            {name: "Threatening Letter", res: "That’s an obvious piece of evidence."},
+            {name: "Bloody Knife", res: "That could be a murder weapon, but it does have legitimate uses."}
         ]
     },
     
 	deadman: {
-		name: "Mr. Callaway"
+		name: "Albert Baynes II"
 	}
 }
 
