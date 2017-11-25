@@ -150,6 +150,7 @@ div.action-item:hover{
   margin-bottom: 5px;
   border-radius: 25px;
   border: 2px solid black;
+  margin-right: 10px;
 }
 
 div.question-item:hover{
@@ -1640,7 +1641,7 @@ function editQVisible(character, question,visible){
 	_vars.characters[character].questions[quesitonIndex].visible = visible
 }
 
-//****************************************************</script><tw-passagedata pid="1" name="Menu" tags="" position="5,4"> &lt;script&gt;
+//****************************************************</script><tw-passagedata pid="1" name="Menu" tags="" position="3.333333333333333,4"> &lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/Wallpaper.jpg&quot;)&#x27;);
 });
@@ -1856,7 +1857,7 @@ You think to yourself, it is now or never...
             &lt;input type=&quot;button&quot; value=&quot;FLIP OVER&quot; id=&quot;flip&quot;/&gt;
         &lt;/div&gt;
         &lt;div id=&quot;card&quot;&gt;
-            &lt;figure class=&quot;front&quot;&gt;&lt;img src=&quot;./static/images/invite/Invite-Front.png&quot; /&gt;&lt;/figure&gt;
+            &lt;figure class=&quot;front&quot;&gt;&lt;img src=&quot;./static/images/invite/Invite-Front.png&quot; class=&quot;postcard front&quot; /&gt;&lt;/figure&gt;
             &lt;figure class=&quot;back&quot;&gt;&lt;img src=&quot;./static/images/invite/Invite-Back2.png&quot; class=&quot;postcard back&quot; /&gt;&lt;/figure&gt;
         &lt;/div&gt;
 	&lt;section&gt;
@@ -2039,7 +2040,7 @@ You think to yourself, it is now or never...
 		_functions.changeRoom(roomName)
 	}
 	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="11" name="Hallway" tags="" position="1002,441">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="11" name="Hallway" tags="" position="1002,439.3333333333333">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
     &lt;div class=&quot;top-section&quot;&gt;
                    &lt;div id=&quot;room&quot;&gt;
                        &lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -2099,12 +2100,14 @@ You think to yourself, it is now or never...
    
    &lt;script&gt;
   $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/Act2Background2.png&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;./static/images/backgrounds/Act2Background2.png&quot;)&#x27;);
 });
    
        var _functions = story.state.functions
        var _vars = story.state.variables
        
+	   setInterval(()=&gt;_functions.incrementClock(5),5000)
+	   
        //Update Clock
        var clock = document.getElementById(&quot;clock&quot;)
        setInterval(function(){
@@ -2284,7 +2287,7 @@ It was at this point that James lead you and the other guests into the dining ro
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="Conversation 1" tags="" position="412,872">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="Conversation 1" tags="" position="412,870.3333333333334">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
