@@ -71,7 +71,7 @@ img {
   color:white;
     box-sizing: border-box;
     width: 100%;
-    height: 195px;
+    height: 181px;
     margin-top: 1%;
     padding: 20px;
   overflow: auto;
@@ -97,7 +97,7 @@ img {
     float: left;
     width: 31%;
     height: 100%;
-    margin-right: 1%;
+    margin-right: -1%;
 	padding: 20px;
 }
 
@@ -106,7 +106,7 @@ img {
     float: left;
     width: 31%;
     height: 100%;
-    margin-right: 1%;
+    margin-right: 3%;
   	overflow: auto;
   	overflow-x: hidden;
     padding: 20px;
@@ -767,7 +767,7 @@ _vars.locations = {
 	},
     
     bedroom:{
-        people: ["deadman"],
+        people: [],
         actions: [
 			{name: "Investigate Bedside Table", visible:true, function: investigateBedsideTable},
 			{name: "Investigate Desk", visible:true, function: investigateBedDesk},
@@ -1266,7 +1266,7 @@ function investigateBookshelf(){
 function investigateBrokenDrawer(){
 	printPlayerInfo("You find a gun in the drawer. It is old, and has not been fired recently.")
 
-	_functions.addItem("gun")
+	_functions.addItem("Gun")
 	editLocAction("library","Investigate Broken Drawer",false)
 	_functions.updateActions("library")
 }
@@ -1400,7 +1400,6 @@ _functions.changeRoom = function(roomName){
 	_functions.updateItems()
 	_functions.updateInfo()
 	_functions.updateQuestions(roomName)
-	_functions.drawRoomInfo(roomName)
 }
 
 _functions.getClock = function(){
@@ -1576,6 +1575,9 @@ _functions.updateItemWindow = function(itemName){
 		itemActions.forEach(function(action){
 			var actionName;
 			if(typeof action.name == 'function'){
+				if(currentRoom == "bedroom"){
+					return
+				}
 				actionName = action.name()
 			}else{
 				actionName = action.name
@@ -1662,6 +1664,7 @@ function editQVisible(character, question,visible){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/Wallpaper.jpg&quot;)&#x27;);
 });
 &lt;/script&gt;
+
  
  &lt;div id=&quot;menu&quot;&gt;
  	Welcome
@@ -2002,7 +2005,7 @@ You think to yourself, it is now or never...
 		_functions.changeRoom(roomName)
 	}
 	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="Bedroom" tags="" position="1005,576">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="Bedroom" tags="" position="1006.6666666666666,559.3333333333334">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
  &lt;div class=&quot;top-section&quot;&gt;
                 &lt;div id=&quot;room&quot;&gt;
 					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -2072,9 +2075,9 @@ You think to yourself, it is now or never...
                             &lt;div id=&quot;library&quot; onclick=&#x27;changeRoom(&quot;Library&quot;)&#x27;&gt;&lt;/div&gt;
                        &lt;/div&gt;
                        &lt;div id=&quot;actions&quot;&gt;
-                       &lt;h2Actions&lt;/h2&gt;
-                       &lt;div id=&quot;action-list&quot;&gt;
-                       &lt;/div&gt;
+						 &lt;h2&gt;Actions&lt;/h2&gt;
+						 &lt;div id=&quot;action-list&quot;&gt;
+						 &lt;/div&gt;
                        &lt;/div&gt;
                    &lt;/div&gt;
                &lt;/div&gt;
@@ -2139,7 +2142,6 @@ You think to yourself, it is now or never...
        
        //Update Information
        _functions.updateInfo()
-       _functions.drawRoomInfo(&quot;hallway&quot;)
        
        //Update Questions
        _functions.updateQuestions(&quot;hallway&quot;)
