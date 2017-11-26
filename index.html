@@ -11,6 +11,7 @@ CS4067
 <div id="passage"></div>
 
 <tw-storydata name="CS4067" startnode="22" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+<tw-storydata name="CS4067" startnode="45" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
     font: 18px "Helvetica Neue",Helvetica,Arial,sans-serif;
   	background-image: url("././static/images/backgrounds/Wallpaper.jpg");
   background-repeat:no-repeat;
@@ -646,7 +647,7 @@ p.delay {
 
 .accusation{
 	padding: 25px;
-  display: block;
+  display: none;
   cursor: pointer;
 }
 
@@ -1806,8 +1807,12 @@ function logCharTrust(){
 	console.log("***************************")
 	console.log("")
 }
+<<<<<<< HEAD
 
 </script><tw-passagedata pid="1" name="Menu" tags="" position="22,45">
+=======
+</script><tw-passagedata pid="1" name="Menu" tags="" position="21,45">
+>>>>>>> 4078021a760fe14e798f77951388b5850b9054c8
  &lt;div id=&quot;menu&quot;&gt;
 	[[Start Game-&gt;Intro]]
 	
@@ -1877,18 +1882,10 @@ function logCharTrust(){
 	
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="3" name="Credits" tags="" position="23,214">
 &lt;script&gt;
-    $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/acts/Credits.png&quot;)&#x27;);
-});
+	,6000)
 &lt;/script&gt;
-
-&lt;div id=&quot;menu&quot;&gt;
- 
-[[Main Menu|Menu]]
-&lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="Act Two" tags="" position="1000,202">&lt;div class=&quot;act-intro&quot;&gt;
+</tw-passagedata><tw-passagedata pid="4" name="Act Two" tags="" position="1000,202">&lt;div class=&quot;act-intro&quot;&gt;
     &lt;img src=&quot;./static/images/acts/Act2.png&quot; width = 100% height = 100% /&gt;
 &lt;/div&gt;
 &lt;script&gt;
@@ -3229,100 +3226,68 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/Police2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="46" name="Butler Bio" tags="" position="529,4">&lt;script&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="46" name="Butler Bio" tags="" position="530,3">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/ButlerBio.png&quot;)&#x27;);
 });
+setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(&quot;Character Bios&quot;))
+	,22000)
 &lt;/script&gt;
-
-&lt;div id=&quot;menu&quot;&gt;
- 
-[[Back|Character Bios]]
-[[Main Menu|Menu]]
-&lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="Host Bio" tags="" position="400,4">&lt;script&gt;
+</tw-passagedata><tw-passagedata pid="47" name="Host Bio" tags="" position="400,4">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/HostBio.png&quot;)&#x27;);
 });
+
+setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(&quot;Character Bios&quot;))
+	,22000)
 &lt;/script&gt;
-
-&lt;div id=&quot;menu&quot;&gt;
- 
-[[Back|Character Bios]]
-[[Main Menu|Menu]]
-&lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
 
 </tw-passagedata><tw-passagedata pid="48" name="Sister Bio" tags="" position="1041,7">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/SisterBio.png&quot;)&#x27;);
 });
+setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(&quot;Character Bios&quot;))
+	,22000)
 &lt;/script&gt;
 
-&lt;div id=&quot;menu&quot;&gt;
- 
-[[Back|Character Bios]]
-[[Main Menu|Menu]]
-&lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="Rival Bio" tags="" position="915,6">&lt;script&gt;
+</tw-passagedata><tw-passagedata pid="49" name="Rival Bio" tags="" position="915,0">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/RivalBio.png&quot;)&#x27;);
 });
+setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(&quot;Character Bios&quot;))
+	,22000)
 &lt;/script&gt;
 
-&lt;div id=&quot;menu&quot;&gt;
- 
-[[Back|Character Bios]]
-[[Main Menu|Menu]]
-&lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="Politician Bio" tags="" position="658,4">&lt;script&gt;
+</tw-passagedata><tw-passagedata pid="50" name="Politician Bio" tags="" position="658,4">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/PoliticianBio.png&quot;)&#x27;);
 });
+setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(&quot;Character Bios&quot;))
+	,22000)
 &lt;/script&gt;
-
-&lt;div id=&quot;menu&quot;&gt;
- 
-[[Back|Character Bios]]
-[[Main Menu|Menu]]
-&lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="Policeman Bio" tags="" position="783,5">&lt;script&gt;
+</tw-passagedata><tw-passagedata pid="51" name="Policeman Bio" tags="" position="783,5">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/PolicemanBio.png&quot;)&#x27;);
 });
+setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(&quot;Character Bios&quot;))
+	,22000)
 &lt;/script&gt;
 
-&lt;div id=&quot;menu&quot;&gt;
- 
-[[Back|Character Bios]]
-[[Main Menu|Menu]]
-&lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="Player Bio" tags="" position="1166,7">&lt;script&gt;
+</tw-passagedata><tw-passagedata pid="52" name="Player Bio" tags="" position="1166,7">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/PlayerBio.png&quot;)&#x27;);
 });
+setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(&quot;Character Bios&quot;))
+	,22000)
 &lt;/script&gt;
-
-&lt;div id=&quot;menu&quot;&gt;
- 
-[[Back|Character Bios]]
-[[Main Menu|Menu]]
-&lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="Character Bios" tags="" position="269,5">&lt;script&gt;
+</tw-passagedata><tw-passagedata pid="53" name="Character Bios" tags="" position="269,5">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/CharactersBackground.png&quot;)&#x27;);
 });
