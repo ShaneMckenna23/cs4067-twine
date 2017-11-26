@@ -10,7 +10,7 @@ CS4067
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="CS4067" startnode="47" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+<tw-storydata name="CS4067" startnode="22" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
     font: 18px "Helvetica Neue",Helvetica,Arial,sans-serif;
   	background-image: url("././static/images/backgrounds/Wallpaper.jpg");
   background-repeat:no-repeat;
@@ -521,7 +521,7 @@ p.delay {
   color:white;
   background-image:url("././static/images/ui/conversationFrame3.png");
   background-repeat:no-repeat;
-  background-size:100%;
+  background-size:100% 100%;
   padding:10%;
   overflow: auto;
   overflow-x: hidden;
@@ -639,6 +639,12 @@ p.delay {
     height: 99%;
     color: white;
     font-weight: 300;
+}
+
+.accusation{
+	padding: 25px;
+  display: none;
+  cursor: pointer;
 }
 
 
@@ -823,9 +829,9 @@ _vars.locations = {
     hallway:{
         people: ["policeman"],
         actions: [
-			{name: "I know who committed the murder", visible:true, function: iKnowTheMurderer},
 			{name: "Investigate Table", visible:true, function:investigateHallTable},
-			{name: "Investigate Purse", visible:true, function:investigatePurse}
+			{name: "Investigate Purse", visible:true, function:investigatePurse},
+			{name: "I know who committed the murder", visible:true, function: iKnowTheMurderer}
         ],
 		desc: "This is the hallway"
 	}
@@ -946,6 +952,12 @@ _vars.items = [
 		]
 	},
 	{
+		name: "Rival's Blame",
+		desc: "Victor saw Francis and Ada talking in the dining room.",
+		actions: [
+		]
+	},
+	{
 		name: "Untrustworthy Alibi",
 		desc: "Victor and Francis' alibis contradict each other.",
 		actions: [
@@ -1031,7 +1043,6 @@ function whereWasSister(e){
 
 	editQVisible("sister", e.target.innerHTML, false)
 	_functions.updateQuestions(currentRoom)
-	//trust--
 }
 
 function anyCluesSister(e){
@@ -1041,7 +1052,9 @@ function anyCluesSister(e){
 
 	editQVisible("sister", e.target.innerHTML, false)
 	_functions.updateQuestions(currentRoom)
-	//EVIDENCE: Francis wife gossip
+
+	_functions.addItem("Sister's Blame")
+	_functions.updateItems()
 }
 function tragicSister(e){
 	printPlayerInfo(e.target.innerHTML)
@@ -1061,15 +1074,23 @@ function whereWasPol(e){
 
 	editQVisible("politician", e.target.innerHTML, false)
 	_functions.updateQuestions(currentRoom)
-	//trust--
+
+	//check if Where were you at the time of the murder? visible = false
+	var knowWhatRiv = _vars.characters.rival.questions[0].visible
+	if(knowWhatRiv == false){
+		editQVisible("politician", "That’s not what Victor said. He said the two of you where having a drink.", true)
+		_functions.updateQuestions(currentRoom)
+		editQVisible("rival", "Your story does not fully add up Francis didn’t mention this at all?", true)
+	}
 }
 
 function wereYouDrinkingPol(e){
 	printPlayerInfo(e.target.innerHTML)
-	var res = "That’s not what Victor said. He said the two of you where having a drink."
+	var res = "You know what, we did have a drink last night."
 	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
 
 	editQVisible("politician", e.target.innerHTML, false)
+	editQVisible("politician", "What were you drinking?", true)
 	_functions.updateQuestions(currentRoom)
 }
 
@@ -1080,6 +1101,8 @@ function whatDrinkingPol(e){
 
 	editQVisible("politician", e.target.innerHTML, false)
 	_functions.updateQuestions(currentRoom)
+
+	_functions.addItem("Inconsistent Story")
 } 
 
 function anyCluePolitiction(e){
@@ -1104,7 +1127,7 @@ function makeOfDeathPol(e){
 //Butler
 function whereWasButler(e){
 	printPlayerInfo(e.target.innerHTML)
-	var res = "I was the making tea for Miss Ada."
+	var res = "I was making tea for Miss Ada."
 	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
 
 	editQVisible("butler", e.target.innerHTML, false)
@@ -1113,8 +1136,11 @@ function whereWasButler(e){
 
 function anyCluesButler(e){
 	printPlayerInfo(e.target.innerHTML)
-	var res = "I guess it could have been Victor; things have been tense since the falling out."
+	var res = "I guess it could have been Ana, she would get all of Albert's money."
 	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	_functions.addItem("Butler's Blame")
+	_functions.updateItems()
 
 	editQVisible("butler", e.target.innerHTML, false)
 	_functions.updateQuestions(currentRoom)
@@ -1146,7 +1172,14 @@ function whereWasRival(e){
 
 	editQVisible("rival", e.target.innerHTML, false)
 	_functions.updateQuestions(currentRoom)
-	//trust -- 
+
+	//check if Pol Where were you at the time of the murder?
+	var knowWhatPol = _vars.characters.politician.questions[0].visible
+	if(knowWhatPol == false){
+		editQVisible("rival", "Your story does not fully add up Francis didn’t mention this at all?", true)
+		_functions.updateQuestions(currentRoom)
+		editQVisible("politician", "That’s not what Victor said. He said the two of you where having a drink.", true)
+	}
 }
 
 function storyDoesntMatchRival(e){
@@ -1155,8 +1188,11 @@ function storyDoesntMatchRival(e){
 	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
 
 	editQVisible("rival", e.target.innerHTML, false)
+	editQVisible("rival", "And what drink do the two of you enjoy?", true)
 	_functions.updateQuestions(currentRoom)
-	//EVIDENCE untrustworthy alibi
+	
+	_functions.addItem("Untrustworthy Alibi")
+	_functions.updateItems()
 }
 
 function whatDrinkRival(e){
@@ -1166,13 +1202,15 @@ function whatDrinkRival(e){
 
 	editQVisible("rival", e.target.innerHTML, false)
 	_functions.updateQuestions(currentRoom)
-	//Evidence inconsistent story
 }
 
 function anyClueRival(e){
 	printPlayerInfo(e.target.innerHTML)
-	var res = "You religious types think you are outside the law. Stop bothering me."
+	var res = "I saw Francis and Ada in the dining room."
 	setTimeout(()=>_functions.addInfo(getPersonInRoomName(),res), 1500)
+
+	_functions.addItem("Rival's Blame")
+	_functions.updateItems()
 
 	editQVisible("rival", e.target.innerHTML, false)
 	_functions.updateQuestions(currentRoom)
@@ -1255,16 +1293,35 @@ function investigateCabinet(){
 function investigateDecorations(){
 	printPlayerInfo("You notice a gun case on the wall, but it is empty. The lock has been opened. On closer inspection, you notice a dust outline.")
 
+	_functions.addItem("Gun Case")
+	_functions.updateItems()
 	
 	editLocAction("dining","Investigate Decorations",false)
 	_functions.updateActions("dining")
+
+	var itemName = "Gun"
+	var hasItem
+	var inventory = _vars.player.inventory
+	inventory.forEach(function(item){
+		if(item.name == itemName){
+			hasItem = true
+		}
+	})
+
+	if(hasItem){
+		editLocAction("dining","Place Gun in Holder",true)
+		_functions.updateActions("dining")
+	}
 }
+
 
 function placeGunInHolder(){
 	printPlayerInfo("You place the gun back in its case.")
 	setTimeout(()=> printPlayerInfo("You notice a bloodstain and stray hairs on the butt of the gun."),1500)
-	//ToDO - Evidence is added	
 	
+	_functions.addItem("Blood on Gun");
+	_functions.updateItems();
+
 	editLocAction("dining","Place Gun in Holder",false)
 	_functions.updateActions("dining")
 }
@@ -1316,6 +1373,19 @@ function investigateBrokenDrawer(){
 	_functions.addItem("Gun")
 	editLocAction("library","Investigate Broken Drawer",false)
 	_functions.updateActions("library")
+
+	var itemName = "Gun Case"
+	var hasItem
+	var inventory = _vars.player.inventory
+	inventory.forEach(function(item){
+		if(item.name == itemName){
+			hasItem = true
+		}
+	})
+
+	if(hasItem){
+		editLocAction("dining","Place Gun in Holder",true)
+	}
 }
 
 function investigateTwoCities(e){
@@ -1716,8 +1786,7 @@ function logCharTrust(){
 	console.log("Rival Trust: "+ rivalTrust)
 	console.log("***************************")
 	console.log("")
-}
-</script><tw-passagedata pid="1" name="Menu" tags="" position="3,4"> &lt;script&gt;
+}</script><tw-passagedata pid="1" name="Menu" tags="" position="22,45"> &lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/MainMenuBackground.png&quot;)&#x27;);
 });
@@ -1731,11 +1800,7 @@ function logCharTrust(){
 	
 	[[Start Game-&gt;Intro]]
 	
-	[[Gameplay and Instructions-&gt;Gameplay and Instructions]]
-	
 	[[Character Backgrounds-&gt;Character Bios]]
-	
-	[[Design and Theme-&gt;Design and Theme]]
 
 	[[Credits]]
  &lt;/div&gt;
@@ -1793,7 +1858,7 @@ function logCharTrust(){
 		_functions.changeRoom(roomName)
 	}
 	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="3" name="Credits" tags="" position="10,265">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="3" name="Credits" tags="" position="23,214">
 &lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/acts/Credits.png&quot;)&#x27;);
@@ -1806,7 +1871,7 @@ function logCharTrust(){
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="Act Two" tags="" position="1000,203">&lt;div class=&quot;act-intro&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="Act Two" tags="" position="1000,202">&lt;div class=&quot;act-intro&quot;&gt;
     &lt;img src=&quot;./static/images/acts/Act2.png&quot; width = 100% height = 100% /&gt;
 &lt;/div&gt;
 &lt;script&gt;
@@ -1817,18 +1882,7 @@ function logCharTrust(){
 		})
 		,1200)
 })
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="5" name="Choose" tags="" position="1642,197">You and the Constable draw all of the otehr guests into the Dining room, where just a night ago you had all enjoyed a meal. 
-
-You think to yourself, it is now or never...
-
-[[Choose Ada|The Accusation]]
-
-[[Choose Francis|The Accusation]]
-
-[[Choose Victor|The Accusation]]
-
-[[Choose &quot;The Butler&quot;|The Accusation]]
-</tw-passagedata><tw-passagedata pid="6" name="Kitchen" tags="" position="878,553">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="5" name="Kitchen" tags="" position="878,553">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
  &lt;div class=&quot;top-section&quot;&gt;
                 &lt;div id=&quot;room&quot;&gt;
 					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -1882,7 +1936,7 @@ You think to yourself, it is now or never...
 		_functions.changeRoom(roomName)
 	}
 	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="7" name="Intro" tags="" position="260,130">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="6" name="Intro" tags="" position="260,130">
 
 &lt;div class=&quot;section&quot;&gt;
 &lt;section class=&quot;card-container&quot;&gt;
@@ -1913,7 +1967,7 @@ $(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/
 			});
 		 }, 5000)
 	});
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="8" name="Office" tags="" position="1135,556">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="7" name="Office" tags="" position="1135,556">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
     &lt;div class=&quot;top-section&quot;&gt;
                    &lt;div id=&quot;room&quot;&gt;
                        &lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -1967,7 +2021,7 @@ $(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/
            _functions.changeRoom(roomName)
        }
        
-   &lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="Library" tags="" position="1131,434">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+   &lt;/script&gt;</tw-passagedata><tw-passagedata pid="8" name="Library" tags="" position="1131,434">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
  &lt;div class=&quot;top-section&quot;&gt;
                 &lt;div id=&quot;room&quot;&gt;
 					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -2021,7 +2075,7 @@ $(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/
 		_functions.changeRoom(roomName)
 	}
 	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="Bedroom" tags="" position="1006,559">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="Bedroom" tags="" position="1006,559">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
  &lt;div class=&quot;top-section&quot;&gt;
                 &lt;div id=&quot;room&quot;&gt;
 					&lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -2075,7 +2129,7 @@ $(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/
 		_functions.changeRoom(roomName)
 	}
 	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="11" name="Hallway" tags="" position="1002,439">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="Hallway" tags="" position="1002,439">&lt;div id=&quot;ui&quot; class=&quot;container&quot;&gt;            
     &lt;div class=&quot;top-section&quot;&gt;
                    &lt;div id=&quot;room&quot;&gt;
                        &lt;div class=&quot;clock&quot;&gt;&lt;h2 id=&quot;clock&quot;&gt;&lt;%=story.state.functions.getClock()%&gt;&lt;/h2&gt;&lt;/div&gt;
@@ -2166,7 +2220,7 @@ $(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/
        function changeRoom(roomName){
            _functions.changeRoom(roomName)
        }
-   &lt;/script&gt;</tw-passagedata><tw-passagedata pid="12" name="Butler Introduction" tags="" position="295,382">&lt;div class = &quot;IntroImage&quot;&gt;
+   &lt;/script&gt;</tw-passagedata><tw-passagedata pid="11" name="Butler Introduction" tags="" position="295,382">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src=&quot;./static/images/characters/bodyshot/ButlerFramed.png&quot;&gt;
 &lt;/div&gt;
 
@@ -2199,7 +2253,7 @@ You walk up to the old manor, noticing that the walkway needs to be repaved. A q
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/SittingRoom.jpg&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="13" name="Host Introduction" tags="" position="292,499">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="12" name="Host Introduction" tags="" position="292,499">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src = &quot;./static/images/characters/bodyshot/HostFramed.png&quot;&gt;
 &lt;/div&gt;
 
@@ -2232,7 +2286,7 @@ Your response is cut off by a knock at the door.
 [[Continue|Rival Introduction]]
 &lt;/div&gt;
 
-</tw-passagedata><tw-passagedata pid="14" name="Rival Introduction" tags="" position="291,622">
+</tw-passagedata><tw-passagedata pid="13" name="Rival Introduction" tags="" position="291,622">
 &lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img src = &quot;./static/images/characters/bodyshot/RivalFramed.png&quot;&gt;
 &lt;/div&gt;
@@ -2261,7 +2315,7 @@ You look between the two gentleman, feeling the ice coming off of Victor, and Al
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Continue|Politician Introduction]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="15" name="Politician Introduction" tags="" position="286,748">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="Politician Introduction" tags="" position="286,748">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img src = &quot;./static/images/characters/bodyshot/PoliticianFramed.png&quot;&gt;
 &lt;/div&gt;
 
@@ -2291,7 +2345,7 @@ After a few minutes of light conversation, you were once again interrupted by th
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="Sister Introduction" tags="" position="289,870">&lt;div = class = &quot;IntroImage&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="15" name="Sister Introduction" tags="" position="289,870">&lt;div = class = &quot;IntroImage&quot;&gt;
 &lt;img src=&quot;./static/images/characters/bodyshot/SisterFramed.png&quot;&gt;
 &lt;/div&gt;
 
@@ -2321,7 +2375,7 @@ It was at this point that Cecil lead you and the other guests into the dining ro
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="Conversation 1" tags="" position="412,870">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="Conversation 1" tags="" position="412,870">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -2391,7 +2445,7 @@ You decide that the conversation has gotten heated up enough and decide to inter
 	})
 &lt;/script&gt;
 
-</tw-passagedata><tw-passagedata pid="18" name="Conversation 2" tags="" position="411,764">&lt;div class=&quot;ConversationBackground&quot;&gt;
+</tw-passagedata><tw-passagedata pid="17" name="Conversation 2" tags="" position="411,764">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -2438,7 +2492,7 @@ $(&quot;#Option1&quot;).click(function(){
 		_functions.editCharacterTrust(&quot;rival&quot;, -1)
 		_functions.editCharacterTrust(&quot;politician&quot;, -1)
 	})
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="19" name="Conversation 3" tags="" position="419,636">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="18" name="Conversation 3" tags="" position="419,636">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -2530,7 +2584,7 @@ $(&quot;#Option1&quot;).click(function(){
 		_functions.editCharacterTrust(&quot;rival&quot;, 2)
 		_functions.editCharacterTrust(&quot;politician&quot;, 2)
 	})
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="20" name=" Conversation 4" tags="" position="416,521">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="19" name=" Conversation 4" tags="" position="416,521">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -2592,7 +2646,7 @@ var _functions = story.state.functions
 		_functions.editCharacterTrust(&quot;rival&quot;, 2)
 		_functions.editCharacterTrust(&quot;politician&quot;, -2)		
 	})
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="21" name="Conversation 5" tags="" position="419,387">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="20" name="Conversation 5" tags="" position="419,387">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class= &quot;Comment&quot;&gt;
@@ -2636,7 +2690,7 @@ $(&quot;#Option1&quot;).click(function(){
 	$(&quot;#Option2&quot;).click(function(){
 		_functions.editCharacterTrust(&quot;butler&quot;, -1)
 	})
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="22" name="The Murder" tags="" position="672,278">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="21" name="The Murder" tags="" position="672,278">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -2664,37 +2718,50 @@ When you enter the room you notice Albert lying motionless in his bed. After a f
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="The Accusation" tags="" position="1637,333">&lt;div class = &quot;comment&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="The Accusation" tags="" position="1636,300">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;div class=&quot;Conversation&quot;&gt;
+
+&lt;div class = &quot;Comment&quot;&gt;
 It is time to choose who you think committed the murder.
 &lt;/div&gt;
 
-&lt;div id = &quot;accusation1&gt;
-[[&quot;It was Francis&quot;|The Rival Reaction]]
+&lt;div class=&quot;accusation&quot; id=&quot;accusation1&quot; onclick=&#x27;renderPassage(&quot;The Rival Reaction&quot;)&#x27;&gt;
+It was Victor
 &lt;/div&gt;
 
-&lt;div id = &quot;accusation2&gt;
-[[&quot;It was Victor&quot;|The Politician Reaction]]
+&lt;div class=&quot;accusation&quot; id=&quot;accusation2&quot; onclick=&#x27;renderPassage(&quot;The Sister Reaction&quot;)&#x27;&gt;
+It was Ada
 &lt;/div&gt;
 
-&lt;div id = &quot;accusation3&gt;
-[[&quot;It was Ada&quot;|The Sister Reaction]]
+&lt;div class=&quot;accusation&quot; id=&quot;accusation3&quot; onclick=&#x27;renderPassage(&quot;The Butler Reaction&quot;)&#x27;&gt;
+It was Cecil
 &lt;/div&gt;
 
-&lt;div id = &quot;accusation4&gt;
-[[&quot;It was Cecil&quot;|The Butler Reaction]]
+&lt;div class=&quot;accusation&quot; id=&quot;accusation4&quot; onclick=&#x27;renderPassage(&quot;The Politician Reaction&quot;)&#x27;&gt;
+It was Francis
 &lt;/div&gt;
 
-&lt;div id = &quot;accusation5&quot;&gt;
-[[&quot;It was no one who was at this party&quot;|No One Reaction]]
+&lt;div class=&quot;accusation&quot; id=&quot;accusation5&quot; onclick=&#x27;renderPassage(&quot;The Sister/Politician Reaction&quot;)&#x27;&gt;
+It must have been Ada and Victor
 &lt;/div&gt;
 
-&lt;div id = &quot;accusation6&quot;&gt;
-[[&quot;It must have been Ada and Victor&quot;|The Sister/Politician Reaction]]
+&lt;div class=&quot;accusation&quot; id=&quot;accusation6&quot; onclick=&#x27;renderPassage(&quot;No One Reaction&quot;)&#x27;&gt;
+It was no one who was at this party
+&lt;/div&gt;
+
+&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
-
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="24" name="The Rival Reaction" tags="" position="1478,486">&lt;div class = &quot;IntroImage&quot;&gt;
+	var _functions = story.state.functions
+	var _vars = story.state.variables
+	
+	function renderPassage(passage){
+		$(&quot;#passage&quot;).html(window.story.render(passage))
+	}
+	
+	
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="The Rival Reaction" tags="" position="1478,486">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
 &lt;/div&gt;
 
@@ -2724,7 +2791,7 @@ Victor:&quot;This is utterly ridiculous, there is no way you all believe what he
 [[Continue|Afterwards]]
 &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="The Politician Reaction" tags="" position="1687,485">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="The Politician Reaction" tags="" position="1687,485">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
 &lt;/div&gt;
 
@@ -2762,7 +2829,7 @@ As Victor began to look around the room, no one else attempted to make eye conta
 [[Continue|Afterwards]]
 &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="The Sister Reaction" tags="" position="1791,484">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="The Sister Reaction" tags="" position="1791,484">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
 &lt;/div&gt;
 
@@ -2800,7 +2867,7 @@ As Victor began to look around the room, no one else attempted to make eye conta
 [[Continue|Afterwards]]
 &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="27" name="The Butler Reaction" tags="" position="1375,487">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="The Butler Reaction" tags="" position="1375,487">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
 &lt;/div&gt;
 
@@ -2834,24 +2901,24 @@ A look of shock runs across Cecil&#x27;s face for a moment until he returns to h
 &lt;/div&gt;
 
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="28" name="Good Ending" tags="" position="1613,1498">
+</tw-passagedata><tw-passagedata pid="27" name="Good Ending" tags="" position="1613,1498">
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Good-Ending.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="29" name="Worst Ending" tags="" position="1955,1498">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="28" name="Worst Ending" tags="" position="1955,1498">
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Worst-Ending.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="30" name="Bad Ending" tags="" position="1784,1500">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="29" name="Bad Ending" tags="" position="1784,1500">
 &lt;div class=&quot;darren-lazy&quot;&gt;
     &lt;img src=&quot;./static/images/epilogues/Bad-Ending.png&quot; width = 100% height = 100% /&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="31" name="Afterwards" tags="" position="1648,680">[[Butler Free]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="30" name="Afterwards" tags="" position="1648,680">[[Butler Free]]
 
-[[Butler Inprison]]</tw-passagedata><tw-passagedata pid="32" name="Butler Free" tags="" position="1504,802">
+[[Butler Inprison]]</tw-passagedata><tw-passagedata pid="31" name="Butler Free" tags="" position="1504,802">
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Rival Free]]
 &lt;/div&gt;
@@ -2867,7 +2934,7 @@ $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Butler2.png&quot;)&#x27;);
 });
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="33" name="Butler Inprison" tags="" position="1793,798">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="32" name="Butler Inprison" tags="" position="1793,798">
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Sister Free]]
@@ -2885,7 +2952,7 @@ $(function(){
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Butler-Jail.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="34" name="Sister Free" tags="" position="1387,1096">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="33" name="Sister Free" tags="" position="1387,1096">
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Politician Free]]
 &lt;/div&gt;
@@ -2898,7 +2965,7 @@ $(function(){
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Sister2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="35" name="Sister In prison" tags="" position="1657,1101">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="34" name="Sister In prison" tags="" position="1657,1101">
 
 &lt;div class = &quot;TopParagraph&quot;&gt;
 [[Politician Free]]
@@ -2912,7 +2979,7 @@ $(function(){
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Sister-Jail2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="36" name="Rival Free" tags="" position="1499,956">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="35" name="Rival Free" tags="" position="1499,956">
 
 [[Sister Free]]
 
@@ -2924,7 +2991,7 @@ $(function(){
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Rival2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="37" name="Rival In prison" tags="" position="1799,954">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="36" name="Rival In prison" tags="" position="1799,954">
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Sister Free]]
@@ -2942,7 +3009,7 @@ $(function(){
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Rival-Jail.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="38" name="Politician Free" tags="" position="1535,1266">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="37" name="Politician Free" tags="" position="1535,1266">
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Best Ending]]
@@ -2966,7 +3033,7 @@ $(function(){
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Politician2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="39" name="Politician In prison" tags="" position="1794,1280">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="38" name="Politician In prison" tags="" position="1794,1280">
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Best Ending]]
@@ -2990,14 +3057,14 @@ $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Politician-Jail.png&quot;)&#x27;);
 });
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="40" name="Best Ending" tags="" position="1430,1492">
+</tw-passagedata><tw-passagedata pid="39" name="Best Ending" tags="" position="1430,1492">
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Best-Ending.png&quot;)&#x27;);
 });
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="41" name="The Sister/Politician Reaction" tags="" position="1582,488">&lt;div class = &quot;IntroText&quot;&gt;
+</tw-passagedata><tw-passagedata pid="40" name="The Sister/Politician Reaction" tags="" position="1582,488">&lt;div class = &quot;IntroText&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes II.&quot;
 &lt;/div&gt;
@@ -3024,7 +3091,7 @@ Francis: &quot;Well my boy, that seems to be a very bold claim indeed, I do hope
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Afterwards]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="No One Reaction" tags="" position="1901,484">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="No One Reaction" tags="" position="1901,484">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -3049,7 +3116,7 @@ Moments later you are dragged out in handcuffs.
 
 &lt;/div&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="43" name="Act One" tags="" position="501,201">&lt;div class=&quot;act-intro&quot;&gt;
+</tw-passagedata><tw-passagedata pid="42" name="Act One" tags="" position="501,201">&lt;div class=&quot;act-intro&quot;&gt;
     &lt;img src=&quot;./static/images/acts/Act1.png&quot; width = 100% height = 100% /&gt;
 &lt;/div&gt;
 &lt;script&gt;
@@ -3060,7 +3127,7 @@ Moments later you are dragged out in handcuffs.
 		})
 		,1200)
 })
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="44" name="Conversation 2.5" tags="" position="560,703">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="43" name="Conversation 2.5" tags="" position="560,703">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -3071,16 +3138,12 @@ Victor: &quot;No need for the Sir, our dear Francis here is no lord. Indeed he i
 Francis: &quot;I am off noble blood and a member of parliament!!!&quot;
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
-Victor: 
-&lt;/div&gt;
-
 &lt;div class = &quot;Option&quot; id = &quot;Option1&quot;&gt;
 [[&quot;I think it a great achievment to represent the his majesties subjects in any house of parliament&quot; |Conversation 3]]
 &lt;/div&gt;
 
 &lt;div class = &quot;Option&quot; id = &quot;Option2&quot;&gt;
-[[&quot;&quot;|Conversation 3]]
+[[&quot;Member of Parliament or not, you have no reason to talk to all of us like this.&quot;|Conversation 3]]
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -3098,7 +3161,7 @@ $(&quot;#Option1&quot;).click(function(){
 		_functions.editCharacterTrust(&quot;politician&quot;, 2)
 	})
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="45" name="Heading To Bed" tags="" position="541,387">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="44" name="Heading To Bed" tags="" position="541,387">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -3119,7 +3182,7 @@ You continue on to bed, dreading tomorrow morning.
 
 &lt;div class = &quot;Comment&quot;&gt;
 [[Continue|The Murder]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="Sister In prison for Murder" tags="" position="1888,1103">
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="45" name="Sister In prison for Murder" tags="" position="1888,1103">
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Politician Free]]
@@ -3134,7 +3197,7 @@ You continue on to bed, dreading tomorrow morning.
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Sister-Jail.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="47" name="Policeman Introduction" tags="" position="999,320">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="46" name="Policeman Introduction" tags="" position="999,320">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src=&quot;./static/images/characters/bodyshot/PolicemanFramed.png&quot;&gt;
 &lt;/div&gt;
 
@@ -3162,7 +3225,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/Police2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="48" name="Butler Bio" tags="" position="529,4">&lt;script&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="47" name="Butler Bio" tags="" position="529,4">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/ButlerBio.png&quot;)&#x27;);
 });
@@ -3175,7 +3238,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="Host Bio" tags="" position="400,4">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="Host Bio" tags="" position="400,4">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/HostBio.png&quot;)&#x27;);
 });
@@ -3190,20 +3253,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;/div&gt;
 &lt;/div&gt;
 
-</tw-passagedata><tw-passagedata pid="50" name="Gameplay and Instructions" tags="" position="134,129">
-&lt;script&gt;
-    $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/DesignAndThemeBackground.png&quot;)&#x27;);
-});
-&lt;/script&gt;
-
-&lt;div id=&quot;menu&quot;&gt;
- 
-[[Main Menu|Menu]]
-&lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="Sister Bio" tags="" position="1041,7">&lt;script&gt;
+</tw-passagedata><tw-passagedata pid="49" name="Sister Bio" tags="" position="1041,7">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/SisterBio.png&quot;)&#x27;);
 });
@@ -3216,7 +3266,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="Rival Bio" tags="" position="915,6">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="Rival Bio" tags="" position="915,6">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/RivalBio.png&quot;)&#x27;);
 });
@@ -3229,7 +3279,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="Politician Bio" tags="" position="658,4">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="Politician Bio" tags="" position="658,4">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/PoliticianBio.png&quot;)&#x27;);
 });
@@ -3242,7 +3292,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="Policeman Bio" tags="" position="783,5">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="Policeman Bio" tags="" position="783,5">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/PolicemanBio.png&quot;)&#x27;);
 });
@@ -3255,7 +3305,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="Player Bio" tags="" position="1166,7">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="Player Bio" tags="" position="1166,7">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/PlayerBio.png&quot;)&#x27;);
 });
@@ -3268,7 +3318,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="56" name="Character Bios" tags="" position="269,5">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="Character Bios" tags="" position="269,5">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/CharactersBackground.png&quot;)&#x27;);
 });
@@ -3286,19 +3336,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 	[[Hero and his Journey|Player Bio]]
 	[[Main Menu|Menu]]
 
- &lt;/div&gt;</tw-passagedata><tw-passagedata pid="57" name="Design and Theme" tags="" position="5,129">&lt;script&gt;
-    $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/DesignAndThemeBackground.png&quot;)&#x27;);
-});
-&lt;/script&gt;
-
-&lt;div id=&quot;menu&quot;&gt;
- 
-[[Main Menu|Menu]]
-&lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="58" name="Act Three" tags="" position="1638,83">&lt;div class=&quot;act-intro&quot;&gt;
+ &lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="Act Three" tags="" position="1635,135">&lt;div class=&quot;act-intro&quot;&gt;
     &lt;img src=&quot;./static/images/acts/Act3.png&quot; width = 100% height = 100% /&gt;
 &lt;/div&gt;
 &lt;script&gt;
@@ -3309,7 +3347,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 	$(&quot;.act-intro&quot;).fadeIn(&quot;slow&quot;,function(){
 	setTimeout(()=&gt;
 		$(&quot;.act-intro&quot;).fadeOut(&quot;slow&quot;,function(){
-			$(&quot;#passage&quot;).html(window.story.render(&quot;Choose&quot;))
+			$(&quot;#passage&quot;).html(window.story.render(&quot;The Accusation&quot;))
 		})
 		,1200)
 })
