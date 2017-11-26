@@ -10,7 +10,7 @@ CS4067
 <body>
 <div id="passage"></div>
 
-<tw-storydata name="CS4067" startnode="4" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
+<tw-storydata name="CS4067" startnode="47" creator="Twine" creator-version="2.1.3" ifid="366133FC-41E1-44A2-B575-CBC0F71B68DB" format="Snowman" format-version="1.3.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">body {
     font: 18px "Helvetica Neue",Helvetica,Arial,sans-serif;
   	background-image: url("././static/images/backgrounds/Wallpaper.jpg");
   background-repeat:no-repeat;
@@ -375,6 +375,29 @@ p.delay {
         background-color: white;
     }
 
+#mainmenu {
+        position: absolute;
+        top:300;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 892;
+        height: 800;
+    }
+
+#button {
+  		position: absolute;
+        top:30;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 892;
+        height: 135;
+}
+
+
 #begin a {
     color: white;
     font-size: 200%;
@@ -413,12 +436,14 @@ p.delay {
 
 .popup-head {
     padding: 2px 16px;
-    background-color: #ff0000;
-    color: white;
+    color: black;
 }
 .popup-main {
   padding: 2px 16px;
   height: 500px;
+   background-image:url("././static/images/ui/paper.jpg");
+    background-repeat:no-repeat;
+  background-size:100% 100%;
 }
 
 
@@ -599,6 +624,19 @@ p.delay {
     margin: auto;
     width: 100%;
     height: 100%;
+    color: white;
+    font-weight: 300;
+}
+
+.darren-lazy {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 99%;
+    height: 99%;
     color: white;
     font-weight: 300;
 }
@@ -1687,10 +1725,11 @@ function logCharTrust(){
 
  
  &lt;div id=&quot;menu&quot;&gt;
- 	Welcome
-	CS4067 - Twine Game
-
-	[[Start-&gt;Intro]]
+	&lt;div id=&quot;button&quot;&gt;
+	 &lt;img src=&quot;./static/images/ui/buttons/StartButton2.png&quot;/&gt;
+	&lt;/div&gt;
+	
+	[[Start Game-&gt;Intro]]
 	
 	[[Gameplay and Instructions-&gt;Gameplay and Instructions]]
 	
@@ -2228,7 +2267,7 @@ You look between the two gentleman, feeling the ice coming off of Victor, and Al
 
 &lt;div class = &quot;IntroText&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
-It was at this point that the doorbell let out a loud chime. You notice how much louder it sounds from the inside of the manor. James calmly leaves the room and moments later another man has entered the room. He is a stately mannered and impeccably dressed middle aged man.
+It was at this point that the doorbell let out a loud chime. You notice how much louder it sounds from the inside of the manor. Cecil calmly leaves the room and moments later another man has entered the room. He is a stately mannered and impeccably dressed middle aged man.
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
@@ -2274,7 +2313,7 @@ A young woman follows the butler into the room. She is dressed in the typical un
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
-It was at this point that James lead you and the other guests into the dining room. 
+It was at this point that Cecil lead you and the other guests into the dining room. 
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
@@ -2356,7 +2395,7 @@ You decide that the conversation has gotten heated up enough and decide to inter
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-It was at this point that the James enters the room and begins serving the guest. 
+It was at this point that the Cecil enters the room and begins serving the guest. 
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -2364,7 +2403,7 @@ Francis: It seems that dinner is served. But who is this rough gent who is servi
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-Albert: Oh I will assure you my friend there is no cause for alarm, though James here may look rough, he has been a loyal servant of this household for quite some time. 
+Albert: Oh I will assure you my friend there is no cause for alarm, though Cecil here may look rough, he has been a loyal servant of this household for quite some time. 
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -2372,7 +2411,7 @@ Francis: And in which branch would that be in?
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
-James: The Royal Navy, sir. 
+Cecil: The Royal Navy, sir. 
 &lt;/div&gt;
 
 &lt;div class = &quot;Comment&quot; id = &quot;Option1&quot;&gt;
@@ -2795,63 +2834,22 @@ A look of shock runs across Cecil&#x27;s face for a moment until he returns to h
 &lt;/div&gt;
 
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="28" name="Good Ending" tags="" position="1613,1498">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-You continue your work as a minister in the parish. You came to love the parish you lived in 
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-Some nights, you start to question whether you really know the entire story and who was involved.
-&lt;/div&gt;
-
-&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="28" name="Good Ending" tags="" position="1613,1498">
 
 &lt;script&gt;
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Good-Ending.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="29" name="Worst Ending" tags="" position="1955,1498">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-You where found to be the main suspect in the case. 
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-Francis had put lots of money behind the case of Alberts murder, and it was dealt with in records time. While once a great of believer in Great Britians justice, you find that system fickle and corruptable.
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-You lived the rest of your life bitter that the murders had gotten away with their crime, and that you where punished in thier stead. 
-&lt;/div&gt;
-
-&lt;/div&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="29" name="Worst Ending" tags="" position="1955,1498">
 
 &lt;script&gt;
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Worst-Ending.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="30" name="Bad Ending" tags="" position="1784,1500">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-You returned to your parish and tried to get on with living your life again.
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-Often you thought back on that night, reliving every detail again and again, never able to escape the sinking feeling that you had come to the wrong conclusion and your evidence just hadnt really added up. To 
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-You began to increasingly drink  Eventually you were fired in disgrace 
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;script&gt;
-$(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
-});
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="31" name="Afterwards" tags="" position="1648,680">[[Butler Free]]
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="30" name="Bad Ending" tags="" position="1784,1500">
+&lt;div class=&quot;darren-lazy&quot;&gt;
+    &lt;img src=&quot;./static/images/epilogues/Bad-Ending.png&quot; width = 100% height = 100% /&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="31" name="Afterwards" tags="" position="1648,680">[[Butler Free]]
 
 [[Butler Inprison]]</tw-passagedata><tw-passagedata pid="32" name="Butler Free" tags="" position="1504,802">
 &lt;div class = &quot;Paragraph&quot;&gt;
@@ -2869,11 +2867,7 @@ $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Butler2.png&quot;)&#x27;);
 });
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="33" name="Butler Inprison" tags="" position="1793,798">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-Victor Wharton’s company expands to become a global leader in coal manufacturing.
-&lt;/div&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="33" name="Butler Inprison" tags="" position="1793,798">
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Sister Free]]
@@ -2889,14 +2883,9 @@ Victor Wharton’s company expands to become a global leader in coal manufacturi
 
 &lt;script&gt;
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Butler-Jail.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="34" name="Sister Free" tags="" position="1387,1096">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-Ada Baynes continued her fight for women’s rights, becoming a household name with her death ten years later.
-&lt;/div&gt;
-
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="34" name="Sister Free" tags="" position="1387,1096">
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Politician Free]]
 &lt;/div&gt;
@@ -2907,13 +2896,9 @@ Ada Baynes continued her fight for women’s rights, becoming a household name w
 
 &lt;script&gt;
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Sister2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="35" name="Sister In prison" tags="" position="1657,1101">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-Ada Baynes gets a 20-year sentence for accessory to murder. She dies five years later of pneumonia, never seeing women get the right to vote.
-&lt;/div&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="35" name="Sister In prison" tags="" position="1657,1101">
 
 &lt;div class = &quot;TopParagraph&quot;&gt;
 [[Politician Free]]
@@ -2925,11 +2910,9 @@ Ada Baynes gets a 20-year sentence for accessory to murder. She dies five years 
 
 &lt;script&gt; 
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Sister-Jail2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="36" name="Rival Free" tags="" position="1499,956">&lt;div class = &quot;OutroText&quot;&gt;
-Victor Wharton’s company expands to become a global leader in coal manufacturing.
-&lt;/div&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="36" name="Rival Free" tags="" position="1499,956">
 
 [[Sister Free]]
 
@@ -2939,13 +2922,9 @@ Victor Wharton’s company expands to become a global leader in coal manufacturi
 
 &lt;script&gt;
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Rival2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="37" name="Rival In prison" tags="" position="1799,954">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-Victor Wharton gets a life sentence for murder. He commits suicide shortly after being sentenced. His son is unable to keep the family business alive.
-&lt;/div&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="37" name="Rival In prison" tags="" position="1799,954">
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Sister Free]]
@@ -2961,13 +2940,9 @@ Victor Wharton gets a life sentence for murder. He commits suicide shortly after
 
 &lt;script&gt;
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Rival-Jail.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="38" name="Politician Free" tags="" position="1535,1266">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-Ada Baynes gets a life sentence for murder. She dies five years later of pneumonia, never seeing women get the right to vote.
-&lt;/div&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="38" name="Politician Free" tags="" position="1535,1266">
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Best Ending]]
@@ -2989,13 +2964,9 @@ Ada Baynes gets a life sentence for murder. She dies five years later of pneumon
 
 &lt;script&gt;
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Politician2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="39" name="Politician In prison" tags="" position="1794,1280">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-Francis Tappington gets life in prison. His wife divorces him and his political career ended before it started.
-&lt;/div&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="39" name="Politician In prison" tags="" position="1794,1280">
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Best Ending]]
@@ -3016,24 +2987,14 @@ Francis Tappington gets life in prison. His wife divorces him and his political 
 &lt;/div&gt;
 &lt;script&gt;
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Politician-Jail.png&quot;)&#x27;);
 });
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="40" name="Best Ending" tags="" position="1430,1492">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-You spend the rest of your life working as a minister in the parish. 
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-Years from now you still look back fondly on the murder you solved at the beginning of your career, very proud you put the killers behind bars.
-&lt;/div&gt;
-
-&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="40" name="Best Ending" tags="" position="1430,1492">
 
 &lt;script&gt;
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Best-Ending.png&quot;)&#x27;);
 });
 &lt;/script&gt;
 </tw-passagedata><tw-passagedata pid="41" name="The Sister/Politician Reaction" tags="" position="1582,488">&lt;div class = &quot;IntroText&quot;&gt;
@@ -3158,11 +3119,7 @@ You continue on to bed, dreading tomorrow morning.
 
 &lt;div class = &quot;Comment&quot;&gt;
 [[Continue|The Murder]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="Sister In prison for Murder" tags="" position="1888,1103">&lt;div class = &quot;OutroText&quot;&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-
-&lt;/div&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="46" name="Sister In prison for Murder" tags="" position="1888,1103">
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Politician Free]]
@@ -3175,7 +3132,7 @@ You continue on to bed, dreading tomorrow morning.
 &lt;/div&gt;
 &lt;script&gt;
 $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;http://image.ibb.co/iyUhtR/Sitting_Room.jpg&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Sister-Jail.png&quot;)&#x27;);
 });
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="47" name="Policeman Introduction" tags="" position="999,320">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src=&quot;./static/images/characters/bodyshot/PolicemanFramed.png&quot;&gt;
@@ -3203,7 +3160,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;/div&gt;
 &lt;script&gt;
     $(function(){
-	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/Police3.png&quot;)&#x27;);
+	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/Police2.png&quot;)&#x27;);
 });
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="48" name="Butler Bio" tags="" position="529,4">&lt;script&gt;
     $(function(){
