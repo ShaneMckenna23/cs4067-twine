@@ -650,6 +650,15 @@ p.delay {
   cursor: pointer;
 }
 
+.Reaction{
+  width:60%;
+  margin:5% 20%;
+ background-image:url("././static/images/ui/conversationFrame3.png");
+    background-repeat:no-repeat;
+  background-size:100% 100%;
+  height:800px;
+  overflow: auto;
+}
 
 
 
@@ -1797,6 +1806,7 @@ function logCharTrust(){
 	console.log("***************************")
 	console.log("")
 }
+
 </script><tw-passagedata pid="1" name="Menu" tags="" position="22,45">
  &lt;div id=&quot;menu&quot;&gt;
 	[[Start Game-&gt;Intro]]
@@ -2836,17 +2846,17 @@ if(showRival){
 if(showSisAndPol){
 	$(&#x27;#accusation5&#x27;).css(&quot;display&quot;, &quot;block&quot;)
 }
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="The Rival Reaction" tags="" position="1448,479">&lt;div class = &quot;IntroImage&quot;&gt;
-&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
-&lt;/div&gt;
-
-&lt;div class = &quot;IntroText&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="The Rival Reaction" tags="" position="1448,479">&lt;div class = &quot;Reaction&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room, to announce what I have found about murder of Albert Baynes II.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 &quot;It was none other than Victor.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+Francis: &quot;That is a bold claim you are making Father, I hope you know you are doing.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
@@ -2874,11 +2884,7 @@ Victor:&quot;This is utterly ridiculous, there is no way you all believe what he
 	endingObj.type = &quot;Bad Ending&quot;
 	endingObj.prison = &quot;Rival In prison&quot;
 	endingObj.free = [&quot;Sister Free&quot;,&quot;Butler Free&quot;,&quot;Politician Free&quot;]
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="24" name="The Politician Reaction" tags="" position="1611,475">&lt;div class = &quot;IntroImage&quot;&gt;
-&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
-&lt;/div&gt;
-
-&lt;div class = &quot;IntroText&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="24" name="The Politician Reaction" tags="" position="1611,475">&lt;div class = &quot;Reaction&quot;&gt;
 
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes the second.&quot;
@@ -2920,11 +2926,7 @@ As Francis began to look around the room, no one else attempted to make eye cont
 	endingObj.type = &quot;Good Ending&quot;
 	endingObj.prison = &quot;Politician In prison&quot;
 	endingObj.free = [&quot;Sister Free&quot;,&quot;Butler Free&quot;,&quot;Rival Free&quot;]
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="25" name="The Sister Reaction" tags="" position="1748,474">&lt;div class = &quot;IntroImage&quot;&gt;
-&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
-&lt;/div&gt;
-
-&lt;div class = &quot;IntroText&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="25" name="The Sister Reaction" tags="" position="1748,474">&lt;div class = &quot;Reaction&quot;&gt;
 
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes the second.&quot;
@@ -2958,11 +2960,7 @@ When the room finally came to its senses and the gravity of what had happened fi
 	endingObj.type = &quot;Good Ending&quot;
 	endingObj.prison = &quot;Sister In prison for Murder&quot;
 	endingObj.free = [&quot;Rival Free&quot;,&quot;Butler Free&quot;,&quot;Politician Free&quot;]
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="26" name="The Butler Reaction" tags="" position="1319,480">&lt;div class = &quot;IntroImage&quot;&gt;
-&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
-&lt;/div&gt;
-
-&lt;div class = &quot;IntroText&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="26" name="The Butler Reaction" tags="" position="1319,481.6666666666667">&lt;div class = &quot;Reaction&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room, to announce what I have found about murder of Albert Baynes II.&quot;
 &lt;/div&gt;
@@ -3054,7 +3052,7 @@ $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Best-Ending.png&quot;)&#x27;);
 });
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="39" name="The Sister/Politician Reaction" tags="" position="1874,482">&lt;div class = &quot;IntroText&quot;&gt;
+</tw-passagedata><tw-passagedata pid="39" name="The Sister/Politician Reaction" tags="" position="1874,482">&lt;div class = &quot;Reaction&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room to announce what I have found about murder of Albert Baynes II.&quot;
 &lt;/div&gt;
@@ -3101,26 +3099,25 @@ As Francis began to frantically look around the room while Ada managed to keep c
 	endingObj.type = &quot;Best Ending&quot;
 	endingObj.prison = &quot;Sister In prison&quot;
 	endingObj.free = [&quot;Politician In prison&quot;,&quot;Butler Free&quot;,&quot;Rival Free&quot;]
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="40" name="No One Reaction" tags="" position="2016,508">&lt;div class=&quot;ConversationBackground&quot;&gt;
-&lt;div class=&quot;Conversation&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="40" name="No One Reaction" tags="" position="2016,508">&lt;div class = &quot;Reaction&quot;&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 Deputy Connolly gathers you all in the drawing room. An uneasy silence fell over the room.
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 Francis: &quot;Well my friends, I think it rather convient that our newfound priest arrived just on the verge of the our dear Albert death&quot;.
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 You try to speak up to defend yourself of this ridiculous claim, there is almost no evidence linking you to the crime at all. You nearly pass out from the horror of the scene transpiring infront of you. 
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 Moments later you are dragged out in handcuffs.
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Continue|Afterwards]]
 &lt;/div&gt;
 
