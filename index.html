@@ -118,6 +118,8 @@ img {
     width: 18%;
     height: 100%;
   	padding: 20px;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .clock {
@@ -643,9 +645,10 @@ p.delay {
 
 .accusation{
 	padding: 25px;
-  display: none;
+  display: block;
   cursor: pointer;
 }
+
 
 
 
@@ -1004,6 +1007,12 @@ _vars.player = {
 }
 
 _vars.information = []
+
+_vars.ending = {
+	type: "",
+	prison: "",
+	free: []
+}
 
 //***************************************************
 
@@ -1786,7 +1795,8 @@ function logCharTrust(){
 	console.log("Rival Trust: "+ rivalTrust)
 	console.log("***************************")
 	console.log("")
-}</script><tw-passagedata pid="1" name="Menu" tags="" position="22,45"> &lt;script&gt;
+}
+</script><tw-passagedata pid="1" name="Menu" tags="" position="22,45"> &lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/MainMenuBackground.png&quot;)&#x27;);
 });
@@ -2718,7 +2728,7 @@ When you enter the room you notice Albert lying motionless in his bed. After a f
 &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="The Accusation" tags="" position="1636,300">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="The Accusation" tags="" position="1635,300">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -2745,7 +2755,7 @@ It was Francis
 It must have been Ada and Victor
 &lt;/div&gt;
 
-&lt;div class=&quot;accusation&quot; id=&quot;accusation6&quot; onclick=&#x27;renderPassage(&quot;No One Reaction&quot;)&#x27;&gt;
+&lt;div id=&quot;accusation6&quot; onclick=&#x27;renderPassage(&quot;No One Reaction&quot;)&#x27;&gt;
 It was no one who was at this party
 &lt;/div&gt;
 
@@ -2754,14 +2764,82 @@ It was no one who was at this party
 
 &lt;script&gt;
 	var _functions = story.state.functions
-	var _vars = story.state.variables
-	
-	function renderPassage(passage){
-		$(&quot;#passage&quot;).html(window.story.render(passage))
+var _vars = story.state.variables
+
+function renderPassage(passage){
+	$(&quot;#passage&quot;).html(window.story.render(passage))
+}
+
+var showButler = true
+var showSister = true
+var showPol = true
+var showRival = true
+var showSisAndPol = true
+
+var inventory = _vars.player.inventory
+var invNameArr = []
+inventory.forEach(function(element) {
+	invNameArr.push(element.name)
+});
+
+console.log(invNameArr)
+
+var butlerReq = [&quot;Letter of Termination&quot;,&quot;Bloody Knife&quot;]
+var sisterReq = [&quot;Butler&#x27;s Blame&quot;,&quot;Key in Purse&quot;,&quot;Head Trauma on Albert&quot;]
+var polReq = [&quot;RSVPs&quot;,&quot;Threatening Letter&quot;,&quot;Matching Handwriting&quot;,&quot;Head Trauma on Albert&quot;]
+var rivalReq = [&quot;Ledger&quot;,&quot;Untrustworthy Alibi&quot;]
+var sisAndPolReq = [&quot;Blood on Gun&quot;,&quot;Newspaper Article&quot;,&quot;Head Trauma on Albert&quot;,&quot;Threatening Letter&quot;]
+
+butlerReq.forEach(function(item){
+	if(invNameArr.indexOf(item) == -1){
+      showButler = false
 	}
-	
-	
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="The Rival Reaction" tags="" position="1478,486">&lt;div class = &quot;IntroImage&quot;&gt;
+})
+
+sisterReq.forEach(function(item){
+	if(invNameArr.indexOf(item) == -1){
+		showSister = false
+	}
+})
+
+polReq.forEach(function(item){
+	if(invNameArr.indexOf(item) == -1){
+		showPol = false
+	}
+})
+
+rivalReq.forEach(function(item){
+	if(invNameArr.indexOf(item) == -1){
+		showRival = false
+	}
+})
+
+sisAndPolReq.forEach(function(item){
+	if(invNameArr.indexOf(item) == -1){
+		showSisAndPol = false
+	}
+})
+
+if(showButler){
+	$(&#x27;#accusation3&#x27;).css(&quot;display&quot;, &quot;block&quot;)
+}
+
+if(showSister){
+	$(&#x27;#accusation2&#x27;).css(&quot;display&quot;, &quot;block&quot;)
+}
+
+if(showPol){
+	$(&#x27;#accusation4&#x27;).css(&quot;display&quot;, &quot;block&quot;)
+}
+
+if(showRival){
+	$(&#x27;#accusation1&#x27;).css(&quot;display&quot;, &quot;block&quot;)
+}
+
+if(showSisAndPol){
+	$(&#x27;#accusation5&#x27;).css(&quot;display&quot;, &quot;block&quot;)
+}
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="The Rival Reaction" tags="" position="1448,479">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
 &lt;/div&gt;
 
@@ -2783,15 +2861,12 @@ Victor:&quot;This is utterly ridiculous, there is no way you all believe what he
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
-
-&lt;/div&gt;
-
-
-&lt;div class = &quot;Paragraph&quot;&gt;
+	&lt;div class = &quot;Comment&quot;&gt;
 [[Continue|Afterwards]]
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="The Politician Reaction" tags="" position="1687,485">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="The Politician Reaction" tags="" position="1702,476">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
 &lt;/div&gt;
 
@@ -2829,7 +2904,7 @@ As Victor began to look around the room, no one else attempted to make eye conta
 [[Continue|Afterwards]]
 &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="The Sister Reaction" tags="" position="1791,484">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="The Sister Reaction" tags="" position="1844,473">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
 &lt;/div&gt;
 
@@ -2867,7 +2942,7 @@ As Victor began to look around the room, no one else attempted to make eye conta
 [[Continue|Afterwards]]
 &lt;/div&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="The Butler Reaction" tags="" position="1375,487">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="The Butler Reaction" tags="" position="1319,480">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
 &lt;/div&gt;
 
@@ -2896,175 +2971,74 @@ Ada: &quot;He has been a loyal member of this household many years&quot;.
 A look of shock runs across Cecil&#x27;s face for a moment until he returns to his calm and collected self. He was then taken away by Deputy Connolly.
 &lt;/div&gt;
 
-&lt;div class = &quot;Paragraph&quot;&gt;
+&lt;div class = &quot;Comment&quot;&gt;
 [[Continue|Afterwards]]
 &lt;/div&gt;
 
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="27" name="Good Ending" tags="" position="1613,1498">
+
+
+&lt;script&gt;
+	var _vars = story.state.variables
+	var endingObj = _vars.ending
+	endingObj.type = &quot;Bad Ending&quot;
+	endingObj.prison = &quot;Butler In prison&quot;
+	endingObj.free = [&quot;Sister Free&quot;,&quot;Rival Free&quot;,&quot;Politician Free&quot;]
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="27" name="Good Ending" tags="" position="1599,1204">
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Good-Ending.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="28" name="Worst Ending" tags="" position="1955,1498">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="28" name="Worst Ending" tags="" position="1999,1200">
 
 &lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Worst-Ending.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="29" name="Bad Ending" tags="" position="1784,1500">
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="29" name="Bad Ending" tags="" position="1801,1201">
 &lt;div class=&quot;darren-lazy&quot;&gt;
     &lt;img src=&quot;./static/images/epilogues/Bad-Ending.png&quot; width = 100% height = 100% /&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="30" name="Afterwards" tags="" position="1648,680">[[Butler Free]]
-
-[[Butler Inprison]]</tw-passagedata><tw-passagedata pid="31" name="Butler Free" tags="" position="1504,802">
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Rival Free]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Rival In prison]]
-&lt;div&gt;
-
-&lt;/div&gt;
-
-&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="30" name="Butler Free" tags="" position="1351,1001">&lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Butler2.png&quot;)&#x27;);
 });
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="32" name="Butler Inprison" tags="" position="1793,798">
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Sister Free]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Sister In prison]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Sister In prison for Murder]]
-&lt;/div&gt;
-
-&lt;script&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="31" name="Butler In prison" tags="" position="1319,797">&lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Butler-Jail.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="33" name="Sister Free" tags="" position="1387,1096">
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Politician Free]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Politician In prison]]
-&lt;/div&gt;
-
-&lt;script&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="32" name="Sister Free" tags="" position="1529,1001">&lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Sister2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="34" name="Sister In prison" tags="" position="1657,1101">
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-[[Politician Free]]
-&lt;/div&gt;
-
-&lt;div class = &quot;TopParagraph&quot;&gt;
-[[Politician In prison]]
-&lt;/div&gt;
-
-&lt;script&gt; 
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="33" name="Sister In prison" tags="" position="1987,800">&lt;script&gt; 
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Sister-Jail2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="35" name="Rival Free" tags="" position="1499,956">
-
-[[Sister Free]]
-
-[[Sister In prison]]
-
-[[Sister In prison for Murder]]
-
-&lt;script&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="34" name="Rival Free" tags="" position="1703,1002">&lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Rival2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="36" name="Rival In prison" tags="" position="1799,954">
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Sister Free]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Sister In prison]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Sister In prison for Murder]]
-&lt;/div&gt;
-
-&lt;script&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="35" name="Rival In prison" tags="" position="1468,799">&lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Rival-Jail.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="37" name="Politician Free" tags="" position="1535,1266">
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Best Ending]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Good Ending]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Bad Ending]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Worst Ending]]
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;script&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="36" name="Politician Free" tags="" position="1903,1001">&lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Free-Politician2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="38" name="Politician In prison" tags="" position="1794,1280">
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Best Ending]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Good Ending]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Bad Ending]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Worst Ending]]
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;script&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="37" name="Politician In prison" tags="" position="1798,799">&lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Politician-Jail.png&quot;)&#x27;);
 });
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="39" name="Best Ending" tags="" position="1430,1492">
-
-&lt;script&gt;
+</tw-passagedata><tw-passagedata pid="38" name="Best Ending" tags="" position="1401,1201">&lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Best-Ending.png&quot;)&#x27;);
 });
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="40" name="The Sister/Politician Reaction" tags="" position="1582,488">&lt;div class = &quot;IntroText&quot;&gt;
+</tw-passagedata><tw-passagedata pid="39" name="The Sister/Politician Reaction" tags="" position="1579,474">&lt;div class = &quot;IntroText&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes II.&quot;
 &lt;/div&gt;
@@ -3091,7 +3065,7 @@ Francis: &quot;Well my boy, that seems to be a very bold claim indeed, I do hope
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 [[Afterwards]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="No One Reaction" tags="" position="1901,484">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="40" name="No One Reaction" tags="" position="2009,482">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -3116,7 +3090,7 @@ Moments later you are dragged out in handcuffs.
 
 &lt;/div&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="42" name="Act One" tags="" position="501,201">&lt;div class=&quot;act-intro&quot;&gt;
+</tw-passagedata><tw-passagedata pid="41" name="Act One" tags="" position="501,201">&lt;div class=&quot;act-intro&quot;&gt;
     &lt;img src=&quot;./static/images/acts/Act1.png&quot; width = 100% height = 100% /&gt;
 &lt;/div&gt;
 &lt;script&gt;
@@ -3127,7 +3101,7 @@ Moments later you are dragged out in handcuffs.
 		})
 		,1200)
 })
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="43" name="Conversation 2.5" tags="" position="560,703">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="42" name="Conversation 2.5" tags="" position="560,703">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -3161,7 +3135,7 @@ $(&quot;#Option1&quot;).click(function(){
 		_functions.editCharacterTrust(&quot;politician&quot;, 2)
 	})
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="44" name="Heading To Bed" tags="" position="541,387">&lt;div class=&quot;ConversationBackground&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="43" name="Heading To Bed" tags="" position="541,387">&lt;div class=&quot;ConversationBackground&quot;&gt;
 &lt;div class=&quot;Conversation&quot;&gt;
 
 &lt;div class = &quot;Comment&quot;&gt;
@@ -3182,22 +3156,11 @@ You continue on to bed, dreading tomorrow morning.
 
 &lt;div class = &quot;Comment&quot;&gt;
 [[Continue|The Murder]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="45" name="Sister In prison for Murder" tags="" position="1888,1103">
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Politician Free]]
-&lt;/div&gt;
-
-&lt;div class = &quot;Paragraph&quot;&gt;
-[[Politician In prison]]
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="44" name="Sister In prison for Murder" tags="" position="1631,797">&lt;script&gt;
 $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Sister-Jail.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="46" name="Policeman Introduction" tags="" position="999,320">&lt;div class = &quot;IntroImage&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="45" name="Policeman Introduction" tags="" position="999,320">&lt;div class = &quot;IntroImage&quot;&gt;
 &lt;img  src=&quot;./static/images/characters/bodyshot/PolicemanFramed.png&quot;&gt;
 &lt;/div&gt;
 
@@ -3225,7 +3188,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/Police2.png&quot;)&#x27;);
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="47" name="Butler Bio" tags="" position="529,4">&lt;script&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="46" name="Butler Bio" tags="" position="529,4">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/ButlerBio.png&quot;)&#x27;);
 });
@@ -3238,7 +3201,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="Host Bio" tags="" position="400,4">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="Host Bio" tags="" position="400,4">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/HostBio.png&quot;)&#x27;);
 });
@@ -3253,7 +3216,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;/div&gt;
 &lt;/div&gt;
 
-</tw-passagedata><tw-passagedata pid="49" name="Sister Bio" tags="" position="1041,7">&lt;script&gt;
+</tw-passagedata><tw-passagedata pid="48" name="Sister Bio" tags="" position="1041,7">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/SisterBio.png&quot;)&#x27;);
 });
@@ -3266,7 +3229,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="Rival Bio" tags="" position="915,6">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="Rival Bio" tags="" position="915,6">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/RivalBio.png&quot;)&#x27;);
 });
@@ -3279,7 +3242,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="Politician Bio" tags="" position="658,4">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="Politician Bio" tags="" position="658,4">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/PoliticianBio.png&quot;)&#x27;);
 });
@@ -3292,7 +3255,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="Policeman Bio" tags="" position="783,5">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="Policeman Bio" tags="" position="783,5">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/PolicemanBio.png&quot;)&#x27;);
 });
@@ -3305,7 +3268,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="Player Bio" tags="" position="1166,7">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="Player Bio" tags="" position="1166,7">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/characters/bios/PlayerBio.png&quot;)&#x27;);
 });
@@ -3318,7 +3281,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="Character Bios" tags="" position="269,5">&lt;script&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="Character Bios" tags="" position="269,5">&lt;script&gt;
     $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/backgrounds/CharactersBackground.png&quot;)&#x27;);
 });
@@ -3336,7 +3299,7 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 	[[Hero and his Journey|Player Bio]]
 	[[Main Menu|Menu]]
 
- &lt;/div&gt;</tw-passagedata><tw-passagedata pid="55" name="Act Three" tags="" position="1635,135">&lt;div class=&quot;act-intro&quot;&gt;
+ &lt;/div&gt;</tw-passagedata><tw-passagedata pid="54" name="Act Three" tags="" position="1635,135">&lt;div class=&quot;act-intro&quot;&gt;
     &lt;img src=&quot;./static/images/acts/Act3.png&quot; width = 100% height = 100% /&gt;
 &lt;/div&gt;
 &lt;script&gt;
@@ -3351,6 +3314,31 @@ Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone
 		})
 		,1200)
 })
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="55" name="Afterwards" tags="" position="1643,658">&lt;script&gt;
+	var _vars = story.state.variables
+	var endingObj = _vars.ending
+	
+	$(&quot;#passage&quot;).html(window.story.render(endingObj.prison))
+	
+	setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(endingObj.free[0]))
+	,5000)
+	
+	setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(endingObj.free[1]))
+	,10000)
+	
+	setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(endingObj.free[2]))
+	,15000)
+	
+	setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(endingObj.type))
+	,20000)
+	
+	setTimeout(
+	()=&gt; $(&quot;#passage&quot;).html(window.story.render(&quot;Menu&quot;))
+	,30000)
 &lt;/script&gt;</tw-passagedata></tw-storydata>
 
 <script>(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
