@@ -1,0 +1,1596 @@
+CS4067
+
+
+ <div id="menu">
+	[[Start Game->Intro]]
+	
+	[[Character Backgrounds->Character Bios]]
+
+	[[Credits]]
+ </div>
+ 
+  <script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/backgrounds/MainMenuBackground.png")');
+});
+</script>
+<div id="ui" class="container">            
+ <div class="top-section">
+                <div id="room">
+					<div class="clock"><h2 id="clock"><%=story.state.functions.getClock()%></h2></div>
+                    <img id="room-img" src="./static/images/rooms/diningroomFramed.png"/>
+                </div>
+                <div class="right">
+                    <div id="map">
+                   <div id="kitchen" onclick='changeRoom("Kitchen")'></div>
+                           <div id="lounge" onclick='changeRoom("Dining")'></div>
+						   <div id="office" onclick='changeRoom("Office")'></div>
+						    <div id="hallway" onclick='changeRoom("Hallway")'></div>
+						    <div id="bedroom" onclick='changeRoom("Bedroom")'></div>
+                            <div id="library" onclick='changeRoom("Library")'></div>
+                       </div>
+                    <div id="actions">
+					<h2>Actions:</h2>
+					<div id="action-list">
+					</div>
+                    </div>
+                </div>
+            </div>
+			<div class="bottom-section">
+                <div id="player">
+                    <img id="player-img" src="./static/images/characters/portraits/SisterPortrait.png"/>
+                </div>
+				<div id="questions">
+				<h2>Questions</h2>
+				<div id="question-list"></div>
+				</div>
+				<div id="information">
+					
+                </div>
+				<div id="item">
+                        <h2>Evidence</h2>
+						<div id="item-list"></div>
+                </div>
+            </div>
+</div>
+
+<script>
+	var _functions = story.state.functions
+
+	//Update Clock
+	var clock = document.getElementById("clock")
+	setInterval(function(){
+		var time = story.state.functions.getClock()
+		clock.innerHTML = time
+	},1000)
+	
+	function changeRoom(roomName){
+		_functions.changeRoom(roomName)
+	}
+	
+</script>
+
+<script>
+	$('body').css('background-image','url("././static/images/acts/Credits.png")');
+	$('body').css('background-color','black');
+	setTimeout(
+	()=> $("#passage").html(window.story.render("Menu"))
+	,6000)
+</script>
+<div class="act-intro">
+    <img src="./static/images/acts/Act2.png" width = 100% height = 100% />
+</div>
+<script>
+	$(".act-intro").fadeIn("slow",function(){
+	setTimeout(()=>
+		$(".act-intro").fadeOut("slow",function(){
+			$("#passage").html(window.story.render("Policeman Introduction"))
+		})
+		,1200)
+})
+</script>
+<div id="ui" class="container">            
+ <div class="top-section">
+                <div id="room">
+					<div class="clock"><h2 id="clock"><%=story.state.functions.getClock()%></h2></div>
+                    <img id="room-img" src="./static/images/rooms/kitchenFramed.png"/>
+                </div>
+                <div class="right">
+                    <div id="map">
+                   <div id="kitchen" onclick='changeRoom("Kitchen")'></div>
+                           <div id="lounge" onclick='changeRoom("Dining")'></div>
+						   <div id="office" onclick='changeRoom("Office")'></div>
+						    <div id="hallway" onclick='changeRoom("Hallway")'></div>
+						    <div id="bedroom" onclick='changeRoom("Bedroom")'></div>
+                            <div id="library" onclick='changeRoom("Library")'></div>
+                       </div>
+                    <div id="actions">
+					<h2>Actions:</h2>
+					<div id="action-list">
+					</div>
+                    </div>
+                </div>
+            </div>
+			<div class="bottom-section">
+                <div id="player">
+                    <img id="player-img" src="./static/images/characters/portraits/ButlerPortrait.png"/>
+                </div>
+				<div id="questions">
+				<h2>Questions</h2>
+				<div id="question-list"></div>
+				</div>
+				<div id="information">
+					
+                </div>
+				<div id="item">
+                        <h2>Evidence</h2>
+						<div id="item-list"></div>
+                </div>
+            </div>
+</div>
+
+<script>
+	var _functions = story.state.functions
+
+	//Update Clock
+	var clock = document.getElementById("clock")
+	setInterval(function(){
+		var time = story.state.functions.getClock()
+		clock.innerHTML = time
+	},1000)
+	
+	function changeRoom(roomName){
+		_functions.changeRoom(roomName)
+	}
+	
+</script>
+
+
+<div class="section">
+<section class="card-container">
+        <div>
+            <input type="button" value="FLIP OVER" id="flip"/>
+        </div>
+        <div id="card">
+            <figure class="front"><img src="./static/images/invite/Invite-Front.png" class="postcard front" /></figure>
+            <figure class="back"><img src="./static/images/invite/Invite-Back2.png" class="postcard back" /></figure>
+        </div>
+	<section>
+</div>
+<div id="begin" class="hidden-info">
+	[[Begin->Act One]]
+<div>
+
+
+
+
+<script>
+$('body').css('background-image','url("././static/images/backgrounds/Wallpaper.jpg")');
+
+    $("#flip").click(function() {
+      $("#card").toggleClass("flipped");
+    	setTimeout(function(){
+		  $( ".hidden-info" ).fadeIn( "slow", function() {
+			  $(".hidden-info").removeClass("hidden-info");
+			});
+		 }, 5000)
+	});
+</script>
+<div id="ui" class="container">            
+    <div class="top-section">
+                   <div id="room">
+                       <div class="clock"><h2 id="clock"><%=story.state.functions.getClock()%></h2></div>
+                       <img id="room-img" src="./static/images/rooms/officeFramed.png"/>
+                   </div>
+                   <div class="right">
+                           <div id="map">
+                                <div id="kitchen" onclick='changeRoom("Kitchen")'></div>
+                              <div id="lounge" onclick='changeRoom("Dining")'></div>
+                              <div id="office" onclick='changeRoom("Office")'></div>
+                               <div id="hallway" onclick='changeRoom("Hallway")'></div>
+                               <div id="bedroom" onclick='changeRoom("Bedroom")'></div>
+                               <div id="library" onclick='changeRoom("Library")'></div>
+                          </div>
+                       <div id="actions">
+                       <h2>Actions:</h2>
+                       <div id="action-list">
+                       </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="bottom-section">
+                   <div id="player">
+                       <img id="player-img" src="./static/images/characters/portraits/RivalPortrait.png"/>
+                   </div>
+                   <div id="questions">
+                   <h2>Questions</h2>
+                   <div id="question-list"></div>
+                   </div>
+                   <div id="information">
+                       
+                   </div>
+                   <div id="item">
+                           <h2>Evidence</h2>
+                           <div id="item-list"></div>
+                   </div>
+               </div>
+   </div>
+   
+   <script>
+       var _functions = story.state.functions
+   
+       //Update Clock
+       var clock = document.getElementById("clock")
+       setInterval(function(){
+           var time = story.state.functions.getClock()
+           clock.innerHTML = time
+       },1000)
+       
+       function changeRoom(roomName){
+           _functions.changeRoom(roomName)
+       }
+       
+   </script>
+<div id="ui" class="container">            
+ <div class="top-section">
+                <div id="room">
+					<div class="clock"><h2 id="clock"><%=story.state.functions.getClock()%></h2></div>
+                    <img id="room-img" src="./static/images/rooms/libraryFramed.png"/>
+                </div>
+                <div class="right">
+                    <div id="map">
+                   <div id="kitchen" onclick='changeRoom("Kitchen")'></div>
+                           <div id="lounge" onclick='changeRoom("Dining")'></div>
+						   <div id="office" onclick='changeRoom("Office")'></div>
+						    <div id="hallway" onclick='changeRoom("Hallway")'></div>
+						    <div id="bedroom" onclick='changeRoom("Bedroom")'></div>
+                            <div id="library" onclick='changeRoom("Library")'></div>
+                       </div>
+                    <div id="actions">
+					<h2>Actions:</h2>
+					<div id="action-list">
+					</div>
+                    </div>
+                </div>
+            </div>
+			<div class="bottom-section">
+                <div id="player">
+                    <img id="player-img" src="./static/images/characters/portraits/PoliticianPortrait.png"/>
+                </div>
+				<div id="questions">
+				<h2>Questions</h2>
+				<div id="question-list"></div>
+				</div>
+				<div id="information">
+					
+                </div>
+				<div id="item">
+                        <h2>Evidence</h2>
+						<div id="item-list"></div>
+                </div>
+            </div>
+</div>
+
+<script>
+	var _functions = story.state.functions
+
+	//Update Clock
+	var clock = document.getElementById("clock")
+	setInterval(function(){
+		var time = story.state.functions.getClock()
+		clock.innerHTML = time
+	},1000)
+	
+	function changeRoom(roomName){
+		_functions.changeRoom(roomName)
+	}
+	
+</script>
+<div id="ui" class="container">            
+ <div class="top-section">
+                <div id="room">
+					<div class="clock"><h2 id="clock"><%=story.state.functions.getClock()%></h2></div>
+                    <img id="room-img" src="./static/images/rooms/bedroomFramed.png"/>
+                </div>
+                <div class="right">
+                    <div id="map">
+                   <div id="kitchen" onclick='changeRoom("Kitchen")'></div>
+                           <div id="lounge" onclick='changeRoom("Dining")'></div>
+						   <div id="office" onclick='changeRoom("Office")'></div>
+						    <div id="hallway" onclick='changeRoom("Hallway")'></div>
+						    <div id="bedroom" onclick='changeRoom("Bedroom")'></div>
+                            <div id="library" onclick='changeRoom("Library")'></div>
+                       </div>
+                    <div id="actions">
+					<h2>Actions:</h2>
+					<div id="action-list">
+					</div>
+                    </div>
+                </div>
+            </div>
+			<div class="bottom-section">
+                <div id="player">
+                    <img id="player-img" src="./static/images/characters/portraits/HostPortrait.png"/>
+                </div>
+				<div id="questions">
+				<h2>Questions</h2>
+				<div id="question-list"></div>
+				</div>
+				<div id="information">
+					
+                </div>
+				<div id="item">
+                        <h2>Evidence</h2>
+						<div id="item-list"></div>
+                </div>
+            </div>
+</div>
+
+<script>
+	var _functions = story.state.functions
+
+	//Update Clock
+	var clock = document.getElementById("clock")
+	setInterval(function(){
+		var time = story.state.functions.getClock()
+		clock.innerHTML = time
+	},1000)
+	
+	function changeRoom(roomName){
+		_functions.changeRoom(roomName)
+	}
+	
+</script>
+<div id="ui" class="container">            
+    <div class="top-section">
+                   <div id="room">
+                       <div class="clock"><h2 id="clock"><%=story.state.functions.getClock()%></h2></div>
+                       <img id="room-img" src="./static/images/rooms/hallwayFramed.png"/>
+                   </div>
+                   <div class="right">
+                       <div id="map">
+                   <div id="kitchen" onclick='changeRoom("Kitchen")'></div>
+                           <div id="lounge" onclick='changeRoom("Dining")'></div>
+						   <div id="office" onclick='changeRoom("Office")'></div>
+						    <div id="hallway" onclick='changeRoom("Hallway")'></div>
+						    <div id="bedroom" onclick='changeRoom("Bedroom")'></div>
+                            <div id="library" onclick='changeRoom("Library")'></div>
+                       </div>
+                       <div id="actions">
+						 <h2>Actions</h2>
+						 <div id="action-list">
+						 </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="bottom-section">
+                   <div id="player">
+                       <img id="player-img" src="./static/images/characters/portraits/PolicemanPortrait.png"/>
+                   </div>
+                   <div id="questions">
+                   <h2>Questions</h2>
+                   <div id="question-list"></div>
+                   </div>
+                   <div id="information">
+                       
+                   </div>
+                   <div id="item">
+                           <h2>Evidence</h2>
+                           <div id="item-list"></div>
+                   </div>
+               </div>
+   </div>
+   
+   
+   <div id="popupBox" class="popup">
+       <!-- mPopup content -->
+       <div class="popup-content">
+           <div class="popup-head">
+               <span class="close">×</span>
+               <h2>Description:</h2>
+           </div>
+			<div class="popup-main"> 
+			<div id="popup-desc"></div>
+			<div id="popup-actions">
+			<h2>Actions:</h2>
+			</div>
+           </div>
+       </div>
+   </div>
+   
+   
+   <script>
+  $(function(){
+	$('body').css('background-image','url("./static/images/backgrounds/Act2Background6.png")');
+});
+   
+       var _functions = story.state.functions
+       var _vars = story.state.variables
+       
+	   setInterval(()=>_functions.incrementClock(5),5000)
+	   
+       //Update Clock
+       var clock = document.getElementById("clock")
+       setInterval(function(){
+           var time = story.state.functions.getClock()
+           clock.innerHTML = time
+       },1000)
+   
+       //Update Actions
+       _functions.updateActions("hallway")
+       
+       //Update Items
+       _functions.updateItems()
+       
+       //Update Information
+       _functions.updateInfo()
+       
+       //Update Questions
+       _functions.updateQuestions("hallway")
+       
+       
+       function changeRoom(roomName){
+           _functions.changeRoom(roomName)
+       }
+   </script>
+<div class = "IntroImage">
+<img  src="./static/images/characters/bodyshot/ButlerFramed.png">
+</div>
+
+<div class = "IntroBackground">
+<div class = "IntroText">
+<div class = "TopParagraph">
+You walk up to the old manor, noticing that the walkway needs to be repaved. A quick glance at your pocket watch shows that you are a few minutes early, but not wanting to wait too much longer in the cold you reach up for a door knocker. When you notice a  doorbell you are pleasantly surprised. After briefly ringing it you hear it echo through the open space. After a short wait, the large, ornate door is opened by a broad-shouldered and round-faced butler.
+</div>
+
+<div class = "Paragraph">
+“Greetings, Father. I am Cecil Smith, Albert II’s butler. Allow me to take your cloak and direct you to his master’s parlor.”
+</div>
+
+<div class = "Paragraph">
+“Thank you, Mr. Smith. A pleasure to make your acquaintance.”
+</div>
+
+
+<div class="Paragraph">
+[[Continue|Host Introduction]]
+</div>
+
+<div class="clearfix"> </div>
+
+</div>
+
+</div>
+</div>
+<script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/backgrounds/SittingRoom.jpg")');
+});
+</script>
+<div class = "IntroImage">
+<img  src = "./static/images/characters/bodyshot/HostFramed.png">
+</div>
+
+<div class = "IntroText">
+<div class = "TopParagraph">
+The butler leads you into the parlor, where you are greeted by a prominent looking gentleman with a guarded look on his face. As he sees you, his expression softens into one of [happy to see you, but not really].
+</div>
+
+<div class = "Paragraph">
+“Mr. Baynes.”
+</div>
+
+<div class = "Paragraph">
+“Father Witherfield, so lovely to finally meet you in person.”
+</div>
+
+<div class = "Paragraph">
+“Please, call me Paul.”
+</div>
+
+<div class = "Paragraph">
+“In that case, call me Albert. Mr. Baynes is too formal between friends.”
+</div>
+
+<div class = "Paragraph">
+Your response is cut off by a knock at the door.
+</div>
+
+<div class = "Paragraph">
+[[Continue|Rival Introduction]]
+</div>
+
+
+<div class = "IntroImage">
+<img src = "./static/images/characters/bodyshot/RivalFramed.png">
+</div>
+
+<div class = "IntroText">
+<div class = "TopParagraph">
+“That must be Mr. Wharton. He always refuses to use the doorbell. So old-fashioned”
+</div>
+
+<div class = "Paragraph">
+Mr. Smith, the butler, leads a slender and clean-cut older gentleman into the parlor. The man introduces himself as Victor Wharton of Wharton and Co., putting a strange emphasis on the company’s name.
+</div>
+
+<div class = "Paragraph">
+“Oh, did you change the name of the company?” Albert asks.
+</div>
+
+<div class = "Paragraph">
+“Well of course I did. We are not longer partners in the business, so your name doesn’t belong there.”
+</div>
+
+<div class = "Paragraph">
+You look between the two gentleman, feeling the ice coming off of Victor, and Albert’s feeble attempts to ease the tension.
+</div>
+
+
+<div class = "Paragraph">
+[[Continue|Politician Introduction]]
+</div>
+<div class = "IntroImage">
+<img src = "./static/images/characters/bodyshot/PoliticianFramed.png">
+</div>
+
+<div class = "IntroText">
+<div class = "TopParagraph">
+It was at this point that the doorbell let out a loud chime. You notice how much louder it sounds from the inside of the manor. Cecil calmly leaves the room and moments later another man has entered the room. He is a stately mannered and impeccably dressed middle aged man.
+</div>
+
+<div class = "Paragraph">
+“Gentlemen lovely to see you all again. And do I see a new face?”
+</div>
+
+<div class = "Paragraph">
+“Ah yes, I newly ordained and was assigned to this parish. Paul Edmonds.”
+</div>
+
+<div class = "Paragraph">
+Before you get a chance to ask his name, he shoots his hand into yours and introduces himself heartily. “I am Francis Tappington, Member of Parliament for Bromley and Chislehurst.”
+</div>
+
+<div class = "Paragraph">
+After a few minutes of light conversation, you were once again interrupted by the doorbell. Albert announces, “That must be my sister Ada”.
+</div>
+
+<div class = "Paragraph">
+[[Continue|Sister Introduction]]
+</div>
+
+</div>
+</div>
+<div = class = "IntroImage">
+<img src="./static/images/characters/bodyshot/SisterFramed.png">
+</div>
+
+<div class = "IntroText">
+<div class = "TopParagraph">
+A young woman follows the butler into the room. She is dressed in the typical uniform of the suffragettes, a blazer over her dress and petticoats with a votes for Women badge proudly pinned on top .
+</div>
+
+<div class = "Paragraph">
+“Good even gentlemen, dreadfully sorry about the time, I didn't mean to leave you waiting on my behalf. ”
+</div>
+
+<div class = "Paragraph">
+“Oh sister, this was to be expected. That is why I had given you an earlier time then the rest of them.” 
+</div>
+
+<div class = "Paragraph">
+“How very rude of you Albert!” It was at this point that Ada first noticed your presence. “And how very rude of me to have not introduce myself, I am Ada and I presume my charming brother has told you all about me.” You return return the introduction in a cordial manner avoiding the questioned tacked on at the end. 
+</div>
+
+<div class = "Paragraph">
+It was at this point that Cecil lead you and the other guests into the dining room. 
+</div>
+
+<div class = "Paragraph">
+[[Continue|Conversation 1]]
+</div>
+
+</div>
+</div>
+<div class="ConversationBackground">
+<div class="Conversation">
+
+<div class = "Comment">
+Albert: "I hear that the HMS Dreadnought will be ready to launch in a months time. It looks to be the largest ship of its type ever built."
+</div>
+
+<div class = "Comment">
+Victor: "Hopefully that will be enough to keep those upstart Prussians at bay. If it is not, we might have to take some time to show the Kaiser a thing or two."
+</div>
+
+<div class = "Comment">
+Francis: "I would not have thought of you as such a Jingoist, my boy."
+</div>
+
+<div class = "Comment">
+Victor: "Is it wrong to look to defend such His Majesty's great empire from foreign barabarity."
+</div>
+
+<div class = "Comment">
+
+Francis: "We both know that is not what the issue is here. The issue here is a member of parliament does not trust he has a seat in westminister to return to next Autumn."
+</div>
+
+<div class = "Comment">
+<img>
+Victor: "I would not have pegged you for a yellow belly. I guess that what so many years of mercentalism will do to someone. Turn them soft to thier core!"
+</div>
+ 
+<div class = "Comment">
+You decide that the conversation has gotten heated up enough and decide to intervene.
+<img>
+</div>
+
+<div class = "Comment" id = "Option1">
+[["As the lord has said to us 'Blessed are the peacemakers, for they will be called children of God.'" |Conversation 2]]
+</div>
+
+<div class = "Comment" id = "Option2">
+[["Ok Gentlemen, I think this has all gone on long enough, let us all just drop it." |Conversation 2]]
+</div>
+
+<div class = "Comment" id = "Option3">
+[["I think Victor is right, this is not a country built on weak stomachs!" |Conversation 2]]
+</div>
+
+</div>
+</div>
+
+<script>
+	var _functions = story.state.functions
+	
+    $(function(){
+	$('body').css('background-image','url("././static/images/backgrounds/Wallpaper.jpg")');
+});
+
+	$("#Option1").click(function(){
+		_functions.editCharacterTrust("politician", 2)
+		_functions.editCharacterTrust("rival", -2)
+	})
+	$("#Option2").click(function(){
+		_functions.editCharacterTrust("politician", -1)
+		_functions.editCharacterTrust("rival", -1)
+	})
+	$("#Option3").click(function(){
+		_functions.editCharacterTrust("rival", 2)
+		_functions.editCharacterTrust("politician", -2)		
+	})
+</script>
+
+<div class="ConversationBackground">
+<div class="Conversation">
+
+<div class = "Comment">
+It was at this point that the Cecil enters the room and begins serving the guest. 
+</div>
+
+<div class = "Comment">
+Francis: It seems that dinner is served. But who is this rough gent who is serving us? We might have to call the constable over this evening?
+</div>
+
+<div class = "Comment">
+Albert: Oh I will assure you my friend there is no cause for alarm, though Cecil here may look rough, he has been a loyal servant of this household for quite some time. 
+</div>
+
+<div class = "Comment">
+Francis: And in which branch would that be in?
+</div>
+
+<div class = "Comment">
+Cecil: The Royal Navy, sir. 
+</div>
+
+<div class = "Comment" id = "Option1">
+[["Gentlemen, I hardly think it is right to comment on another mans appearance at the dinner table" |Conversation 3]]
+</div>
+
+<div class = "Comment" id = "Option2">
+[[Let the converasation continue|Conversation 2.5]] 
+</div>
+
+</div>
+</div>
+
+<script>
+	var _functions = story.state.functions
+	
+$("#Option1").click(function(){
+		_functions.editCharacterTrust("sister", 3)
+		_functions.editCharacterTrust("rival", -1)
+		_functions.editCharacterTrust("politician", -1)
+	})
+	$("#Option2").click(function(){
+		_functions.editCharacterTrust("sister", -1)
+		_functions.editCharacterTrust("rival", -1)
+		_functions.editCharacterTrust("politician", -1)
+	})
+</script>
+<div class="ConversationBackground">
+<div class="Conversation">
+
+<div class = "Comment">
+Francis: Did any of you hear about the incedent with suffragette.
+</div>
+
+<div class = "Comment">
+Albert: No, what are those wenches up to now?
+</div>
+
+<div class = "Comment">
+Francis: Well suffice to say this stays between us gentlemen, but a friend at Scotland Yard, has it upon good information that another one has been locked up for a most unladylike of deeds.
+</div>
+
+<div class = "Comment">
+Victor: Good, we should have the whole pettycoat rabble locked up before the month is out!
+</div>
+
+<div class = "Comment">
+Ada: \*Scoff\*
+</div>
+
+<div class = "Comment">
+Victor: Anything to say on the matter? 
+</div>
+
+<div class = "Comment">
+Ada: I think that the battle of women to gain the vote is the defining cuase of our time!
+</div>
+
+<div class = "Comment">
+Victor: So that excuses that most unbecoming behavoir?
+</div>
+
+<div class = "Comment">
+Ada: One might say "The argument of the broken window pane is the most valuable argument in modern politics".
+</div>
+
+<div class = "Comment">
+Albert: Oh dear sister, it is basic science, women's brains simply arent as large as mens and thus thrusting this burden upon them helps no one. 
+</div>
+
+<div class = "Comment">
+Ada: Oh Gentlemen I think even from taking a quick glance around this table, you will see the fairer sex can be ever bit as clever as you men. 
+</div>
+
+<div class = "Comment">
+Francis: My my Ada, letting our imagination get a little ahead of us arent we!
+</div>
+
+<div class = "Comment">
+Ada: That counts double for brutes like you!
+</div>
+
+<div class = "Comment">
+Albert :My good Paul you have been rather quiet, what does the church have to say about the issue?
+</div>
+
+<div class = "Comment" id = "Option1">
+[["I think Women should be given the vote the same as any man" | Conversation 4]]
+</div>
+
+<div class = "Comment" id = "Option2">
+[["I do not think it right for a man of the cloth like myself to  " | Conversation 4]]
+</div>
+
+<div class = "Comment" id = "Option3">
+[["Was it not Eve, the first of all women, who lead Adam astray in the Garden of Eden." | Conversation 4]]
+</div>
+
+</div>
+</div>
+
+<script>
+var _functions = story.state.functions
+
+$("#Option1").click(function(){
+		_functions.editCharacterTrust("sister", 3)
+		_functions.editCharacterTrust("rival", -1)
+		_functions.editCharacterTrust("politician", -1)
+	})
+	$("#Option2").click(function(){
+		_functions.editCharacterTrust("sister", -1)
+		_functions.editCharacterTrust("rival", -1)
+		_functions.editCharacterTrust("politician", -1)
+	})
+	$("#Option2").click(function(){
+		_functions.editCharacterTrust("sister", -3)
+		_functions.editCharacterTrust("rival", 2)
+		_functions.editCharacterTrust("politician", 2)
+	})
+</script>
+<div class="ConversationBackground">
+<div class="Conversation">
+
+<div class = "Comment">
+As the guests begin to finish there meals, you lose concentration. When you return to your sense the rest of the party have moved on to the topic of literature. 
+</div>
+
+<div class = "Comment">
+Ada:" Unsuprisingly, I think the Bronte Sisters show a far superior wit to anything you "Men" have thrown out."
+</div>
+
+<div class = "Comment">
+Victor: "Unsuprisingly indeed! I think it hard to overlook the great Dickens. A Tale of Two Cities is an epic for our generation!"
+</div>
+
+<div class = "Comment">
+Francis: "I personally would vouch for the classics, it loses a certain something in translation to English, but Homer's Oddyssey is a classic that has lasted the ages."
+</div>
+
+<div class = "Comment">
+Albert:"I myself would be partial to the works of HG Wells, the time machine being a personal favourite."
+</div>
+
+<div class = "Comment">
+You decide that now would be a good time to chime in. 
+</div>
+
+<div class = "Comment" id = "Option1">
+[["I would be partial to a tale of two Cities"|Conversation 5]]
+</div>
+
+<div class = "Comment" id = "Option2">
+[["There is certain appeal to Wuthering Heights"|Conversation 5]]
+</div>
+
+<div class = "Comment" id = "Option3">
+[["I agree with Albert, none of these catch my imagination in the same fashion as a good HG Wells novel" |Conversation 5]]
+</div>
+
+<div class = "Comment" id = "Option4">
+[["The Odyssey certainly is a classic"|Conversation 5]]
+</div>
+
+<script>
+var _functions = story.state.functions
+
+	$("#Option1").click(function(){
+		_functions.editCharacterTrust("politician", 2)
+		_functions.editCharacterTrust("rival", -2)
+	})
+	$("#Option2").click(function(){
+		_functions.editCharacterTrust("politician", -1)
+		_functions.editCharacterTrust("rival", -1)
+	})
+	$("#Option3").click(function(){
+		_functions.editCharacterTrust("politician", -1)
+		_functions.editCharacterTrust("rival", -1)
+	})
+	$("#Option4").click(function(){
+		_functions.editCharacterTrust("rival", 2)
+		_functions.editCharacterTrust("politician", -2)		
+	})
+</script>
+<div class="ConversationBackground">
+<div class="Conversation">
+
+<div class= "Comment">
+Conversation became sparser as the meal drew to a close. Cecil enters the room and begins to clean away the dishes. 
+</div>
+
+<div class = "Comment">
+Victor:"Ah look, if it isnt our dearest friend the Butler. Come regale us with a story from your time in the military".
+</div>
+
+<div class= "Comment">
+Albert:Victor I think it is becoming increasingly obvious that you have drank altogether too much red wine.
+</div>
+
+<div class = "Comment">
+
+</div>
+
+<div class= "Comment">
+Cecil:"I would very much like to keep at the task at hand." 
+</div>
+
+<div class = "Comment" id = "Option1">
+[["My good chap, I think you have had altogether enough to drink and need to leave that poor butler alone"|Heading To Bed]]
+</div>
+
+<div class = "Comment" id = "Option2">
+[[Ignore the situation again->Heading To Bed]]
+</div>
+
+</div>
+</div>
+
+<script>
+var _functions = story.state.functions
+
+$("#Option1").click(function(){
+		_functions.editCharacterTrust("butler", 3)
+		_functions.editCharacterTrust("rival", -1)
+	})
+	$("#Option2").click(function(){
+		_functions.editCharacterTrust("butler", -1)
+	})
+</script>
+<div class="ConversationBackground">
+<div class="Conversation">
+
+<div class = "Comment">
+In the morning, you reluctantly get up out of bed. Preparing for your hunting trip with the owner of the house. You wait for him quietly in hallway. 
+</div>
+
+<div class = "Comment">
+After some time you begin to worry about the time, you had not taken Albert for a tardy gentleman. 
+</div>
+
+<div class = "Comment">
+You knock upon his door. When there is no responce a few minutes later you knock again. Instead of knocking a third time, you find Cecil and inquire about Albert's whereabouts. He says he too is surprised about Albert not being up yet. He is an avid hunter. 
+</div>
+
+<div class = "Comment">
+Cecil decides to look for Albert in his room. A few moments later he calls you in. 
+</div>
+
+<div class = "Comment">
+When you enter the room you notice Albert lying motionless in his bed. After a few seconds you begin to realise what has happened. 
+</div>
+
+<div class = "Comment">
+[[Act Two]]
+</div>
+
+</div>
+</div>
+<div class="ConversationBackground">
+<div class="Conversation">
+
+<div class = "Comment">
+It is time to choose who you think committed the murder.
+</div>
+
+<div class="accusation" id="accusation1" onclick='renderPassage("The Rival Reaction")'>
+It was Victor
+</div>
+
+<div class="accusation" id="accusation2" onclick='renderPassage("The Sister Reaction")'>
+It was Ada
+</div>
+
+<div class="accusation" id="accusation3" onclick='renderPassage("The Butler Reaction")'>
+It was Cecil
+</div>
+
+<div class="accusation" id="accusation4" onclick='renderPassage("The Politician Reaction")'>
+It was Francis
+</div>
+
+<div class="accusation" id="accusation5" onclick='renderPassage("The Sister/Politician Reaction")'>
+It must have been Ada and Victor
+</div>
+
+<div id="accusation6" onclick='renderPassage("No One Reaction")'>
+It was no one who was at this party
+</div>
+
+</div>
+</div>
+
+<script>
+	var _functions = story.state.functions
+var _vars = story.state.variables
+
+function renderPassage(passage){
+	$("#passage").html(window.story.render(passage))
+}
+
+var showButler = true
+var showSister = true
+var showPol = true
+var showRival = true
+var showSisAndPol = true
+
+var inventory = _vars.player.inventory
+var invNameArr = []
+inventory.forEach(function(element) {
+	invNameArr.push(element.name)
+});
+
+console.log(invNameArr)
+
+var butlerReq = ["Letter of Termination","Bloody Knife"]
+var sisterReq = ["Butler's Blame","Key in Purse","Head Trauma on Albert"]
+var polReq = ["RSVPS","Threatening Letter","Matching Handwriting","Head Trauma on Albert"]
+var rivalReq = ["Ledger","Untrustworthy Alibi"]
+var sisAndPolReq = ["Blood on Gun","Newspaper Article","Head Trauma on Albert","Threatening Letter"]
+
+butlerReq.forEach(function(item){
+	if(invNameArr.indexOf(item) == -1){
+      showButler = false
+	}
+})
+
+sisterReq.forEach(function(item){
+	if(invNameArr.indexOf(item) == -1){
+		showSister = false
+	}
+})
+
+polReq.forEach(function(item){
+	if(invNameArr.indexOf(item) == -1){
+		showPol = false
+	}
+})
+
+rivalReq.forEach(function(item){
+	if(invNameArr.indexOf(item) == -1){
+		showRival = false
+	}
+})
+
+sisAndPolReq.forEach(function(item){
+	if(invNameArr.indexOf(item) == -1){
+		showSisAndPol = false
+	}
+})
+
+if(showButler){
+	$('#accusation3').css("display", "block")
+}
+
+if(showSister){
+	$('#accusation2').css("display", "block")
+}
+
+if(showPol){
+	$('#accusation4').css("display", "block")
+}
+
+if(showRival){
+	$('#accusation1').css("display", "block")
+}
+
+if(showSisAndPol){
+	$('#accusation5').css("display", "block")
+}
+</script>
+<div class = "Reaction">
+<div class = "TopParagraph">
+"Good evening all. I have gathered you all into the drawing room, to announce what I have found about murder of Albert Baynes II."
+</div>
+
+<div class = "Paragraph">
+"It was none other than Victor."
+</div>
+
+<div class = "Paragraph">
+Francis: "That is a bold claim you are making Father, I hope you know you are doing."
+</div>
+
+<div class = "Paragraph">
+"But the dissolution of their partnership was fraught with anger and resentment. Victor was owed money from Albert, but he refused to acknowledge the debt. Victor must have wanted to reduce the competition."
+</div>
+
+<div class = "Paragraph">
+Victor:"This is utterly ridiculous, there is no way you all believe what he is saying."
+</div>
+
+<div class = "Paragraph">
+He was soon taken away by Deputy Connolly.
+</div>
+
+
+<div class = "Paragraph">
+[[Continue|Afterwards]]
+</div>
+
+</div>
+
+<script>
+	var _vars = story.state.variables
+	var endingObj = _vars.ending
+	endingObj.type = "Bad Ending"
+	endingObj.prison = "Rival In prison"
+	endingObj.free = ["Sister Free","Butler Free","Politician Free"]
+</script>
+<div class = "IntroImage">
+<img  src = "https://image.ibb.co/e5x306/Albert.jpg">
+</div>
+
+<div class = "IntroText">
+
+<div class = "TopParagraph">
+"Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes the second."
+</div>
+
+<div class = "Paragraph">
+"You see it was Francis all along."
+</div>
+
+<div class = "Paragraph">
+Francis:"That is a very bold claim to be making, especially about a man of my stature."
+</div>
+
+<div class = "Paragraph">
+"But there was a reason to want Albert dead. Albert knew that Francis took bribes from prominent aristocrats and was threatening to reveal this information, which would have ruined Francis’ career." 
+</div>
+
+<div class = "Paragraph">
+"Furthermore, the scrawl on the death threat matches the handwriting on Francis’ RSVP."
+</div>
+
+<div class = "Paragraph">
+Francis: "I think these claims are quite ridiculous altogether, can you not all see that this man doesnt know what he is saying".
+</div>
+
+<div class = "Paragraph">
+As Francis began to look around the room, no one else attempted to make eye contact with him. He was then taken away by Deputy Connolly.
+</div>
+
+<div class = "Paragraph">
+[[Continue|Afterwards]]
+</div>
+
+</div>
+
+<script>
+	var _vars = story.state.variables
+	var endingObj = _vars.ending
+	endingObj.type = "Good Ending"
+	endingObj.prison = "Politician In prison"
+	endingObj.free = ["Sister Free","Butler Free","Rival Free"]
+</script>
+<div class = "Reaction">
+
+<div class = "TopParagraph">
+"Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes the second."
+</div>
+
+<div class = "Paragraph">
+"The murderer was none other than his sister Ada."
+</div>
+
+<div class = "Paragraph">
+Francis: "I think you had better take a step back and look at what you are doing father, she has just lost her closest relative, this is no time for unfounded personal attacks."
+</div>
+
+<div class = "Paragraph">
+"They were family, but only by blood. Ada knew that when Albert died unwed, she would inherit the large family fortune. To damn her further, the key to the gun case was in her purse."
+</div>
+
+<div class = "Paragraph">
+When the room finally came to its senses and the gravity of what had happened finally settles in Deputy Connolly takes her away.
+</div>
+
+<div class = "Paragraph">
+[[Continue|Afterwards]]
+</div>
+
+</div>
+
+<script>
+	var _vars = story.state.variables
+	var endingObj = _vars.ending
+	endingObj.type = "Good Ending"
+	endingObj.prison = "Sister In prison for Murder"
+	endingObj.free = ["Rival Free","Butler Free","Politician Free"]
+</script>
+<div class = "Reaction">
+<div class = "TopParagraph">
+"Good evening all. I have gathered you all into the drawing room, to announce what I have found about murder of Albert Baynes II."
+</div>
+
+<div class = "Paragraph">
+"It was our dear Cecil all along."
+</div>
+
+<div class = "Paragraph">
+Ada: "He has been a loyal member of this household many years".
+</div>
+
+<div class = "Paragraph">
+"That he has, but that all changed when Albert I died and Albert II took over. If you see this letter here, this was on Albert’s bedside table, and is a letter of termination. Cecil must have seen this, and decided to exact his vengeance for Albert I."
+</div>
+
+<div class = "Paragraph">
+"But the question still remained, how did he do it. The answer was the bloody knife he had so carelessly left in the kitchen sink."
+</div>
+
+<div class = "Paragraph">
+A look of shock runs across Cecil's face for a moment until he returns to his calm and collected self. He was then taken away by Deputy Connolly.
+</div>
+
+<div class = "Paragraph">
+[[Continue|Afterwards]]
+</div>
+
+</div>
+
+
+<script>
+	var _vars = story.state.variables
+	var endingObj = _vars.ending
+	endingObj.type = "Bad Ending"
+	endingObj.prison = "Butler In prison"
+	endingObj.free = ["Sister Free","Rival Free","Politician Free"]
+</script>
+
+
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Good-Ending.png")');
+});
+</script>
+
+
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Worst-Ending.png")');
+});
+</script>
+
+<div class="darren-lazy">
+    <img src="./static/images/epilogues/Bad-Ending.png" width = 100% height = 100% />
+</div>
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Free-Butler2.png")');
+});
+
+</script>
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Butler-Jail.png")');
+});
+</script>
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Free-Sister2.png")');
+});
+</script>
+<script> 
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Sister-Jail2.png")');
+});
+</script>
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Free-Rival2.png")');
+});
+</script>
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Rival-Jail.png")');
+});
+</script>
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Free-Politician2.png")');
+});
+</script>
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Politician-Jail.png")');
+});
+</script>
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Best-Ending.png")');
+});
+</script>
+<div class = "Reaction">
+<div class = "TopParagraph">
+"Good evening all. I have gathered you all into the drawing room to announce what I have found about murder of Albert Baynes II."
+</div>
+
+<div class = "Paragraph">
+"It was not one murderer, but rather a pair."
+</div>
+
+<div class = "Paragraph">
+"Francis and Ada despite their apparent distaste for one another, colluded to eliminate a mutual enemy. After all, the enemy of my enemy is my friend."
+</div>
+
+<div class = "Paragraph">
+Francis: "Well my boy, that seems to be a very bold claim indeed, I do hope you have what you need to back it all up."
+</div>
+
+<div class = "Paragraph">
+"And that I do, here I present the proof. Albert knew that Francis took bribes from prominent aristocrats and was threatening to reveal this information, which would have ruined Francis’ career, and the scrawl on the 'death threat matches the handwriting on Francis’ RSVP. The key to the gun case was in Ada’s purse, and she stood to gain the family fortune with Albert’s death." 
+</div>
+
+<div class = "Paragraph">
+Ada: "I did nothing of the sort. I could never work with that man".
+</div>
+
+<div class = "Paragraph">
+"To prove their collusion, I present this article showing Francis’ quick change of heart in supporting women’s voting rights, as well as the butler’s statement that he saw them talking last night."
+</div>
+
+<div class = "Paragraph">
+Francis: "I think these claims are quite ridiculous altogether, can you not all see that this man doesnt know what he is saying".
+</div>
+
+<div class = "Paragraph">
+As Francis began to frantically look around the room while Ada managed to keep composure. In a matter of moments the two had been taken away by Deputy Connolly.
+</div>
+
+<div class = "Paragraph">
+[[Continue|Afterwards]]
+</div>
+
+<script>
+	var _vars = story.state.variables
+	var endingObj = _vars.ending
+	endingObj.type = "Best Ending"
+	endingObj.prison = "Sister In prison"
+	endingObj.free = ["Politician In prison","Butler Free","Rival Free"]
+</script>
+<div class = "Reaction">
+
+<div class = "Paragraph">
+Deputy Connolly gathers you all in the drawing room. An uneasy silence fell over the room.
+</div>
+
+<div class = "Paragraph">
+Francis: "Well my friends, I think it rather convient that our newfound priest arrived just on the verge of the our dear Albert death".
+</div>
+
+<div class = "Paragraph">
+You try to speak up to defend yourself of this ridiculous claim, there is almost no evidence linking you to the crime at all. You nearly pass out from the horror of the scene transpiring infront of you. 
+</div>
+
+<div class = "Paragraph">
+Moments later you are dragged out in handcuffs.
+</div>
+
+<div class = "Paragraph">
+[[Continue|Afterwards]]
+</div>
+
+</div>
+</div>
+
+<script>
+	var _vars = story.state.variables
+	var endingObj = _vars.ending
+	endingObj.type = "Bad Ending"
+	endingObj.prison = "Rival In prison"
+	endingObj.free = ["Sister Free","Butler Free","Politician Free"]
+</script>
+<div class="act-intro">
+    <img src="./static/images/acts/Act1.png" width = 100% height = 100% />
+</div>
+<script>
+	$(".act-intro").fadeIn("slow",function(){
+	setTimeout(()=>
+		$(".act-intro").fadeOut("slow",function(){
+			$("#passage").html(window.story.render("Butler Introduction"))
+		})
+		,1200)
+})
+</script>
+<div class="ConversationBackground">
+<div class="Conversation">
+
+<div class = "Comment">
+Victor: "No need for the Sir, our dear Francis here is no lord. Indeed he is merely the brother of one." 
+</div>
+
+<div class = "Comment">
+Francis: "I am off noble blood and a member of parliament!!!"
+</div>
+
+<div class = "Option" id = "Option1">
+[["I think it a great achievment to represent the his majesties subjects in any house of parliament" |Conversation 3]]
+</div>
+
+<div class = "Option" id = "Option2">
+[["Member of Parliament or not, you have no reason to talk to all of us like this."|Conversation 3]]
+</div>
+
+</div>
+</div>
+
+<script>
+var _functions = story.state.functions
+
+$("#Option1").click(function(){
+		_functions.editCharacterTrust("rival", 2)
+		_functions.editCharacterTrust("politician", -2)
+	})
+	$("#Option2").click(function(){
+		_functions.editCharacterTrust("rival", -2)
+		_functions.editCharacterTrust("politician", 2)
+	})
+
+</script>
+<div class="ConversationBackground">
+<div class="Conversation">
+
+<div class = "Comment">
+As you all start to make your way up to bed, Albert draws you aside.
+</div>
+
+<div class = "Comment">
+Albert: My good priest. How are you at hunting?
+</div>
+
+<div class = "Comment">
+Embarrassed to admit that you are not a good hunter, you agree to join him in the morning.
+</div>
+
+<div class = "Comment">
+You continue on to bed, dreading tomorrow morning.
+</div>
+
+<div class = "Comment">
+[[Continue|The Murder]]
+</div>
+<script>
+$(function(){
+	$('body').css('background-image','url("././static/images/epilogues/Sister-Jail.png")');
+});
+</script>
+<div class = "IntroImage">
+<img  src="./static/images/characters/bodyshot/PolicemanFramed.png">
+</div>
+
+<div class = "IntroBackground">
+<div class = "IntroText">
+<div class = "TopParagraph">
+In no what seems like no time at all, there is a loud knocking on the door. 
+
+
+
+ 
+
+</div>
+
+<div class = "Paragraph">
+Still mildly in shock you you limply walk to the hallway to find Cecil letting in a Policeman.
+</div>
+
+<div class = "Paragraph">
+He announces himself as Deputy Connolly. He tells you all that as suspects in the murder none of you are allowed to leave the house until further notice. 
+</div>
+
+<div class = "Paragraph">
+You decide to get to the bottom of this murder yourself, lest you are suspected yourself. 
+</div>
+
+<div class="Paragraph">
+[[Continue|Hallway]]
+</div>
+
+<div class="clearfix"> </div>
+
+</div>
+
+</div>
+</div>
+<script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/backgrounds/Police2.png")');
+});
+</script>
+<script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/characters/bios/ButlerBio.png")');
+});
+setTimeout(
+	()=> $("#passage").html(window.story.render("Character Bios"))
+	,22000)
+</script>
+<script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/characters/bios/HostBio.png")');
+});
+
+setTimeout(
+	()=> $("#passage").html(window.story.render("Character Bios"))
+	,22000)
+</script>
+
+<script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/characters/bios/SisterBio.png")');
+});
+setTimeout(
+	()=> $("#passage").html(window.story.render("Character Bios"))
+	,22000)
+</script>
+
+<script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/characters/bios/RivalBio.png")');
+});
+setTimeout(
+	()=> $("#passage").html(window.story.render("Character Bios"))
+	,22000)
+</script>
+
+<script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/characters/bios/PoliticianBio.png")');
+});
+setTimeout(
+	()=> $("#passage").html(window.story.render("Character Bios"))
+	,22000)
+</script>
+<script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/characters/bios/PolicemanBio.png")');
+});
+setTimeout(
+	()=> $("#passage").html(window.story.render("Character Bios"))
+	,22000)
+</script>
+
+<script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/characters/bios/PlayerBio.png")');
+});
+setTimeout(
+	()=> $("#passage").html(window.story.render("Character Bios"))
+	,22000)
+</script>
+<script>
+    $(function(){
+	$('body').css('background-image','url("././static/images/backgrounds/CharactersBackground.png")');
+});
+</script>
+ 
+ <div id="menu">
+ 	Characters
+	
+	[[Host|Host Bio]]
+	[[Butler|Butler Bio]]
+	[[Sister|Sister Bio]]
+	[[Rival|Rival Bio]]
+	[[Politician|Politician Bio]]
+	[[Policeman|Policeman Bio]]
+	[[Hero and his Journey|Player Bio]]
+	[[Main Menu|Menu]]
+
+ </div>
+<div class="act-intro">
+    <img src="./static/images/acts/Act3.png" width = 100% height = 100% />
+</div>
+<script>
+	$(function(){
+	$('body').css('background-image','url("././static/images/backgrounds/Wallpaper.jpg")');
+});
+
+	$(".act-intro").fadeIn("slow",function(){
+	setTimeout(()=>
+		$(".act-intro").fadeOut("slow",function(){
+			$("#passage").html(window.story.render("The Accusation"))
+		})
+		,1200)
+})
+</script>
+<script>
+	var _vars = story.state.variables
+	var endingObj = _vars.ending
+	
+	$("#passage").html(window.story.render(endingObj.prison))
+	
+	setTimeout(
+	()=> $("#passage").html(window.story.render(endingObj.free[0]))
+	,8000)
+	
+	setTimeout(
+	()=> $("#passage").html(window.story.render(endingObj.free[1]))
+	,16000)
+	
+	setTimeout(
+	()=> $("#passage").html(window.story.render(endingObj.free[2]))
+	,24000)
+	
+	setTimeout(
+	()=> $("#passage").html(window.story.render(endingObj.type))
+	,32000)
+	
+	setTimeout(
+	()=> $("#passage").html(window.story.render("Menu"))
+	,52000)
+</script>
