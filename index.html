@@ -572,7 +572,7 @@ p.delay {
 .IntroText{
   float:left;
   width:50%;
-  margin:5% 7.5%;
+  margin:5%;
  background-image:url("././static/images/ui/conversationFrame3.png");
     background-repeat:no-repeat;
   background-size:100% 100%;
@@ -651,6 +651,17 @@ p.delay {
 }
 
 
+
+
+.Reaction{
+  width:60%;
+  margin:5% 20%;
+ background-image:url("././static/images/ui/conversationFrame3.png");
+    background-repeat:no-repeat;
+  background-size:100% 100%;
+  height:800px;
+  overflow: auto;
+}
 
 
 
@@ -1819,6 +1830,8 @@ function logCharTrust(){
 	console.log("***************************")
 	console.log("")
 }
+
+
 </script><tw-passagedata pid="1" name="Menu" tags="" position="21,45">
  &lt;div id=&quot;menu&quot;&gt;
 	[[Start Game-&gt;Intro]]
@@ -2800,7 +2813,7 @@ console.log(invNameArr)
 
 var butlerReq = [&quot;Letter of Termination&quot;,&quot;Bloody Knife&quot;]
 var sisterReq = [&quot;Butler&#x27;s Blame&quot;,&quot;Key in Purse&quot;,&quot;Head Trauma on Albert&quot;]
-var polReq = [&quot;RSVPs&quot;,&quot;Threatening Letter&quot;,&quot;Matching Handwriting&quot;,&quot;Head Trauma on Albert&quot;]
+var polReq = [&quot;RSVPS&quot;,&quot;Threatening Letter&quot;,&quot;Matching Handwriting&quot;,&quot;Head Trauma on Albert&quot;]
 var rivalReq = [&quot;Ledger&quot;,&quot;Untrustworthy Alibi&quot;]
 var sisAndPolReq = [&quot;Blood on Gun&quot;,&quot;Newspaper Article&quot;,&quot;Head Trauma on Albert&quot;,&quot;Threatening Letter&quot;]
 
@@ -2853,17 +2866,17 @@ if(showRival){
 if(showSisAndPol){
 	$(&#x27;#accusation5&#x27;).css(&quot;display&quot;, &quot;block&quot;)
 }
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="The Rival Reaction" tags="" position="1448,479">&lt;div class = &quot;IntroImage&quot;&gt;
-&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
-&lt;/div&gt;
-
-&lt;div class = &quot;IntroText&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="The Rival Reaction" tags="" position="1448,479">&lt;div class = &quot;Reaction&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room, to announce what I have found about murder of Albert Baynes II.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
 &quot;It was none other than Victor.&quot;
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+Francis: &quot;That is a bold claim you are making Father, I hope you know you are doing.&quot;
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
@@ -2875,7 +2888,7 @@ Victor:&quot;This is utterly ridiculous, there is no way you all believe what he
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
-
+He was soon taken away by Deputy Connolly.
 &lt;/div&gt;
 
 
@@ -2937,11 +2950,7 @@ As Francis began to look around the room, no one else attempted to make eye cont
 	endingObj.type = &quot;Good Ending&quot;
 	endingObj.prison = &quot;Politician In prison&quot;
 	endingObj.free = [&quot;Sister Free&quot;,&quot;Butler Free&quot;,&quot;Rival Free&quot;]
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="25" name="The Sister Reaction" tags="" position="1748,474">&lt;div class = &quot;IntroImage&quot;&gt;
-&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
-&lt;/div&gt;
-
-&lt;div class = &quot;IntroText&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="25" name="The Sister Reaction" tags="" position="1748,474">&lt;div class = &quot;Reaction&quot;&gt;
 
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room like this to announce what I have found about murder of Albert Baynes the second.&quot;
@@ -2975,11 +2984,7 @@ When the room finally came to its senses and the gravity of what had happened fi
 	endingObj.type = &quot;Good Ending&quot;
 	endingObj.prison = &quot;Sister In prison for Murder&quot;
 	endingObj.free = [&quot;Rival Free&quot;,&quot;Butler Free&quot;,&quot;Politician Free&quot;]
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="26" name="The Butler Reaction" tags="" position="1319,480">&lt;div class = &quot;IntroImage&quot;&gt;
-&lt;img  src = &quot;https://image.ibb.co/e5x306/Albert.jpg&quot;&gt;
-&lt;/div&gt;
-
-&lt;div class = &quot;IntroText&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="26" name="The Butler Reaction" tags="" position="1319,480">&lt;div class = &quot;Reaction&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room, to announce what I have found about murder of Albert Baynes II.&quot;
 &lt;/div&gt;
@@ -3071,7 +3076,7 @@ $(function(){
 	$(&#x27;body&#x27;).css(&#x27;background-image&#x27;,&#x27;url(&quot;././static/images/epilogues/Best-Ending.png&quot;)&#x27;);
 });
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="39" name="The Sister/Politician Reaction" tags="" position="1874,482">&lt;div class = &quot;IntroText&quot;&gt;
+</tw-passagedata><tw-passagedata pid="39" name="The Sister/Politician Reaction" tags="" position="1874,482">&lt;div class = &quot;Reaction&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
 &quot;Good evening all. I have gathered you all into the drawing room to announce what I have found about murder of Albert Baynes II.&quot;
 &lt;/div&gt;
@@ -3118,26 +3123,25 @@ As Francis began to frantically look around the room while Ada managed to keep c
 	endingObj.type = &quot;Best Ending&quot;
 	endingObj.prison = &quot;Sister In prison&quot;
 	endingObj.free = [&quot;Politician In prison&quot;,&quot;Butler Free&quot;,&quot;Rival Free&quot;]
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="40" name="No One Reaction" tags="" position="2016,508">&lt;div class=&quot;ConversationBackground&quot;&gt;
-&lt;div class=&quot;Conversation&quot;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="40" name="No One Reaction" tags="" position="2016,508">&lt;div class = &quot;Reaction&quot;&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 Deputy Connolly gathers you all in the drawing room. An uneasy silence fell over the room.
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 Francis: &quot;Well my friends, I think it rather convient that our newfound priest arrived just on the verge of the our dear Albert death&quot;.
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 You try to speak up to defend yourself of this ridiculous claim, there is almost no evidence linking you to the crime at all. You nearly pass out from the horror of the scene transpiring infront of you. 
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 Moments later you are dragged out in handcuffs.
 &lt;/div&gt;
 
-&lt;div class = &quot;Comment&quot;&gt;
+&lt;div class = &quot;Paragraph&quot;&gt;
 [[Continue|Afterwards]]
 &lt;/div&gt;
 
@@ -3228,11 +3232,24 @@ $(function(){
 &lt;div class = &quot;IntroBackground&quot;&gt;
 &lt;div class = &quot;IntroText&quot;&gt;
 &lt;div class = &quot;TopParagraph&quot;&gt;
-Craic fathar. I&#x27;m gonna feck ya in jail at half 7 if ya dont accuse someone for unexplained reasons.
+In no what seems like no time at all, there is a loud knocking on the door. 
+
+
+
+ 
+
 &lt;/div&gt;
 
 &lt;div class = &quot;Paragraph&quot;&gt;
-“No boder boi.”
+Still mildly in shock you you limply walk to the hallway to find Cecil letting in a Policeman.
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+He announces himself as Deputy Connolly. He tells you all that as suspects in the murder none of you are allowed to leave the house until further notice. 
+&lt;/div&gt;
+
+&lt;div class = &quot;Paragraph&quot;&gt;
+You decide to get to the bottom of this murder yourself, lest you are suspected yourself. 
 &lt;/div&gt;
 
 &lt;div class=&quot;Paragraph&quot;&gt;
