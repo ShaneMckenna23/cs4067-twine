@@ -681,6 +681,7 @@ p.delay {
 
 
 
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">var music = new Audio("./static/music/piano.mp3")
 music.play()
 
@@ -833,7 +834,7 @@ _vars.locations = {
 	},
     
     bedroom:{
-        people: [],
+        people: ["deadman"],
         actions: [
 			{name: "Investigate Bedside Table", visible:true, function: investigateBedsideTable},
 			{name: "Investigate Desk", visible:true, function: investigateBedDesk},
@@ -1830,6 +1831,7 @@ function logCharTrust(){
 	console.log("***************************")
 	console.log("")
 }
+
 
 
 </script><tw-passagedata pid="1" name="Menu" tags="" position="21,45">
