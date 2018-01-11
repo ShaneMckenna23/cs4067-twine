@@ -1,4 +1,4 @@
-# The Baynes Conspiracy
+# The Baynes Conspiracy🏡🔪🔍
 Murder mystery game built with [Twine](https://twinery.org/) (Snowman v1.3.0). 
 
 ## Getting started
